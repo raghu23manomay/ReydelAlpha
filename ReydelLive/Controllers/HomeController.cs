@@ -164,13 +164,58 @@ namespace ReyDel.Controllers
             Session.RemoveAll();
             return RedirectToAction("Login", "Home");
         }
-      
+
         //public ActionResult UpdateREIMaster(int REI_Id)
         //{
         //    ReydeldbContext _db = new ReydeldbContext();
         //    var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateREIMaster @REI_Id",
         //       new SqlParameter("@REI_Id", REI_Id));
         //    return Json("data Updated");
-        //}
+        
+        public ActionResult RejectionTypeList()
+        {
+            ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+        ReydeldbContext _db = new ReydeldbContext();
+        IEnumerable<RejectionReasonTypeMaster> result = _db.RejectionReasonTypeMasters.SqlQuery(@"exec uspGetRejectionTypeList").ToList<RejectionReasonTypeMaster>();
+
+            return View("RejectionTypeList", result);
     }
+    public ActionResult RejectionReasonList()
+    {
+        ReydeldbContext _db = new ReydeldbContext();
+        IEnumerable<RejectionReasonMaster> result = _db.RejectionReasonMasters.SqlQuery(@"exec uspGetRejectionReasonList").ToList<RejectionReasonMaster>();
+
+        return View("RejectionReasonList", result);
+    }
+    public JsonResult GetRejecteionReason()
+    {
+        ReydeldbContext _db = new ReydeldbContext();
+        var lstItem = binddropdown("City", 0).Select(i => new { i.Value, i.Text }).ToList();
+        return Json(lstItem, JsonRequestBehavior.AllowGet);
+    }
+    public ActionResult AddRejectionType()
+    {
+        RejectionReasonTypeMaster data = new RejectionReasonTypeMaster();
+        data.Rejection_Reason_Id = 1;
+        ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+        return View("AddRejectionType", data);
+    }
+    public ActionResult AddRejectionReason()
+    {
+        MaterialGradeMaster data = new MaterialGradeMaster();
+        ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+        return View("AddRejectionReason", data);
+    }
+    public ActionResult ExportImportTypeList()
+    {
+        ReydeldbContext _db = new ReydeldbContext();
+        IEnumerable<ExcelImportTypeMaster> result = _db.ExcelImportTypeMasters.SqlQuery(@"exec uspGetExportImportTypeList").ToList<ExcelImportTypeMaster>();
+        return View("ExportImportTypeList", result);
+    }
+
+    public ActionResult AddExcelImportType()
+    {
+        return View("AddExcelImportType");
+    }
+}
 }

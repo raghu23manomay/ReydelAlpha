@@ -350,4 +350,44 @@ namespace ReyDel.Models
         public int CountAll { get; set; }
 
     }
+
+
+    public class RejectionReasonTypeMaster
+    {
+        [Key]
+        public int? Rejection_Type_Id { get; set; }
+        public string Rejection_Type_Name { get; set; }
+        public int Rejection_Reason_Id { get; set; }
+        public string Rejection_Reason_Name { get; set; }
+    }
+    public class RejectionReasonMaster
+    {
+        [Key]
+        public int Rejection_Reason_Id { get; set; }
+        public string Rejection_Reason_Name { get; set; }
+    }
+    public class ExcelImportTypeMaster
+    {
+        [Key]
+        public int M_Import_Type_ID { get; set; }
+        public string M_Import_Type_Name { get; set; }
+        public string M_Import_Type_Modes { get; set; }
+    }
+    public class ChangeTypeConfiguration
+    {
+        [Key]
+        public int Machine_Id { get; set; }
+        public int Change_Type_Id { get; set; }
+        public decimal Machine_operation { get; set; }
+        public decimal Change_Over_Target_Time { get; set; }
+        public decimal Expected_Lumps { get; set; }
+        public decimal STD_Material_loading_OST { get; set; }
+        public decimal STD_Change_over_OST { get; set; }
+        public decimal STD_Material_change_over { get; set; }
+        public decimal STD_ASSY_OST { get; set; }
+        public decimal STD_Inspection_OST { get; set; }
+        public decimal STD_Material_Movement { get; set; }
+        public decimal System_Regrind_Management { get; set; }
+        public decimal OST_For_daily_Monitoring { get; set; }
+    }
 }

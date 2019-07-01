@@ -1,27 +1,26 @@
 ﻿
 @{
+    ViewBag.Title = "AddRejectionReason";
     Layout = null;
 }
 
-<div class="modal fade" id="AddREIMaster" role="dialog">
+
+<div class="modal fade" id="AddMaterialGrade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add REI Master</h4>
+                <h4 class="modal-title">Add Rejection Reason</h4>
             </div>
             <div class="modal-body">
                 <form role="form">
-                    <div class="form-group" hidden>
-                        <label>REI ID</label>
-                        <input type="text" class="form-control" id="REIId" placeholder="REI ID">
-                    </div>
+
                     <div class="form-group">
-                        <label> REI Name</label>
-                        <input type="text" class="form-control" id="REIName" placeholder="REI Name">
+                        <label>Rejection Reason</label>
+                        <input type="text" class="form-control" id="RejectionReason" placeholder="Rejection Reason">
                     </div>
-                  
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -31,5 +30,6 @@
 
     </div>
 </div>
+
 
 

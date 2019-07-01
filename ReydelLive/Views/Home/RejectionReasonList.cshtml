@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "RejectionReasonList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+
+@model  IEnumerable<ReyDel.Models.RejectionReasonMaster>
+<section class="content">
+    <div class="row">
+        <div class="col-sm-11">
+
+        </div>
+        <div class="col-sm-1">
+
+            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#AddMaterialGrade">Add New</button>
+            @Html.Partial("../Home/AddRejectionReason")
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title">Rejection Reason </h3>
+
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th> Rejection Reason Name</th> 
+                                <th>Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Rejection_Reason_Id</td>
+                                    <td>
+                                        @item.Rejection_Reason_Name 
+                                    </td>
+                                    
+                                    <td> <a><i class="fa fa-edit"></i></a></td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+ 
+<script src="~/Content/js/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+    $(document).ready(function () {
+        $('#btnAdd').on('click', function () {
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/AddRejectionReason',
+                data:
+                {
+                    GradeName: $("#MaterialGradeName").val(),
+                    GradeRate: $("#MaterialGradeRate").val(),
+                },
+                success: function (data) {
+                    $("#AddMaterialGrade").hide(),
+                        // alert(data);
+                        location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+         function getCity()
+    {
+             var returnResult = [];
+                          $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                         url: "@Url.Action("GetRejecteionReason", "Home")",
+                        method: 'GET',
+                        async: 'false',
+                        dataType: 'json',
+                        success: function (result) {
+                            var data = $.map(result, function (obj) {
+                                obj.value = obj.Text; // desired field
+                                obj.data = obj.Value; // desired field
+                                returnResult.push(obj);
+                                $("#City").autocomplete({
+                                    lookup: returnResult,
+                                    onSelect: function (suggestion) {
+                                        $("#CityId").val(suggestion.data);
+
+                                    }
+                                });
+
+                            });
+                        },
+                        error: function () { }
+                  });
+    }
+    });
+</script>

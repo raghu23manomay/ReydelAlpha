@@ -22,5 +22,9 @@ namespace ReyDel.Models
         public DbSet<ColourMaster> ColourMasters { get; set; }
         public DbSet<SupportFunctionMaster> SupportFunctionMasters { get; set; }
         public DbSet<ChangeTypeMaster> ChangeTypeMasters { get; set; }
+
+        public DbSet<RejectionReasonMaster> RejectionReasonMasters { get; set; }
+        public DbSet<RejectionReasonTypeMaster> RejectionReasonTypeMasters { get; set; }
+        public DbSet<ExcelImportTypeMaster> ExcelImportTypeMasters { get; set; }
     }
 }

@@ -1,17 +1,20 @@
-﻿<!-- Main content -->
+﻿
+@{
+    ViewBag.Title = "Rejection Type List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
 
-@model  IEnumerable<ReyDel.Models.ChangeTypeMaster>
+@model  IEnumerable<ReyDel.Models.RejectionReasonTypeMaster>
 <section class="content">
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-9">
 
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
 
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#AddChangeTypeMaster">Add New</button>
-
-            @Html.Partial("../Home/AddChangeTypeMaster")
-
+            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#AddMaterialGrade">Add New</button>
+            @Html.Partial("../Home/AddRejectionType")
         </div>
     </div>
 
@@ -22,32 +25,31 @@
             <div class="box">
                 <div class="box-header">
 
-                    <h3 class="box-title">Change TypeMaster List</h3>
+                    <h3 class="box-title">Rejection Type </h3>
 
 
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table  table-striped">
+                    <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th style="padding-right:10px;">Sr. No.</th>
-                                <th>Change Type Name</th>
-                                <th>Change Type Code </th>
-                                <th>Action</th>
+                                <th>Sr. No.</th>
+                                <th>Rejection Type</th>
+                                <th>Rejection Reason </th>
+                                <th>Action </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Change_Type_Id</td>
+                                    <td>@item.Rejection_Type_Id</td>
                                     <td>
-                                        @item.Change_Type_Name
-
+                                        @item.Rejection_Type_Name 
                                     </td>
-                                    <td> @item.Change_Type_Code</td>
-                                    <td> <a class="EditREI"><i class="fa fa-edit"></i></a></td>
+                                    <td> @item.Rejection_Reason_Name</td>
+                                    <td> <a><i class="fa fa-edit"></i></a></td>
                                 </tr>
 
                             }
@@ -75,19 +77,7 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-@* <script src="~/dist/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/dist/js/demo.js"></script>
-    <link rel="stylesheet" href="~/dist/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/dist/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="~/dist/bower_components/Ionicons/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/dist/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">*@
-
+ 
 <script src="~/Content/js/jquery-2.1.1.js"></script>
 <script type="text/javascript">
 
@@ -105,14 +95,14 @@
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '/Home/AddChangeTypeMaster',
+                url: '/Home/AddRejectionType',
                 data:
                 {
-                    ChangeTypeName: $("#ChangeTypeName").val(),
-                    ChangeTypeCode: $("#ChangeTypeCode").val(),
+                    GradeName: $("#MaterialGradeName").val(),
+                    GradeRate: $("#MaterialGradeRate").val(),
                 },
                 success: function (data) {
-                    $("#AddChangeTypeMaster").hide(),
+                    $("#AddMaterialGrade").hide(),
                         // alert(data);
                         location.reload();
                 },
