@@ -15,15 +15,15 @@ namespace ReyDel.Controllers
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<MaterialGradeMaster> result = _db.MaterialGradeMasters.SqlQuery(@"exec USPGetMaterialGrade").ToList<MaterialGradeMaster>();
 
-           
-            return View("MaterialGradeList",result);
+
+            return View("MaterialGradeList", result);
         }
         public ActionResult REIMasterList()
         {
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<REIMaster> result = _db.REIMasters.SqlQuery(@"exec USPGetREIMaster").ToList<REIMaster>();
 
-           
+
             return View("REIMasterList", result);
         }
         public ActionResult ColourMasterList()
@@ -51,12 +51,12 @@ namespace ReyDel.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string UserName, string Password) 
+        public ActionResult Login(string UserName, string Password)
         {
-            
+
             try
             {
-               // ReydeldbContext _db = new ReydeldbContext();
+                // ReydeldbContext _db = new ReydeldbContext();
 
                 //var result = _db.LoginDetail.SqlQuery(@"exec usp_login 
                 //@username,@password",
@@ -64,14 +64,14 @@ namespace ReyDel.Controllers
                 //    new SqlParameter("@password", L.password)).ToList<Login>();
                 //Login data = new Login();
                 //data = result.FirstOrDefault();
-                if(UserName == "Test" && Password=="1234")
+                if (UserName == "Test" && Password == "1234")
                 {
                     Session["UserName"] = "Test";
                     Session["UserID"] = 1;
-                    return Json(true,"Sucess");
+                    return Json(true, "Sucess");
                 }
-              else
-                    return Json(false, "failed"); 
+                else
+                    return Json(false, "failed");
 
             }
 
@@ -89,14 +89,14 @@ namespace ReyDel.Controllers
             return View("AddMaterialGrade", data);
         }
         [HttpPost]
-        public ActionResult AddMaterialGrade(String GradeName ,String GradeRate)
+        public ActionResult AddMaterialGrade(String GradeName, String GradeRate)
         {
 
             ReydeldbContext dbc = new ReydeldbContext();
-            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertMaterialGrade @GradeName,@GradeRate", 
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertMaterialGrade @GradeName,@GradeRate",
                 new SqlParameter("@GradeName", GradeName),
-                new SqlParameter("@GradeRate", GradeRate)); 
-            return Json("data inserted"); 
+                new SqlParameter("@GradeRate", GradeRate));
+            return Json("data inserted");
         }
         [HttpPost]
         public ActionResult AddREIMaster(String REIName)
@@ -136,7 +136,7 @@ namespace ReyDel.Controllers
             return Json("data inserted");
         }
         public ActionResult Dashboard()
-        {  
+        {
             return View();
         }
         public List<SelectListItem> binddropdown(string action, int val = 0)
@@ -171,51 +171,62 @@ namespace ReyDel.Controllers
         //    var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateREIMaster @REI_Id",
         //       new SqlParameter("@REI_Id", REI_Id));
         //    return Json("data Updated");
-        
+
         public ActionResult RejectionTypeList()
         {
             ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
-        ReydeldbContext _db = new ReydeldbContext();
-        IEnumerable<RejectionReasonTypeMaster> result = _db.RejectionReasonTypeMasters.SqlQuery(@"exec uspGetRejectionTypeList").ToList<RejectionReasonTypeMaster>();
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<RejectionReasonTypeMaster> result = _db.RejectionReasonTypeMasters.SqlQuery(@"exec uspGetRejectionTypeList").ToList<RejectionReasonTypeMaster>();
 
             return View("RejectionTypeList", result);
-    }
-    public ActionResult RejectionReasonList()
-    {
-        ReydeldbContext _db = new ReydeldbContext();
-        IEnumerable<RejectionReasonMaster> result = _db.RejectionReasonMasters.SqlQuery(@"exec uspGetRejectionReasonList").ToList<RejectionReasonMaster>();
+        }
+        public ActionResult RejectionReasonList()
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<RejectionReasonMaster> result = _db.RejectionReasonMasters.SqlQuery(@"exec uspGetRejectionReasonList").ToList<RejectionReasonMaster>();
 
-        return View("RejectionReasonList", result);
-    }
-    public JsonResult GetRejecteionReason()
-    {
-        ReydeldbContext _db = new ReydeldbContext();
-        var lstItem = binddropdown("City", 0).Select(i => new { i.Value, i.Text }).ToList();
-        return Json(lstItem, JsonRequestBehavior.AllowGet);
-    }
-    public ActionResult AddRejectionType()
-    {
-        RejectionReasonTypeMaster data = new RejectionReasonTypeMaster();
-        data.Rejection_Reason_Id = 1;
-        ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
-        return View("AddRejectionType", data);
-    }
-    public ActionResult AddRejectionReason()
-    {
-        MaterialGradeMaster data = new MaterialGradeMaster();
-        ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
-        return View("AddRejectionReason", data);
-    }
-    public ActionResult ExportImportTypeList()
-    {
-        ReydeldbContext _db = new ReydeldbContext();
-        IEnumerable<ExcelImportTypeMaster> result = _db.ExcelImportTypeMasters.SqlQuery(@"exec uspGetExportImportTypeList").ToList<ExcelImportTypeMaster>();
-        return View("ExportImportTypeList", result);
-    }
+            return View("RejectionReasonList", result);
+        }
+        public JsonResult GetRejecteionReason()
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var lstItem = binddropdown("City", 0).Select(i => new { i.Value, i.Text }).ToList();
+            return Json(lstItem, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AddRejectionType()
+        {
+            RejectionReasonTypeMaster data = new RejectionReasonTypeMaster();
+            data.Rejection_Reason_Id = 1;
+            ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+            return View("AddRejectionType", data);
+        }
+        public ActionResult AddRejectionReason()
+        {
+            MaterialGradeMaster data = new MaterialGradeMaster();
+            ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+            return View("AddRejectionReason", data);
+        }
+        public ActionResult ExportImportTypeList()
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<ExcelImportTypeMaster> result = _db.ExcelImportTypeMasters.SqlQuery(@"exec uspGetExportImportTypeList").ToList<ExcelImportTypeMaster>();
+            return View("ExportImportTypeList", result);
+        }
 
-    public ActionResult AddExcelImportType()
-    {
-        return View("AddExcelImportType");
+        public ActionResult AddExcelImportType()
+        {
+            return View("AddExcelImportType");
+        }
+        
+        [HttpPost]
+        public ActionResult UpdateMaterialGrade(int Material_Grade_Id, string Material_Grade_Name, float Material_Grade_Rate = 0)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateMaterialGrade @Material_Grade_Id,@Material_Grade_Name ,@Material_Grade_Rate",
+               new SqlParameter("@Material_Grade_Id", Material_Grade_Id),
+               new SqlParameter("@Material_Grade_Name", Material_Grade_Name),
+               new SqlParameter("@Material_Grade_Rate", Material_Grade_Rate));
+            return Json("data Updated");
+        }
     }
-}
 }

@@ -7113,6 +7113,7 @@
     <Content Include="Views\Home\ChangeTypeMasterList.cshtml" />
     <Content Include="Views\Home\AddSupportFunctionMaster.cshtml" />
     <Content Include="Views\Home\SupportFunctionMasterList.cshtml" />
+    <Content Include="Views\Home\UpdateMaterialGrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
