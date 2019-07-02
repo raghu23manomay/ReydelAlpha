@@ -15,15 +15,15 @@ namespace ReyDel.Controllers
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<MaterialGradeMaster> result = _db.MaterialGradeMasters.SqlQuery(@"exec USPGetMaterialGrade").ToList<MaterialGradeMaster>();
 
-           
-            return View("MaterialGradeList",result);
+
+            return View("MaterialGradeList", result);
         }
         public ActionResult REIMasterList()
         {
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<REIMaster> result = _db.REIMasters.SqlQuery(@"exec USPGetREIMaster").ToList<REIMaster>();
 
-           
+
             return View("REIMasterList", result);
         }
         public ActionResult ColourMasterList()
@@ -51,12 +51,12 @@ namespace ReyDel.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string UserName, string Password) 
+        public ActionResult Login(string UserName, string Password)
         {
-            
+
             try
             {
-               // ReydeldbContext _db = new ReydeldbContext();
+                // ReydeldbContext _db = new ReydeldbContext();
 
                 //var result = _db.LoginDetail.SqlQuery(@"exec usp_login 
                 //@username,@password",
@@ -64,14 +64,14 @@ namespace ReyDel.Controllers
                 //    new SqlParameter("@password", L.password)).ToList<Login>();
                 //Login data = new Login();
                 //data = result.FirstOrDefault();
-                if(UserName == "Test" && Password=="1234")
+                if (UserName == "Test" && Password == "1234")
                 {
                     Session["UserName"] = "Test";
                     Session["UserID"] = 1;
-                    return Json(true,"Sucess");
+                    return Json(true, "Sucess");
                 }
-              else
-                    return Json(false, "failed"); 
+                else
+                    return Json(false, "failed");
 
             }
 
@@ -89,14 +89,14 @@ namespace ReyDel.Controllers
             return View("AddMaterialGrade", data);
         }
         [HttpPost]
-        public ActionResult AddMaterialGrade(String GradeName ,String GradeRate)
+        public ActionResult AddMaterialGrade(String GradeName, String GradeRate)
         {
 
             ReydeldbContext dbc = new ReydeldbContext();
-            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertMaterialGrade @GradeName,@GradeRate", 
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertMaterialGrade @GradeName,@GradeRate",
                 new SqlParameter("@GradeName", GradeName),
-                new SqlParameter("@GradeRate", GradeRate)); 
-            return Json("data inserted"); 
+                new SqlParameter("@GradeRate", GradeRate));
+            return Json("data inserted");
         }
         [HttpPost]
         public ActionResult AddREIMaster(String REIName)
@@ -136,7 +136,7 @@ namespace ReyDel.Controllers
             return Json("data inserted");
         }
         public ActionResult Dashboard()
-        {  
+        {
             return View();
         }
         public List<SelectListItem> binddropdown(string action, int val = 0)

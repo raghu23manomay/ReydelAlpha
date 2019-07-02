@@ -46,17 +46,22 @@
                                 <td>
                                     @item.Material_Grade_name
 
-                                </td>
-                                <td> @item.Material_Grade_Rate</td>
-                                <td> <a class="EditREI"><i class="fa fa-edit"></i></a></td>
-                            </tr>
+                                        </td>
+                                        <td> @item.Material_Grade_Rate</td>
+                                        <td>
+                                            <span class="EditMaster" gname="@item.Material_Grade_name" gid="@item.Material_Grade_Id" grate="@item.Material_Grade_Rate"><i class="fa fa-edit"></i></span>
+                                        </td>
+                                    </tr>
 
-                            }
+                                }
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
+
                 </div>
+               
 
             </div>
 
@@ -66,9 +71,42 @@
 
 </section>
 
+<div id="UpdateGrade" class="modal fade in" style="padding-top: 50px;" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Material Grade  </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="EditMaterial_Grade_Id">
+                    </div>
+                    <div class="form-group">
+                        <label> Grade Name</label>
+                        <input type="text" class="form-control" id="EditMaterial_Grade_name" placeholder="Grade Name">
+                    </div>
+                    <div class="form-group">
+                        <label> Grade Rate</label>
+                        <input type="text" class="form-control" id="EditMaterial_Grade_Rate" placeholder="Grade Rate">
+                    </div>
 
-<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
 
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
 <script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -76,22 +114,24 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-@* <script src="~/dist/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/dist/js/demo.js"></script>
-    <link rel="stylesheet" href="~/dist/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/dist/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="~/dist/bower_components/Ionicons/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/dist/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">*@
 
-<script src="~/Content/js/jquery-2.1.1.js"></script>
+<script>
+    function refresh() {
+        $('.EditMaster').on('click', function () {
+            var gname = this.getAttribute("gname");
+            var gid = this.getAttribute("gid");
+            var grate = this.getAttribute("grate");
+            $("#EditMaterial_Grade_Id").val(gid);
+            $("#EditMaterial_Grade_name").val(gname);
+            $("#EditMaterial_Grade_Rate").val(grate);
+            $("#UpdateGrade").show();
+        });
+         
+    };
+</script>
+
 <script type="text/javascript">
-
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -101,6 +141,11 @@
         'autoWidth': false
     })
     $(document).ready(function () {
+        
+       
+        $('.close').on('click', function () {
+            $("#UpdateGrade").hide();
+        });
         $('#btnAdd').on('click', function () {
 
             $.ajax({
@@ -116,6 +161,33 @@
                     $("#AddMaterialGrade").hide(),
                         // alert(data);
                         location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+
+      
+
+        $('#btnSaveChanges').on('click', function () {
+            debugger;
+            var gid = $("#EditMaterial_Grade_Id").val();
+            var gname = $("#EditMaterial_Grade_name").val();
+            var grate = $("#EditMaterial_Grade_Rate").val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateMaterialGrade',
+                data:
+                {
+                    Material_Grade_Id: gid,
+                    Material_Grade_Name: gname,
+                    Material_Grade_Rate: grate
+                },
+                success: function (data) {
+                    $("#UpdateGrade").hide();
+                    location.reload();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
 
