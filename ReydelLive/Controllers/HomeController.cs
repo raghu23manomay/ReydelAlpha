@@ -165,57 +165,76 @@ namespace ReyDel.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        //public ActionResult UpdateREIMaster(int REI_Id)
-        //{
-        //    ReydeldbContext _db = new ReydeldbContext();
-        //    var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateREIMaster @REI_Id",
-        //       new SqlParameter("@REI_Id", REI_Id));
-        //    return Json("data Updated");
+       
         
         public ActionResult RejectionTypeList()
         {
             ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
-        ReydeldbContext _db = new ReydeldbContext();
-        IEnumerable<RejectionReasonTypeMaster> result = _db.RejectionReasonTypeMasters.SqlQuery(@"exec uspGetRejectionTypeList").ToList<RejectionReasonTypeMaster>();
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<RejectionReasonTypeMaster> result = _db.RejectionReasonTypeMasters.SqlQuery(@"exec uspGetRejectionTypeList").ToList<RejectionReasonTypeMaster>();
 
             return View("RejectionTypeList", result);
-    }
-    public ActionResult RejectionReasonList()
+        }
+        public ActionResult RejectionReasonList()
     {
         ReydeldbContext _db = new ReydeldbContext();
         IEnumerable<RejectionReasonMaster> result = _db.RejectionReasonMasters.SqlQuery(@"exec uspGetRejectionReasonList").ToList<RejectionReasonMaster>();
 
         return View("RejectionReasonList", result);
     }
-    public JsonResult GetRejecteionReason()
+        public JsonResult GetRejecteionReason()
     {
         ReydeldbContext _db = new ReydeldbContext();
         var lstItem = binddropdown("City", 0).Select(i => new { i.Value, i.Text }).ToList();
         return Json(lstItem, JsonRequestBehavior.AllowGet);
     }
-    public ActionResult AddRejectionType()
+        [HttpPost]
+        public ActionResult AddRejectionType(int Rejection_Reason_Id ,string RejectionTypeName)
     {
-        RejectionReasonTypeMaster data = new RejectionReasonTypeMaster();
-        data.Rejection_Reason_Id = 1;
-        ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
-        return View("AddRejectionType", data);
-    }
-    public ActionResult AddRejectionReason()
+            ReydeldbContext dbc = new ReydeldbContext();
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertRejectionTypeMaster @Rejection_Reason_Id,@RejectionTypeName",
+                  new SqlParameter("@Rejection_Reason_Id", Rejection_Reason_Id),
+                new SqlParameter("@RejectionTypeName", RejectionTypeName));
+
+            return Json("data inserted");
+           
+        }
+        public ActionResult AddRejectionType()
+        {
+            RejectionReasonTypeMaster data = new RejectionReasonTypeMaster();
+            data.Rejection_Reason_Id = 2;
+            ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+
+            return View("AddRejectionType", data);
+        }
+        public ActionResult AddRejectionReason()
     {
         MaterialGradeMaster data = new MaterialGradeMaster();
         ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
         return View("AddRejectionReason", data);
     }
-    public ActionResult ExportImportTypeList()
+        public ActionResult AddRejectionReasonMaster(string RejectionReasonName)
+        {
+            ReydeldbContext dbc = new ReydeldbContext();
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertRejectionReasonMaster @RejectionReasonName",
+                new SqlParameter("@RejectionReasonName", RejectionReasonName));
+            return Json("data inserted");
+        }
+        public ActionResult ExportImportTypeList()
     {
         ReydeldbContext _db = new ReydeldbContext();
         IEnumerable<ExcelImportTypeMaster> result = _db.ExcelImportTypeMasters.SqlQuery(@"exec uspGetExportImportTypeList").ToList<ExcelImportTypeMaster>();
         return View("ExportImportTypeList", result);
     }
 
-    public ActionResult AddExcelImportType()
+        public ActionResult AddExcelImportType(string ImportTypeName,string ImportTypeModes)
     {
-        return View("AddExcelImportType");
+            ReydeldbContext dbc = new ReydeldbContext();
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertExcelImportsTypes @ImportTypeName,@ImportTypeModes",
+                new SqlParameter("@ImportTypeName", ImportTypeName),
+                new SqlParameter("@ImportTypeModes", ImportTypeModes));
+            return Json("data inserted");
+           // return View("AddExcelImportType");
     }
 }
 }

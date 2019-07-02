@@ -7113,6 +7113,12 @@
     <Content Include="Views\Home\ChangeTypeMasterList.cshtml" />
     <Content Include="Views\Home\AddSupportFunctionMaster.cshtml" />
     <Content Include="Views\Home\SupportFunctionMasterList.cshtml" />
+    <Content Include="Views\Home\AddExcelImportType.cshtml" />
+    <Content Include="Views\Home\AddRejectionReason.cshtml" />
+    <Content Include="Views\Home\AddRejectionType.cshtml" />
+    <Content Include="Views\Home\ExportImportTypeList.cshtml" />
+    <Content Include="Views\Home\RejectionReasonList.cshtml" />
+    <Content Include="Views\Home\RejectionTypeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

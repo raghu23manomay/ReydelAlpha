@@ -8,12 +8,12 @@
 @model  IEnumerable<ReyDel.Models.RejectionReasonMaster>
 <section class="content">
     <div class="row">
-        <div class="col-sm-11">
+        <div class="col-sm-10">
 
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-2">
 
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#AddMaterialGrade">Add New</button>
+            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#RejectionReasonMaster">Add New</button>
             @Html.Partial("../Home/AddRejectionReason")
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="box">
                 <div class="box-header">
 
-                    <h3 class="box-title">Rejection Reason </h3>
+                    <h3 class="box-title"><b>Rejection Reason List</b> </h3>
 
 
                 </div>
@@ -94,14 +94,14 @@
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '/Home/AddRejectionReason',
+                url: '/Home/AddRejectionReasonMaster',
                 data:
                 {
-                    GradeName: $("#MaterialGradeName").val(),
-                    GradeRate: $("#MaterialGradeRate").val(),
+                    RejectionReasonName: $("#RejectionReasonName").val(),
+                   
                 },
                 success: function (data) {
-                    $("#AddMaterialGrade").hide(),
+                    $("#AddRejectionReasonMaster").hide(),
                         // alert(data);
                         location.reload();
                 },

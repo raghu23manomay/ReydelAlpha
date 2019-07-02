@@ -6,7 +6,7 @@
 }
 
 
-<div class="modal fade" id="AddMaterialGrade" role="dialog">
+<div class="modal fade" id="AddRejectionType" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -18,20 +18,20 @@
                 <form role="form">
                     <div class="form-group">
                         <label>Rejection Reason</label>
-                        @Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionReason"], "Value", "Text", 1), "Select Source", new { @class = "form-control input-sm",  @id = "SourceID", Title = "Source" })
+                        @Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionReason"], "Value", "Text", 1), "Select Source", new { @class = "form-control input-sm",  @id = "Rejection_Reason_Id", Title = "Source" })
                         @*@Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejecteionReason"], "Value", "Text", Model.Rejection_Reason_Id), "Select Employee", new { @class = "form-control input-sm", @id = "RejecteionReasonID", Title = "Reason" })*@
                         <label style="color:red" id="EmployeeVal"></label>
                        
                     </div>
                     <div class="form-group">
                         <label>Rejection Type</label>
-                        <input type="text" class="form-control" id="RejectionReason" placeholder="Rejection Type">
+                        <input type="text" class="form-control" id="RejectionTypeName" placeholder="Rejection Type">
                     </div>
-
+                    
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="btnAdd">Submit</button>
+                <button type="button" class="btn btn-primary" id="btnSave">Submit</button>
             </div>
         </div>
 
