@@ -26,5 +26,8 @@ namespace ReyDel.Models
         public DbSet<RejectionReasonMaster> RejectionReasonMasters { get; set; }
         public DbSet<RejectionReasonTypeMaster> RejectionReasonTypeMasters { get; set; }
         public DbSet<ExcelImportTypeMaster> ExcelImportTypeMasters { get; set; }
+        public DbSet<ChangeTypeConfiguration> ChangeTypeConfigurations { get; set; }
+        public DbSet<Production_Entry> ProductionEntry { get; set; }
+        public DbSet<DownTime_Entry> DownTime_Entry { get; set; }
     }
 }

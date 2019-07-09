@@ -4991,4 +4991,10 @@ hr {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+    #example1_paginate {
+        float: right !important;
+    }
+    #example1_info {
+        float: right !important;
+    }
 }

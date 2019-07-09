@@ -8,6 +8,42 @@ using System.Web;
 
 namespace ReyDel.Models
 {
+  
+   public class Production_Entry
+    {
+        [Key]
+        public int? Entry_Id { get; set; }
+        public int Calendar_id { get; set; }
+        public DateTime Entry_Date { get; set; }
+        public int Emp_name { get; set; }
+        public int Shift { get; set; }
+        public int Machine { get; set; }
+        public int REI { get; set; }
+        public int Part { get; set; }
+        public int Plan_Qty { get; set; }
+        public decimal Cumm_Accepted_Qty { get; set; }
+        public decimal Accepted_Qty { get; set; }
+        public int Operator_Emp { get; set; }
+        public int Shift_superviser { get; set; }
+    }
+    public class DownTime_Entry
+    {
+        [Key]
+        public int? Entry_Id { get; set; }
+        public DateTime Entry_Date { get; set; }
+        public DateTime Calendar_id { get; set; }
+        public int Emp_Id { get; set; }
+        public int IsPlanned { get; set; }
+        public DateTime Planned_from { get; set; }
+        public DateTime Planned_to { get; set; }
+        public int Total_Planned { get; set; }
+        public DateTime Downtime_description { get; set; }
+        public int Supoort_Function_Id { get; set; }
+        public DateTime Downtime_From { get; set; }
+        public DateTime Downtime_to { get; set; }
+        public DateTime Total_Downtime { get; set; }
+    }
+
     public class MaterialGradeMaster
     {
         [Key]
@@ -45,6 +81,23 @@ namespace ReyDel.Models
         public string Change_Type_Code { get; set; }
 
     }
+    //public class ChangeTypeConfiguration
+    //{
+    //    [Key]
+    //    public int? ChangeTypeConfigID { get; set; }
+    //    public int? Machine_Id { get; set; }
+    //    public string Machine_operation { get; set; }
+    //    public string Change_Over_Target_Time { get; set; }
+    //    public string Expected_Lumps { get; set; }
+    //    public string STD_Material_loading_OST { get; set; }
+    //    public string STD_Change_over_OST { get; set; }
+    //    public string STD_Material_change_over { get; set; }
+    //    public string STD_ASSY_OST { get; set; }
+    //    public string STD_Inspection_OST { get; set; }
+    //    public string STD_material_movement { get; set; }
+    //    public string System_regrind_management { get; set; }
+    //    public string OST_For_daily_monitoring { get; set; }
+    //}
     public class AllMaster
     {
     }
@@ -376,9 +429,9 @@ namespace ReyDel.Models
     public class ChangeTypeConfiguration
     {
         [Key]
+        public int ChangeTypeConfigID { get; set; }
         public int Machine_Id { get; set; }
-        public int Change_Type_Id { get; set; }
-        public decimal Machine_operation { get; set; }
+        public Decimal Machine_operation { get; set; }
         public decimal Change_Over_Target_Time { get; set; }
         public decimal Expected_Lumps { get; set; }
         public decimal STD_Material_loading_OST { get; set; }
@@ -389,5 +442,5 @@ namespace ReyDel.Models
         public decimal STD_Material_Movement { get; set; }
         public decimal System_Regrind_Management { get; set; }
         public decimal OST_For_daily_Monitoring { get; set; }
-    }
+    }                 
 }

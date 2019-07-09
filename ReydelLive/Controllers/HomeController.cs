@@ -18,6 +18,22 @@ namespace ReyDel.Controllers
 
             return View("MaterialGradeList", result);
         }
+        public ActionResult ProductionEntryList()
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<Production_Entry> result = _db.ProductionEntry.SqlQuery(@"exec USPGetProduction_Entry").ToList<Production_Entry>();
+
+
+            return View("ProductionEntryList", result);
+        }
+        public ActionResult DownTimeEntryList()
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<DownTime_Entry> result = _db.DownTime_Entry.SqlQuery(@"exec USPGetDownTimeEntry").ToList<DownTime_Entry>();
+
+
+            return View("ProductionEntryList", result);
+        }
         public ActionResult REIMasterList()
         {
             ReydeldbContext _db = new ReydeldbContext();
@@ -98,6 +114,49 @@ namespace ReyDel.Controllers
                 new SqlParameter("@GradeRate", GradeRate));
             return Json("data inserted");
         }
+       
+        [HttpPost]
+        public ActionResult AddChangeTypeConfiguration(ChangeTypeConfiguration CTC)
+        {
+
+            ReydeldbContext dbc = new ReydeldbContext();
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertChangeTypeConfiguration  @Machine_Id, @Machine_operation, @Change_Over_Target_Time, @Expected_Lumps, @STD_Material_loading_OST, @STD_Change_over_OST, @STD_Material_change_over, @STD_ASSY_OST, @STD_Inspection_OST, @STD_material_movement, @System_regrind_management, @OST_For_daily_monitoring",
+                 new SqlParameter("@Machine_Id", CTC.Machine_Id),
+                 new SqlParameter("@Machine_operation", CTC.Machine_operation),
+                 new SqlParameter("@Change_Over_Target_Time", CTC.Change_Over_Target_Time),
+                 new SqlParameter("@Expected_Lumps", CTC.Expected_Lumps),
+                 new SqlParameter("@STD_Material_loading_OST", CTC.STD_Material_loading_OST),
+                 new SqlParameter("@STD_Change_over_OST", CTC.STD_Change_over_OST),
+                 new SqlParameter("@STD_Material_change_over", CTC.STD_Material_change_over),
+                 new SqlParameter("@STD_ASSY_OST", CTC.STD_ASSY_OST),
+                 new SqlParameter("@STD_Inspection_OST", CTC.STD_Inspection_OST),
+                 new SqlParameter("@STD_material_movement",CTC.STD_Material_Movement),
+                 new SqlParameter("@System_regrind_management", CTC.System_Regrind_Management),
+                 new SqlParameter("@OST_For_daily_monitoring", CTC.OST_For_daily_Monitoring));
+
+            return Json("data inserted");
+        }
+        [HttpPost]
+        public ActionResult AddProductionEntry(Production_Entry PE)
+        {
+
+            ReydeldbContext dbc = new ReydeldbContext();
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertProductionEntry  @Entry_Date,@Calender_Id,@Emp_Id,@Shift_Id,@Machine_Id,@REI_Id,@Part_Id,@Plan_Qty,@Cumm_Accepted_Qty,@Accepted_Qty,@Operator_Emp_Id,@Shift_Supervisor",
+                 new SqlParameter("@Entry_Date", PE.Entry_Date),
+                 new SqlParameter("@Calender_Id", PE.Calendar_id),
+                 new SqlParameter("@Emp_Id", PE.Emp_name),
+                 new SqlParameter("@Shift_Id", PE.Shift),
+                 new SqlParameter("@Machine_Id", PE.Machine),
+                 new SqlParameter("@REI_Id", PE.REI),
+                 new SqlParameter("@Part_Id", PE.Part),
+                 new SqlParameter("@Plan_Qty", PE.Plan_Qty),
+                 new SqlParameter("@Cumm_Accepted_Qty", PE.Cumm_Accepted_Qty),
+                 new SqlParameter("@Accepted_Qty", PE.Accepted_Qty),
+                 new SqlParameter("@Operator_Emp_Id", PE.Operator_Emp),
+                 new SqlParameter("@Shift_Supervisor", PE.Shift_superviser));
+
+            return Json("data inserted");
+        }
         [HttpPost]
         public ActionResult AddREIMaster(String REIName)
         {
@@ -135,6 +194,13 @@ namespace ReyDel.Controllers
                  new SqlParameter("@ChangeTypeCode", ChangeTypeCode));
             return Json("data inserted");
         }
+
+        public ActionResult ChangeTypeConfigurationList()
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            IEnumerable<ChangeTypeConfiguration> result = _db.ChangeTypeConfigurations.SqlQuery(@"exec USPGetChangeTypeConfiguration").ToList<ChangeTypeConfiguration>();
+            return View("ChangeTypeConfigurationList", result);
+        }
         public ActionResult Dashboard()
         {
             return View();
@@ -157,6 +223,32 @@ namespace ReyDel.Controllers
 
             return res;
         }
+        //public ActionResult AddEmployee()
+        //{
+        //    Employee data = new Employee();
+        //    data.EmployeeID = 2;
+        //    ViewData["NameEmployee"] = binddropdown("NameEmployee", 0);
+
+        //    return View("NameEmployee", data);
+        //}
+        //public List<SelectListItem> EmpNamebinddropdown(string action, int val = 0)
+        //{
+        //    ReydeldbContext _db = new ReydeldbContext();
+
+        //    var res = _db.Database.SqlQuery<SelectListItem>("exec USP_EmpNamebinddropdown @action , @val",
+        //           new SqlParameter("@action", action),
+        //            new SqlParameter("@val", val))
+        //           .ToList()
+        //           .AsEnumerable()
+        //           .Select(r => new SelectListItem
+        //           {
+        //               Text = r.Text.ToString(),
+        //               Value = r.Value.ToString(),
+        //               Selected = r.Value.Equals(Convert.ToString(val))
+        //           }).ToList();
+
+        //    return res;
+        //}
         public ActionResult Logout()
         {
             Session.Clear();
@@ -236,5 +328,82 @@ namespace ReyDel.Controllers
             return Json("data inserted");
            // return View("AddExcelImportType");
     }
-}
+
+        [HttpPost]
+        public ActionResult UpdateMaterialGrade(int Material_Grade_Id, string Material_Grade_Name, float Material_Grade_Rate = 0)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateMaterialGrade @Material_Grade_Id,@Material_Grade_Name ,@Material_Grade_Rate",
+            new SqlParameter("@Material_Grade_Id", Material_Grade_Id),
+            new SqlParameter("@Material_Grade_Name", Material_Grade_Name),
+            new SqlParameter("@Material_Grade_Rate", Material_Grade_Rate));
+            return Json("data Updated"); 
+        }
+        [HttpPost]
+        public ActionResult UpdateREIMaster(int REI_Id, string REI_Name)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateREIMaster @REI_Id,@REI_Name",
+            new SqlParameter("@REI_Id", REI_Id),
+            new SqlParameter("@REI_Name", REI_Name));
+            return Json("data Updated"); 
+        }
+        [HttpPost]
+        public ActionResult UpdateColourMaster(int Colour_Id, string Colour_Name)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateColourMaster @Colour_Id,@Colour_Name",
+            new SqlParameter("@Colour_Id", Colour_Id),
+            new SqlParameter("@Colour_Name", Colour_Name));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateSupportFunctionMaster(int SupportFunction_Id, string SupportFunction_Name, string SupportFunction_Code)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateSupportFunctionMaster @SupportFunction_Id,@SupportFunction_Name,@SupportFunction_Code",
+            new SqlParameter("@SupportFunction_Id", SupportFunction_Id),
+            new SqlParameter("@SupportFunction_Name", SupportFunction_Name),
+             new SqlParameter("@SupportFunction_Code", SupportFunction_Code));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateChangeTypeMaster(int Change_Type_Id,string Change_Type_Name, string Change_Type_Code)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateChangeTypeMaster @Change_Type_Id, @Change_Type_Name, @Change_Type_Code",
+            new SqlParameter("@Change_Type_Id", Change_Type_Id),
+            new SqlParameter("@Change_Type_Name", Change_Type_Name),
+             new SqlParameter("@Change_Type_Code", Change_Type_Code));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateRejectionTypeMaster(int Rejection_Type_Id, string Rejection_Type_Name)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateRejectionTypeMaster @Rejection_Type_Id,@Rejection_Type_Name",
+            new SqlParameter("@Rejection_Type_Id", Rejection_Type_Id),
+            new SqlParameter("@Rejection_Type_Name", Rejection_Type_Name));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateRejectionReasonMaster(int Rejection_Reason_Id, string Rejection_Reason_Name)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateRejectionReasonMaster @Rejection_Reason_Id,@Rejection_Reason_Name",
+            new SqlParameter("@Rejection_Reason_Id", Rejection_Reason_Id),
+            new SqlParameter("@Rejection_Reason_Name", Rejection_Reason_Name));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateExcelImportsTypes(int M_Import_Type_ID, string M_Import_Type_Name, string M_Import_Type_Modes)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateExcelImportsTypes @Change_Type_Id, @M_Import_Type_Name, @M_Import_Type_Modes",
+            new SqlParameter("@Change_Type_Id", M_Import_Type_ID),
+            new SqlParameter("@M_Import_Type_Name", M_Import_Type_Name),
+             new SqlParameter("@M_Import_Type_Modes", M_Import_Type_Modes));
+            return Json("data Updated");
+        }
+    }
 }
