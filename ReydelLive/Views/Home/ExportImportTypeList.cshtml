@@ -1,23 +1,15 @@
 ﻿
 @{
-    
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 @model  IEnumerable<ReyDel.Models.ExcelImportTypeMaster>
 <section class="content">
+
+
     <div class="row">
-        <div class="col-sm-10">
-
-        </div>
-        <div class="col-sm-2"> 
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#ExcelImportsTypes" style="margin-right:100px">Add New</button>
-             @Html.Partial("../Home/AddExcelImportType") 
-        </div>
-    </div>
-
-    <div class="row" style="margin-top:20px">
         <div class="col-xs-12">
 
             <!-- /.box -->
@@ -26,7 +18,8 @@
 
                     <h3 class="box-title"><b>Excel Import Type List</b> </h3>
 
-
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#ExcelImportsTypes">Add New</button>
+                    @Html.Partial("../Home/AddExcelImportType")
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -39,20 +32,22 @@
                                 <th> Action </th>
                             </tr>
                         </thead>
-                        <tbody> 
-                            
+                        <tbody>
+
                             @foreach (var item in Model)
                             {
 
-                            <tr>
-                                <td>@item.M_Import_Type_ID </td>
-                                <td>@item.M_Import_Type_Modes</td>
-                                <td>
-                                    @item.M_Import_Type_Name
-                                </td>
+                                <tr>
+                                    <td>@item.M_Import_Type_ID </td>
+                                    <td>@item.M_Import_Type_Modes</td>
+                                    <td>
+                                        @item.M_Import_Type_Name
+                                    </td>
 
-                                <td> <a><i class="fa fa-edit"></i></a></td>
-                            </tr>
+                                    <td>
+                                        <span class="EditExcelImportsTypes" M_ImportTypeModes="@item.M_Import_Type_Modes" M_ImportTypeID="@item.M_Import_Type_ID" M_ImportTypeName="@item.M_Import_Type_Name"><i class="fa fa-edit"></i></span>
+                                    </td>
+                                </tr>
 
                             }
 
@@ -68,10 +63,41 @@
     </div>
 
 </section>
+<div id="UpdateExcelImportsTypes" class="modal fade in" style="padding-top: 50px;" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update ExcelImports Types  </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="UpdateM_Import_Type_ID">
+                    </div>
+                    <div class="form-group">
+                        <label> ImportType Name</label>
+                        <input type="text" class="form-control" id="UpdateM_Import_Type_Name" placeholder="UpdateM_Import_Type_Name">
+                    </div>
+                    <div class="form-group">
+                        <label>ImportType Modes</label>
+                        <input type="text" class="form-control" id="UpdateM_Import_Type_Modes" placeholder="UpdateM_Import_Type_Modes">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
-<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
 <script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -79,10 +105,23 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
+<script>
+    function refresh() {
+        $('.EditExcelImportsTypes').on('click', function () {
+            var M_ImportTypeName = this.getAttribute("M_ImportTypeName");
+            var M_ImportTypeModes = this.getAttribute("M_ImportTypeModes");
+            var M_ImportTypeID = this.getAttribute("M_ImportTypeID");
+            $("#UpdateM_Import_Type_ID").val(M_ImportTypeID);
+            $("#UpdateM_Import_Type_Name").val(M_ImportTypeName);
+            $("#UpdateM_Import_Type_Modes").val(M_ImportTypeModes);
+            $("#UpdateExcelImportsTypes").show();
+        });
 
+    };
+</script>
 <script src="~/Content/js/jquery-2.1.1.js"></script>
 <script type="text/javascript">
-
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -92,6 +131,9 @@
         'autoWidth': false
     })
     $(document).ready(function () {
+        $('.close').on('click', function () {
+            $("#UpdateExcelImportsTypes").hide();
+        });
         $('#btnAdd').on('click', function () {
 
             $.ajax({
@@ -139,6 +181,30 @@
                         },
                         error: function () { }
                   });
-    }
+        }
+        $('#btnSaveChanges').on('click', function () {
+            debugger;
+            var M_ImportTypeID = $("#UpdateM_Import_Type_ID").val();
+            var M_ImportTypeName = $("#UpdateM_Import_Type_Name").val();
+            var M_ImportTypeModes = $("#UpdateM_Import_Type_Modes").val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateExcelImportsTypes ',
+                data:
+                {
+                    M_Import_Type_ID :M_ImportTypeID,
+                    M_Import_Type_Name: M_ImportTypeName,
+                    M_Import_Type_Modes: M_ImportTypeModes,
+                },
+                success: function (data) {
+                    $("#UpdateExcelImportsTypes").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
     });
 </script>

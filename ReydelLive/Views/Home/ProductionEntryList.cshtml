@@ -1,0 +1,97 @@
+﻿
+
+@model  IEnumerable<ReyDel.Models.Production_Entry>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>Production Entry List</b></h3>
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#AddProductionEntry">Add New </button>
+
+                    @Html.Partial("../Home/AddProductionEntry")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>  Entry_Id   </th>
+                                <th>   Calendar_id  </th>
+                                <th>  Entry Date   </th>
+                                <th>   Emp_name  </th>
+                                <th>    Shift </th>
+                                <th>   Machine  </th>
+                                <th>    REI </th>
+                                <th>  Plan Qty   </th>
+                                <th>  Cumm Accepted_Qty   </th>
+                                <th>Accepted Qty</th>
+                                <th>Operator Emp</th>
+                                <th>Shift superviser</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Entry_Id</td>
+                                    <td>@item.Calendar_id</td>
+                                    <td>@item.Entry_Date</td>
+                                    <td>@item.Emp_name</td>
+                                    <td>@item.Shift</td>
+                                    <td>@item.Machine</td>
+                                    <td>@item.REI</td>
+                                    <td>@item.Plan_Qty</td>
+                                    <td>@item.Cumm_Accepted_Qty</td>
+                                    <td>@item.Accepted_Qty</td>
+                                    <td>@item.Operator_Emp</td>
+                                    <td>@item.Shift_superviser</td>
+
+                                    <td>
+                                        <span class="EditColourMaster"><i class="fa fa-edit"></i></span>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script type="text/javascript">
+
+
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+
+</script>

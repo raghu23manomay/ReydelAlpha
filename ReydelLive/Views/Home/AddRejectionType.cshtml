@@ -6,7 +6,7 @@
 }
 
 
-<div class="modal fade" id="AddRejectionType" role="dialog">
+<div class="modal fade" id="AddRejectionType" role="dialog" style="padding-top: 70px;">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -18,7 +18,7 @@
                 <form role="form">
                     <div class="form-group">
                         <label>Rejection Reason</label>
-                        @Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionReason"], "Value", "Text", 1), "Select Source", new { @class = "form-control input-sm",  @id = "Rejection_Reason_Id", Title = "Source" })
+                        @Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionReason"], "Value", "Text",1), "Select Source", new { @class = "form-control input-sm",  @id = "Rejection_Reason_Id", Title = "Source" })
                         @*@Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejecteionReason"], "Value", "Text", Model.Rejection_Reason_Id), "Select Employee", new { @class = "form-control input-sm", @id = "RejecteionReasonID", Title = "Reason" })*@
                         <label style="color:red" id="EmployeeVal"></label>
                        
@@ -31,7 +31,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnSave">Submit</button>
+                <button type="button" class="btn btn-primary" id="btnSave">Save</button>
             </div>
         </div>
 

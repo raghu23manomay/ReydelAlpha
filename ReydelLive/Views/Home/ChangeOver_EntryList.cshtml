@@ -1,0 +1,128 @@
+﻿
+
+
+
+@model  IEnumerable<ReyDel.Models.ChangeOver_Entry>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>Change Over Entry List </b></h3>
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#AddChangeOver_Entry">Add New </button>
+
+                    @Html.Partial("../Home/AddChangeOver_Entry")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th> Entry Id</th>
+                                <th> Entry Date</th>
+                                <th> Calendar id</th>
+                                <th> Emp Id</th>
+                                <th> ChangeOver Config Type</th>
+                                <th> Change From REI ID</th>
+                                <th> Change From Part Id</th>
+                                <th> Change From Mat Grade Id</th>
+                                <th>Change To REI ID</th>
+                                <th> Change To Part Id</th>
+                                <th> Change To Mat Grade Id</th>
+                                <th> Standard Run Qty</th>
+                                <th> Actual Run Qty</th>
+                                <th> Increase in Scrap Percent</th>
+                                <th> Increase in scrap Value</th>
+                                <th>  ChangeOver Start</th>
+                                <th>  ChangeOver End</th>
+                                <th> Total ChangeOver</th>
+                                <th> Std ChangeOver Time</th>
+                                <th>  Difference</th>
+                                <th> Loss In Precentage</th>
+                                <th> Expected Lumps</th>
+                                <th> Actual Lumps</th>
+                                <th>  Difference Lumps</th>
+                                <th> Scrap Percent Increase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.Entry_Id</td>
+                                <td>@item.Entry_Date</td>
+                                <td>@item.Calendar_id</td>
+                                <td>@item.Emp_Id</td>
+                                <td>@item.ChangeOver_Config_Type</td>
+                                <td>@item.Change_From_REI_ID</td>
+                                <td>@item.Change_From_Part_Id</td>
+                                <td>@item.Change_From_Mat_Grade_Id</td>
+                                <td>@item.Change_To_REI_ID</td>
+                                <td>@item.Change_To_Part_Id</td>
+                                <td>@item.Change_To_Mat_Grade_Id</td>
+                                <td>@item.StandardRunQty</td>
+                                <td>@item.Actual_RunQty</td>
+                                <td>@item.Increase_in_Scrap_Percent</td>
+                                <td>@item.Increase_in_scrap_Value</td>
+                                <td>@item.ChangeOver_Start</td>
+                                <td>@item.ChangeOver_End</td>
+                                <td>@item.TotalChangeOver</td>
+                                <td>@item.Std_ChangeOverTime</td>
+                                <td>@item.Difference</td>
+                                <td>@item.LossInPrecentage</td>
+                                <td>@item.Expected_Lumps</td>
+                                <td>@item.Actual_Lumps</td>
+                                <td>@item.Difference_Lumps</td>
+                                <td>@item.ScrapPercentIncrease</td>
+
+
+                                <td>
+                                    <span class="EditColourMaster"><i class="fa fa-edit"></i></span>
+                                </td>
+
+                            </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script type="text/javascript">
+
+
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+
+
+
+
+</script>

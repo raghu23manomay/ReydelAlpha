@@ -3,22 +3,13 @@
     ViewBag.Title = "RejectionReasonList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+
 
 @model  IEnumerable<ReyDel.Models.RejectionReasonMaster>
 <section class="content">
+
+
     <div class="row">
-        <div class="col-sm-10">
-
-        </div>
-        <div class="col-sm-2">
-
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#RejectionReasonMaster">Add New</button>
-            @Html.Partial("../Home/AddRejectionReason")
-        </div>
-    </div>
-
-    <div class="row" style="margin-top:20px">
         <div class="col-xs-12">
 
             <!-- /.box -->
@@ -26,7 +17,8 @@
                 <div class="box-header">
 
                     <h3 class="box-title"><b>Rejection Reason List</b> </h3>
-
+                    <button type="button" class="btn btn-info pull-right " data-toggle="modal" data-target="#RejectionReasonMaster">Add New</button>
+                    @Html.Partial("../Home/AddRejectionReason")
 
                 </div>
                 <!-- /.box-header -->
@@ -35,21 +27,23 @@
                         <thead>
                             <tr>
                                 <th>Sr. No.</th>
-                                <th> Rejection Reason Name</th> 
+                                <th> Rejection Reason Name</th>
                                 <th>Action </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@item.Rejection_Reason_Id</td>
-                                    <td>
-                                        @item.Rejection_Reason_Name 
-                                    </td>
-                                    
-                                    <td> <a><i class="fa fa-edit"></i></a></td>
-                                </tr>
+                            <tr>
+                                <td>@item.Rejection_Reason_Id</td>
+                                <td>
+                                    @item.Rejection_Reason_Name
+                                </td>
+
+                                <td>
+                                    <span class="EditRejectionReasonMaster" RejectionReasonName="@item.Rejection_Reason_Name" RejectionReasonId="@item.Rejection_Reason_Id"><i class="fa fa-edit"></i></span>
+                                </td>
+                            </tr>
 
                             }
 
@@ -65,10 +59,38 @@
     </div>
 
 </section>
+<div id="UpdateRejectionReason" class="modal fade in" style="padding-top: 50px;" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update RejectionReason Master  </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="UpdateRejection_Reason_Id">
+                    </div>
+                    <div class="form-group">
+                        <label>Rejection Reason Name</label>
+                        <input type="text" class="form-control" id="UpdateRejection_Reason_Name" placeholder="UpdateRejection_Reason_Name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
-<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
 <script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -76,10 +98,23 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
- 
+
+<script>
+    function refresh() {
+        $('.EditRejectionReasonMaster').on('click', function () {
+            var RejectionReasonName = this.getAttribute("RejectionReasonName");
+            var RejectionReasonId = this.getAttribute("RejectionReasonId");
+            $("#UpdateRejection_Reason_Id").val(RejectionReasonId);
+            $("#UpdateRejection_Reason_Name").val(RejectionReasonName);
+            $("#UpdateRejectionReason").show();
+        });
+
+    };
+</script>
+
 <script src="~/Content/js/jquery-2.1.1.js"></script>
 <script type="text/javascript">
-
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -89,6 +124,9 @@
         'autoWidth': false
     })
     $(document).ready(function () {
+      $('.close').on('click', function () {
+            $("#UpdateRejectionReason").hide();
+        });
         $('#btnAdd').on('click', function () {
 
             $.ajax({
@@ -98,7 +136,7 @@
                 data:
                 {
                     RejectionReasonName: $("#RejectionReasonName").val(),
-                   
+
                 },
                 success: function (data) {
                     $("#AddRejectionReasonMaster").hide(),
@@ -136,6 +174,28 @@
                         },
                         error: function () { }
                   });
-    }
+        }
+        $('#btnSaveChanges').on('click', function () {
+            debugger;
+            var RejectionReasonId = $("#UpdateRejection_Reason_Id").val();
+            var RejectionReasonName = $("#UpdateRejection_Reason_Name").val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateRejectionReasonMaster',
+                data:
+                {
+                    Rejection_Reason_Id: RejectionReasonId,
+                    Rejection_Reason_Name: RejectionReasonName,
+                },
+                success: function (data) {
+                    $("#UpdateRejectionReason").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
     });
 </script>

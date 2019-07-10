@@ -1,0 +1,115 @@
+﻿<!-- Main content -->
+
+@model  IEnumerable<ReyDel.Models.ChangeTypeConfiguration>
+<section class="content">
+
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>Change Type Configuration List</b></h3>
+                    <button type="button" class="btn btn-info pull-right " data-toggle="modal" data-target="#AddChangeTypeConfiguration">Add New</button>
+                    @Html.Partial("../Home/AddChangeTypeConfiguration")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th> Machine Id</th>
+                                <th>Machine operation</th>
+                                <th>Change Over Target_Time</th>
+                                <th>Expected Lumps</th>
+                                <th>STD Material loading OST</th>
+                                <th>STD Change over OST</th>
+                                <th>STD Material change over</th>
+                                <th>STD ASSY OST</th>
+                                <th>STD Inspection OST</th>
+                                <th>STD material movement</th>
+                                <th>System & regrind management</th>
+                                <th>OST For daily monitoring</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ChangeTypeConfigID</td>
+                                    <td>@item.Machine_Id</td>
+                                    <td>@item.Machine_operation</td>
+                                    <td>@item.Change_Over_Target_Time</td>
+                                    <td>@item.Expected_Lumps</td>
+                                    <td>@item.STD_Material_loading_OST</td>
+                                    <td>@item.STD_Change_over_OST</td>
+                                    <td>@item.STD_Material_change_over</td>
+                                    <td>@item.STD_ASSY_OST</td>
+                                    <td>@item.STD_Inspection_OST</td>
+                                    <td>@item.STD_Material_Movement</td>
+                                    <td>@item.System_Regrind_Management</td>
+                                    <td>@item.OST_For_daily_Monitoring</td>
+                                    <td>
+                                        <span class="EditREIMaster"><i class="fa fa-edit"></i></span>
+                                    </td>
+
+
+
+
+
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+    
+
+</section>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+
+
+<script type="text/javascript">
+
+ 
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+
+    $(document).ready(function () {
+       
+    });
+  
+
+
+</script>
+

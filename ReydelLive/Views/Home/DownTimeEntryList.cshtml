@@ -1,0 +1,104 @@
+﻿
+
+
+@model  IEnumerable<ReyDel.Models.DownTime_Entry>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>DownTime Entry List</b></h3>
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#AddDownTime_Entry">Add New </button>
+
+                    @Html.Partial("../Home/AddDownTime_Entry")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>  Entry_Id   </th>
+                                <th>   Entry_Date  </th>
+                                <th>  Calendar_id   </th>
+                                <th>   Emp_Id  </th>
+                                <th>    IsPlanned </th>
+                                <th>   Planned from  </th>
+                                <th>    Planned to </th>
+                                <th>  Total Planned   </th>
+                                <th>   Downtime description   </th>
+                                <th>Supoort Function Id</th>
+                                <th>Downtime Slip Serial No</th>
+                                <th>Downtime to</th>
+                                <th>Downtime From</th>
+                                <th>Total Downtime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Entry_Id</td>
+                                    <td>@item.Entry_Date</td>
+                                    <td>@item.Calendar_id</td>
+                                    <td>@item.Emp_Id</td>
+                                    <td>@item.IsPlanned</td>
+                                    <td>@item.Planned_from</td>
+                                    <td>@item.Planned_to</td>
+                                    <td>@item.Total_Planned</td>
+                                    <td>@item.Downtime_description</td>
+                                    <td>@item.Supoort_Function_Id</td>
+                                    <td>@item.Downtime_SlipSerialNo</td>
+                                    <td>@item.Downtime_From</td>
+                                    <td>@item.Downtime_to</td>
+                                    <td>@item.Total_Downtime</td>
+
+                                    <td>
+                                        <span class="EditColourMaster"><i class="fa fa-edit"></i></span>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script type="text/javascript">
+
+
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+
+
+
+
+</script>

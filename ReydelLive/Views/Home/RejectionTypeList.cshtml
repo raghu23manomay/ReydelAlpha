@@ -3,20 +3,11 @@
     ViewBag.Title = "Rejection Type List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+
 
 @model  IEnumerable<ReyDel.Models.RejectionReasonTypeMaster>
 <section class="content">
-    <div class="row">
-        <div class="col-sm-10">
 
-        </div>
-        <div class="col-sm-2">
-
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#AddRejectionType">Add New</button>
-            @Html.Partial("../Home/AddRejectionType")
-        </div>
-    </div>
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12">
@@ -26,7 +17,8 @@
                 <div class="box-header">
 
                     <h3 class="box-title"><b>Rejection Type List</b> </h3>
-
+                    <button type="button" class="btn btn-info pull-right " data-toggle="modal" data-target="#AddRejectionType">Add New</button>
+                    @Html.Partial("../Home/AddRejectionType")
 
                 </div>
                 <!-- /.box-header -->
@@ -49,7 +41,9 @@
                                         @item.Rejection_Type_Name
                                     </td>
                                     <td> @item.Rejection_Reason_Name</td>
-                                    <td> <a><i class="fa fa-edit"></i></a></td>
+                                    <td>
+                                        <span class="EditRejectionTypeMaster" RejectionTypeName="@item.Rejection_Type_Name" RejectionTypeId="@item.Rejection_Type_Id"><i class="fa fa-edit"></i></span>
+                                    </td>
                                 </tr>
 
                             }
@@ -67,9 +61,38 @@
 
 </section>
 
+<div id="UpdateRejectionType" class="modal fade in" style="padding-top: 50px;" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update RejectionType Master  </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="UpdateRejection_Type_Id">
+                    </div>
+                    <div class="form-group">
+                        <label>RejectionType Name</label>
+                        <input type="text" class="form-control" id="UpdateRejection_Type_Name" placeholder="Rejection_Type_Name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
 
-<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
+    </div>
+</div>
 
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
 <script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -77,10 +100,22 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
- 
+
+<script>
+    function refresh() {
+        $('.EditRejectionTypeMaster').on('click', function () {
+            var RejectionTypeName = this.getAttribute("RejectionTypeName");
+            var RejectionTypeId = this.getAttribute("RejectionTypeId");
+            $("#UpdateRejection_Type_Id").val(RejectionTypeId);
+            $("#UpdateRejection_Type_Name").val(RejectionTypeName);
+            $("#UpdateRejectionType").show();
+        });
+
+    };
+</script>
 <script src="~/Content/js/jquery-2.1.1.js"></script>
 <script type="text/javascript">
-
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -90,6 +125,9 @@
         'autoWidth': false
     })
     $(document).ready(function () {
+      $('.close').on('click', function () {
+          $("#UpdateRejectionType").hide();
+        });
         $('#btnSave').on('click', function () {
             debugger;
             var id = document.getElementById("Rejection_Reason_Id").options[document.getElementById("Rejection_Reason_Id").selectedIndex].value;
@@ -99,9 +137,9 @@
                 url: '/Home/AddRejectionType',
                 data:
                 {
-                    Rejection_Reason_Id :id,
+                    Rejection_Reason_Id: id,
                     RejectionTypeName: $("#RejectionTypeName").val(),
-                   
+
                 },
                 success: function (data) {
                     $("#AddRejectionType").hide(),
@@ -113,5 +151,28 @@
                 }
             });
         });
+        $('#btnSaveChanges').on('click', function () {
+            debugger;
+            var RejectionTypeId = $("#UpdateRejection_Type_Id").val();
+            var RejectionTypeName = $("#UpdateRejection_Type_Name").val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateRejectionTypeMaster',
+                data:
+                {
+                    Rejection_Type_Id: RejectionTypeId,
+                    Rejection_Type_Name: RejectionTypeName,
+                },
+                success: function (data) {
+                    $("#UpdateRejectionType").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
     });
 </script>
+ 

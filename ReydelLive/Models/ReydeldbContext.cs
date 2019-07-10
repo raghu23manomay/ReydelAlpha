@@ -29,5 +29,7 @@ namespace ReyDel.Models
         public DbSet<ChangeTypeConfiguration> ChangeTypeConfigurations { get; set; }
         public DbSet<Production_Entry> ProductionEntry { get; set; }
         public DbSet<DownTime_Entry> DownTime_Entry { get; set; }
+        public DbSet<ChangeOver_Entry> ChangeOver_Entry { get; set; }
+        public DbSet<RejectionEntryDetails> RejectionEntryDetails { get; set; }
     }
 }

@@ -1,0 +1,184 @@
+﻿
+
+@{
+                /**/
+
+                Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="modal fade" id="AddProductionEntry" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Production Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="Entry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input type="date" class="form-control" id="Entry_Date" placeholder="Entry Date">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Calendar id</label>
+                                <input type="text" class="form-control" id="Calendar_id" placeholder="Calendar id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employe Name  </label>
+                                <select name=" Employee Name"  class="form-control" id="Employee_Id" >
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                              
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Shift</label>
+                                <select name=" Shift "  class="form-control" id="Shift_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Machine</label>
+                                <select name=" Machine"  class="form-control" id="Machine_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  REI</label>
+                                <select name=" REI "  class="form-control" id="REI_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Part</label>
+                                <select name=" Part "  class="form-control" id="Part_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Plan Quntity</label>
+                                <input type="text" class="form-control" id=" Plan_Qty" placeholder="Plan Quntity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Cumm Accepted Qty</label>
+                                <input type="text" class="form-control" id="Cumm_Accepted_Qty" placeholder="Cumm Accepted Qty">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Accepted Quntity</label>
+                                <input type="text" class="form-control" id="Accepted_Quntity" placeholder="  Accepted Quntity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Operator Emp</label>
+                                <select name=" Operator Name"  class="form-control" id="Operator_Emp">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  Shift superviser</label>
+                                <select name=" superviser Name"  class="form-control" id="Shift_superviser">
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnAdd">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('#btnAdd').on('click', function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/AddProductionEntry',
+            data:
+            {
+               
+                Entry_Date: $("#Entry_Date").val(),
+                Calendar_id: $("#Calendar_id").val(),
+                Emp_name: $("#Employee_Id").val(),
+                Shift: $("#Shift_Id").val(),
+                Machine: $("#Machine_Id").val(),
+                REI: $("#REI_Id").val(),
+                Part: $("#Part_Id").val(),
+                Plan_Qty: $("#Plan_Qty").val(),
+                Cumm_Accepted_Qty: $("#Cumm_Accepted_Qty").val(),
+                Accepted_Qty: $("#Accepted_Quntity").val(),
+                Operator_Emp: $("#Operator_Emp").val(),
+                Shift_superviser: $("#Shift_superviser").val(),
+           
+
+            },
+            success: function (data) {
+                $("#AddProductionEntry").hide(),
+                    // alert(data);
+                    location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    });
+</script>
+

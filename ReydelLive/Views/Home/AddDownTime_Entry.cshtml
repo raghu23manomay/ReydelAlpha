@@ -1,0 +1,174 @@
+﻿
+
+@{
+                /**/
+
+                /**/
+
+                Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="modal fade" id="AddDownTime_Entry" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add DownTime Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="Entry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input type="date" class="form-control" id="Entry_Date" placeholder="Entry Date">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Calendar id</label>
+                                <input type="text" class="form-control" id="Calendar_id" placeholder="Calendar id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employe Id  </label>
+                                <input type="text" class="form-control" id="Emp_Id" placeholder="Employe Id ">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Is Planned</label>
+                                <input type="text" class="form-control" id="IsPlanned" placeholder=" Is Planned">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Planned from</label>
+                                <input type="time" class="form-control" id="Planned_from" placeholder="Planned from">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  Planned to</label>
+                                <input type="time" class="form-control" id="Planned_to" placeholder="Planned to">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Total Planned(Mins)</label>
+                                <input type="text" class="form-control" id="Total_Planned" placeholder="Total Planned">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Downtime description</label>
+                                <input type="text" class="form-control" id="Downtime_description" placeholder="Downtime description">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Supoort Function Id</label>
+                                <input type="text" class="form-control" id="Supoort_Function_Id" placeholder="Supoort Function Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                           
+                            <div class="form-group">
+                                <label> Downtime Slip Serial No</label>
+                                <input type="text" class="form-control" id="Downtime_SlipSerialNo" placeholder="  Downtime_SlipSerialNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Downtime From</label>
+                                <input type="time" class="form-control" id="Downtime_From" placeholder="  Downtime From">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Downtime to</label>
+                                <input type="time" class="form-control" id="Downtime_to" placeholder="Downtime to">
+                            </div>
+
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>  Total Downtime(Mins)</label>
+                                    <input type="text" class="form-control" id="Total_Downtime" placeholder="Total_Downtime(Mins)">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                  
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnAdd">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('#btnAdd').on('click', function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/AddDownTime_Entry',
+            data:
+            {
+                
+                Entry_Date: $("#Entry_Date").val(),
+                Calendar_id: $("#Calendar_id").val(),
+                Emp_Id: $("#Emp_Id").val(),
+                IsPlanned: $("#IsPlanned").val(),
+                Planned_from: $("#Planned_from").val(),
+                Planned_to: $("#Planned_to").val(),
+                Total_Planned: $("#Total_Planned").val(),
+                Downtime_description: $("#Downtime_description").val(),
+                Supoort_Function_Id: $("#Supoort_Function_Id").val(),
+                Downtime_SlipSerialNo: $("#Downtime_SlipSerialNo").val(),
+                Downtime_From: $("#Downtime_From").val(),
+                Downtime_to: $("#Downtime_to").val(),
+                Total_Downtime: $("#Total_Downtime").val(),
+
+
+            },
+            success: function (data) {
+                $("#AddDownTime_Entry").hide(),
+                    // alert(data);
+                    location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    });
+</script>
+
+

@@ -7073,6 +7073,7 @@
     <Content Include="dist\css\adminlte.min.css.map" />
     <Content Include="dist\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="dist\plugins\input-mask\phone-codes\phone-codes.json" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7119,6 +7120,17 @@
     <Content Include="Views\Home\ExportImportTypeList.cshtml" />
     <Content Include="Views\Home\RejectionReasonList.cshtml" />
     <Content Include="Views\Home\RejectionTypeList.cshtml" />
+    <Content Include="Views\Home\UpdateMaterialGrade.cshtml" />
+    <Content Include="Views\Home\AddChangeTypeConfiguration.cshtml" />
+    <Content Include="Views\Home\ChangeTypeConfigurationList.cshtml" />
+    <Content Include="Views\Home\ProductionEntryList.cshtml" />
+    <Content Include="Views\Home\AddProductionEntry.cshtml" />
+    <Content Include="Views\Home\DownTimeEntryList.cshtml" />
+    <Content Include="Views\Home\AddDownTime_Entry.cshtml" />
+    <Content Include="Views\Home\AddChangeOver_Entry.cshtml" />
+    <Content Include="Views\Home\ChangeOver_EntryList.cshtml" />
+    <Content Include="Views\Home\AddRejectionEntryDetails.cshtml" />
+    <Content Include="Views\Home\RejectionEntryDetailsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

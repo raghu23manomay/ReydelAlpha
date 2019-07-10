@@ -2,20 +2,9 @@
 
 @model  IEnumerable<ReyDel.Models.SupportFunctionMaster>
 <section class="content">
+
+
     <div class="row">
-        <div class="col-sm-9">
-
-        </div>
-        <div class="col-sm-3">
-
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#AddSupportFunctionMaster" style="margin-left:100px;">Add New  </button>
-
-            @Html.Partial("../Home/AddSupportFunctionMaster")
-
-        </div>
-    </div>
-
-    <div class="row" style="margin-top:20px">
         <div class="col-xs-12">
 
             <!-- /.box -->
@@ -23,7 +12,9 @@
                 <div class="box-header">
 
                     <h3 class="box-title"><b>Support Function List</b></h3>
+                    <button type="button" class="btn btn-info pull-right " data-toggle="modal" data-target="#AddSupportFunctionMaster" style="margin-left:100px;">Add New  </button>
 
+                    @Html.Partial("../Home/AddSupportFunctionMaster")
 
                 </div>
                 <!-- /.box-header -->
@@ -49,7 +40,9 @@
 
                                     </td>
                                     <td>@item.SupportFunction_Code</td>
-                                    <td> <a class=""><i class="fa fa-edit"></i></a></td>
+                                    <td>
+                                        <span class="EditSupportFunctionMaster" SupportFunctionName="@item.SupportFunction_Name" SupportFunctionId="@item.SupportFunction_Id" SupportFunctionCode="@item.SupportFunction_Code"><i class="fa fa-edit"></i></span>
+                                    </td>
 
                                 </tr>
 
@@ -67,38 +60,41 @@
     </div>
 
 </section>
-<span id="EditREI" data-toggle="modal" data-target="#EditREIMaster"></span>
-
-<div class="modal fade" id="EditREIMaster" role="dialog">
+<div id="UpdateSupportFunction" class="modal fade in" style="padding-top: 50px;" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
+        Modal content
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit REI Master</h4>
+                <h4 class="modal-title">Update Support Function   </h4>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group" hidden>
-                        <label>REI Master ID</label>
-                        <input type="text" class="form-control" id="REIId" placeholder="REI Master ID">
+                        <input type="text" class="form-control" id="UpdateSupportFunction_Id">
                     </div>
                     <div class="form-group">
-                        <label> REI Master Name</label>
-                        <input type="text" class="form-control" id="REIName" placeholder="REI Master Name">
+                        <label> SupportFunction Name</label>
+                        <input type="text" class="form-control" id="UpdateSupportFunction_Name" placeholder="UpdateSupport Function Name">
                     </div>
-
+                    <div class="form-group">
+                        <label>SupportFunction Code</label>
+                        <input type="text" class="form-control" id="UpdateSupportFunction_Code" placeholder="Update Support Function Code">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="btnEdit">Edit</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
             </div>
         </div>
 
     </div>
 </div>
-<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
 <script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -106,22 +102,23 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-@* <script src="~/dist/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/dist/js/demo.js"></script>
-    <link rel="stylesheet" href="~/dist/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/dist/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="~/dist/bower_components/Ionicons/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/dist/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">*@
+<script>
+    function refresh() {
+        $('.EditSupportFunctionMaster').on('click', function () {
+            var SupportFunctionName = this.getAttribute("SupportFunctionName");
+            var SupportFunctionCode = this.getAttribute("SupportFunctionCode");
+            var SupportFunctionId = this.getAttribute("SupportFunctionId");
+            $("#UpdateSupportFunction_Id").val(SupportFunctionId);
+            $("#UpdateSupportFunction_Name").val(SupportFunctionName);
+            $("#UpdateSupportFunction_Code").val(SupportFunctionCode);
+            $("#UpdateSupportFunction").show();
+        });
 
+    };
+</script>
 <script src="~/Content/js/jquery-2.1.1.js"></script>
 <script type="text/javascript">
-
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -131,6 +128,9 @@
         'autoWidth': false
     })
     $(document).ready(function () {
+        $('.close').on('click', function () {
+            $("#UpdateSupportFunction").hide();
+        });
         $('#btnAdd').on('click', function () {
 
             $.ajax({
@@ -141,7 +141,7 @@
                 {
                     SupportFunctionName: $("#SupportFunction_Name").val(),
                     SupportFunctionCode: $("#SupportFunction_Code").val(),
-                  
+
 
                 },
                 success: function (data) {
@@ -155,28 +155,29 @@
             });
         });
 
-        $('.EditREI').on('click', function () {
-            var id = $(this).attr("value");
-            $("#EditREI").click();
-            //$.ajax({
-            //    type: 'POST',
-            //    dataType: 'json',
-            //    url: '/Home/GetDataREIMaster',
-            //    data:
-            //    {
-            //        REI_Id: id,
+        $('#btnSaveChanges').on('click', function () {
+            debugger;
+            var SupportFunctionId = $("#UpdateSupportFunction_Id").val();
+            var SupportFunctionName = $("#UpdateSupportFunction_Name").val();
+            var SupportFunctionCode = $("#UpdateSupportFunction_Code").val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateSupportFunctionMaster ',
+                data:
+                {
+                    SupportFunction_Id: SupportFunctionId,
+                    SupportFunction_Name: SupportFunctionName,
+                    SupportFunction_Code: SupportFunctionCode,
+                },
+                success: function (data) {
+                    $("#UpdateSupportFunction").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-            //    },
-            //    success: function (data) {
-            //        $("#EditREIMaster").html(data),
-            //         $("#EditREI").click();
-            //    },
-            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-            //    }
-            //});
+                }
+            });
         });
     });
-
 </script>
-
