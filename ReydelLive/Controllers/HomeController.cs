@@ -21,7 +21,7 @@ namespace ReyDel.Controllers
         public ActionResult ProductionEntryList()
         {
             ReydeldbContext _db = new ReydeldbContext();
-            IEnumerable<Production_Entry> result = _db.ProductionEntry.SqlQuery(@"exec USPGetProduction_Entry").ToList<Production_Entry>();
+            IEnumerable<ProductionEntryList> result = _db.ProductionEntryList.SqlQuery(@"exec USPGetProduction_Entry").ToList<ProductionEntryList>();
 
 
             return View("ProductionEntryList", result);
@@ -29,7 +29,7 @@ namespace ReyDel.Controllers
         public ActionResult DownTimeEntryList()
         {
             ReydeldbContext _db = new ReydeldbContext();
-            IEnumerable<DownTime_Entry> result = _db.DownTime_Entry.SqlQuery(@"exec USPGetDownTimeEntry").ToList<DownTime_Entry>();
+            IEnumerable<DownTimeEntryList> result = _db.DownTimeEntryList.SqlQuery(@"exec USPGetDownTimeEntry").ToList<DownTimeEntryList>();
 
 
             return View("DownTimeEntryList", result);
@@ -37,7 +37,7 @@ namespace ReyDel.Controllers
         public ActionResult RejectionEntryDetailsList()
         {
             ReydeldbContext _db = new ReydeldbContext();
-            IEnumerable<RejectionEntryDetails> result = _db.RejectionEntryDetails.SqlQuery(@"exec USPGetRejectionEntryDetails").ToList<RejectionEntryDetails>();
+            IEnumerable<RejectionEntryDetailsList> result = _db.RejectionEntryDetailsList.SqlQuery(@"exec USPGetRejectionEntryDetails").ToList<RejectionEntryDetailsList>();
 
 
             return View("RejectionEntryDetailsList", result);
@@ -45,7 +45,7 @@ namespace ReyDel.Controllers
         public ActionResult ChangeOver_EntryList()
         {
             ReydeldbContext _db = new ReydeldbContext();
-            IEnumerable<ChangeOver_Entry> result = _db.ChangeOver_Entry.SqlQuery(@"exec USPGetChangeOver_Entry").ToList<ChangeOver_Entry>();
+            IEnumerable<ChangeOverEntryList> result = _db.ChangeOverEntryList.SqlQuery(@"exec USPGetChangeOver_Entry").ToList<ChangeOverEntryList>();
 
 
             return View("ChangeOver_EntryList", result);
@@ -193,7 +193,7 @@ namespace ReyDel.Controllers
             var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertProductionEntry  @Entry_Date,@Calender_Id,@Emp_Id,@Shift_Id,@Machine_Id,@REI_Id,@Part_Id,@Plan_Qty,@Cumm_Accepted_Qty,@Accepted_Qty,@Operator_Emp_Id,@Shift_superviser",
                  new SqlParameter("@Entry_Date", PE.Entry_Date),
                  new SqlParameter("@Calender_Id", PE.Calendar_id),
-                 new SqlParameter("@Emp_Id", PE.Emp_name),
+                 new SqlParameter("@Emp_Id", PE.Emp_id),
                  new SqlParameter("@Shift_Id", PE.Shift),
                  new SqlParameter("@Machine_Id", PE.Machine),
                  new SqlParameter("@REI_Id", PE.REI),
@@ -217,7 +217,7 @@ namespace ReyDel.Controllers
                  new SqlParameter("@Rejection_Type_Id", RED.Rejection_Type_Id),
                  new SqlParameter("@Rejection_Reason_Id", RED.Rejection_Reason_Id),
                  new SqlParameter("@Rejection_Qty", RED.Rejection_Qty),
-                 new SqlParameter("@Lumps", RED.lumps));
+                 new SqlParameter("@Lumps", RED.Lumps));
                
 
             return Json("data inserted");
@@ -492,5 +492,118 @@ namespace ReyDel.Controllers
              new SqlParameter("@M_Import_Type_Modes", M_Import_Type_Modes));
             return Json("data Updated");
         }
+
+        [HttpPost]
+        public ActionResult UpdateChangeTypeConfiguration(int ChangeTypeConfigID,int Machine_Id, decimal Machine_operation, decimal Change_Over_Target_Time, decimal Expected_Lumps, decimal STD_Material_loading_OST, decimal STD_Change_over_OST, decimal STD_Material_change_over, decimal STD_ASSY_OST, decimal STD_Inspection_OST, decimal STD_material_movement, decimal System_regrind_management, decimal OST_For_daily_monitoring)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateChangeTypeConfiguration @ChangeTypeConfigID,@Machine_Id, @Machine_operation, @Change_Over_Target_Time, @Expected_Lumps, @STD_Material_loading_OST, @STD_Change_over_OST, @STD_Material_change_over, @STD_ASSY_OST, @STD_Inspection_OST, @STD_material_movement, @System_regrind_management, @OST_For_daily_monitoring",
+                 new SqlParameter("@ChangeTypeConfigID", ChangeTypeConfigID),
+                new SqlParameter("@Machine_Id", Machine_Id),
+                 new SqlParameter("@Machine_operation", Machine_operation),
+                 new SqlParameter("@Change_Over_Target_Time",Change_Over_Target_Time),
+                 new SqlParameter("@Expected_Lumps", Expected_Lumps),
+                 new SqlParameter("@STD_Material_loading_OST",STD_Material_loading_OST),
+                 new SqlParameter("@STD_Change_over_OST", STD_Change_over_OST),
+                 new SqlParameter("@STD_Material_change_over", STD_Material_change_over),
+                 new SqlParameter("@STD_ASSY_OST", STD_ASSY_OST),
+                 new SqlParameter("@STD_Inspection_OST", STD_Inspection_OST),
+                 new SqlParameter("@STD_material_movement", STD_material_movement),
+                 new SqlParameter("@System_regrind_management", System_regrind_management),
+                 new SqlParameter("@OST_For_daily_monitoring", OST_For_daily_monitoring));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateProductionEntry(Production_Entry PE)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateUpdateProductionEntry @Entry_Id,@Entry_Date,@Calender_Id,@Emp_Id,@Shift_Id,@Machine_Id,@REI_Id,@Part_Id,@Plan_Qty,@Cumm_Accepted_Qty,@Accepted_Qty,@Operator_Emp_Id,@Shift_superviser",
+                 new SqlParameter("@Entry_Id", PE.Entry_Id),
+                new SqlParameter("@Entry_Date", PE.Entry_Date),
+                 new SqlParameter("@Calendar_id", PE.Calendar_id),
+                 new SqlParameter("@Emp_Id", PE.Emp_id),
+                 new SqlParameter("@Shift", PE.Shift),
+                 new SqlParameter("@REI", PE.REI),
+                 new SqlParameter("@Part", PE.Part),
+                 new SqlParameter("@Plan_Qty", PE.Plan_Qty),
+                 new SqlParameter("@Cumm_Accepted_Qty", PE.Cumm_Accepted_Qty),
+                 new SqlParameter("@Accepted_Qty", PE.Accepted_Qty),
+                 new SqlParameter("@Operator_Emp", PE.Operator_Emp),
+                 new SqlParameter("@Shift_superviser", PE.Shift_superviser));
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpadteRejectionEntryDetails(RejectionEntryDetails RED  )
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateUpadteRejectionEntryDetails @PRejection_Entry_Id,@Rejection_From,  @Prod_Entry_Id,  @Rejection_Type_Id,  @Rejection_Reason_Id,  @Rejection_Qty,  @lumps",
+                 new SqlParameter("@PRejection_Entry_Id", RED.PRejection_Entry_Id),
+                new SqlParameter("@Rejection_From", RED.Rejection_from),
+                 new SqlParameter("@Prod_Entry_Id", RED.Prod_Entry_Id),
+                 new SqlParameter("@Rejection_Type_Id", RED.Rejection_Type_Id),
+                 new SqlParameter("@Rejection_Reason_Id", RED.Rejection_Reason_Id),
+                 new SqlParameter("@Rejection_Qty", RED.Rejection_Qty),
+                 new SqlParameter("@lumps", RED.Lumps));
+                
+            return Json("data Updated");
+        }
+        [HttpPost]
+        public ActionResult UpdateDownTimeEntry(DownTime_Entry DTE) 
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateDownTime_Entry @Entry_Id,@Entry_Date, @Calender_Id, @Emp_Id, @IsPlanned,@Planned_from ,@Planned_to , @Total_Planned, @Downtime_description, @Supoort_Function_Id,@Downtime_SlipSerialNo,@Downtime_From, @Downtime_to , @Total_Downtime",
+                 new SqlParameter("@Entry_Id", DTE.Entry_Id),
+                new SqlParameter("@Entry_Date", DTE.Entry_Date),
+                 new SqlParameter("@Calender_Id", DTE.Calendar_id),
+                 new SqlParameter("@Emp_Id", DTE.Emp_Id),
+                 new SqlParameter("@IsPlanned", DTE.IsPlanned),
+                 new SqlParameter("@Planned_from", DTE.Planned_from),
+                 new SqlParameter("@Planned_to", DTE.Planned_to),
+                 new SqlParameter("@Total_Planned", DTE.Total_Planned),
+                 new SqlParameter("@Downtime_description", DTE.Downtime_description),
+                 new SqlParameter("@Supoort_Function_Id", DTE.Supoort_Function_Id),
+                 new SqlParameter("@Downtime_SlipSerialNo", DTE.Downtime_SlipSerialNo),
+                 new SqlParameter("@Downtime_From", DTE.Downtime_From),
+                 new SqlParameter("@Downtime_to", DTE.Downtime_to),
+                 new SqlParameter("@Total_Downtime", DTE.Total_Downtime));
+
+            return Json("data Updated");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateChangeOver_Entry(ChangeOver_Entry COE)
+        {
+
+            ReydeldbContext dbc = new ReydeldbContext();
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPUpdateChangeOver_Entry @Entry_Id, @Entry_Date,@Calendar_id,@Emp_Id,@ChangeOver_Config_Type,@Change_From_REI_ID,@Change_From_Part_Id,@Change_From_Mat_Grade_Id,@Change_To_REI_ID,@Change_To_Part_Id,@Change_To_Mat_Grade_Id,@StandardRunQty,@Actual_RunQty,@Increase_in_Scrap_Percent,@Increase_in_scrap_Value,@ChangeOver_Start,@ChangeOver_End,@TotalChangeOver,@Std_ChangeOverTime,@Difference,@LossInPrecentage,@Expected_Lumps,@Actual_Lumps,@Difference_Lumps,@ScrapPercentIncrease",
+                   new SqlParameter("@Entry_Id", COE.Entry_Id),
+                new SqlParameter("@Entry_Date", COE.Entry_Date),
+                 new SqlParameter("@Calendar_id", COE.Calendar_id),
+                 new SqlParameter("@Emp_Id", COE.Emp_Id),
+                 new SqlParameter("@ChangeOver_Config_Type", COE.ChangeOver_Config_Type),
+                 new SqlParameter("@Change_From_REI_ID", COE.Change_From_REI_ID),
+                 new SqlParameter("@Change_From_Part_Id", COE.Change_From_Part_Id),
+                 new SqlParameter("@Change_From_Mat_Grade_Id", COE.Change_From_Mat_Grade_Id),
+                 new SqlParameter("@Change_To_REI_ID", COE.Change_To_REI_ID),
+                  new SqlParameter("@Change_To_Part_Id", COE.Change_To_Part_Id),
+                 new SqlParameter("@Change_To_Mat_Grade_Id", COE.Change_To_Mat_Grade_Id),
+                 new SqlParameter("@StandardRunQty", COE.StandardRunQty),
+                  new SqlParameter("@Actual_RunQty", COE.Actual_RunQty),
+                 new SqlParameter("@Increase_in_Scrap_Percent", COE.Increase_in_Scrap_Percent),
+                 new SqlParameter("@Increase_in_scrap_Value", COE.Increase_in_scrap_Value),
+                 new SqlParameter("@ChangeOver_Start", COE.ChangeOver_Start),
+                 new SqlParameter("@ChangeOver_End", COE.ChangeOver_End),
+                 new SqlParameter("@TotalChangeOver", COE.TotalChangeOver),
+                 new SqlParameter("@Std_ChangeOverTime", COE.Std_ChangeOverTime),
+                   new SqlParameter("@Difference", COE.Difference),
+                 new SqlParameter("@LossInPrecentage", COE.LossInPrecentage),
+                 new SqlParameter("@Expected_Lumps", COE.Expected_Lumps),
+                   new SqlParameter("@Actual_Lumps", COE.Actual_Lumps),
+                 new SqlParameter("@Difference_Lumps", COE.Difference_Lumps),
+                 new SqlParameter("@ScrapPercentIncrease", COE.ScrapPercentIncrease));
+
+            return Json("data Updated");
+        }
+
     }
 }

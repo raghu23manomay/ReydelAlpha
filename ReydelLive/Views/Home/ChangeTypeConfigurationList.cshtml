@@ -34,6 +34,7 @@
                                 <th>STD material movement</th>
                                 <th>System & regrind management</th>
                                 <th>OST For daily monitoring</th>
+                                <th>Action</th>
 
 
                             </tr>
@@ -56,31 +57,140 @@
                                     <td>@item.System_Regrind_Management</td>
                                     <td>@item.OST_For_daily_Monitoring</td>
                                     <td>
-                                        <span class="EditREIMaster"><i class="fa fa-edit"></i></span>
+                                        <span class="EditChangeTypeConfiguration" UChangeTypeConfigID="@item.ChangeTypeConfigID"
+                                              UMachineId="@item.Machine_Id"
+                                              UMachine_operation="@item.Machine_operation"
+                                              UChange_Over_Target_Time="@item.Change_Over_Target_Time"
+                                              UExpected_Lumps="@item.Expected_Lumps" 
+                                              USTD_Material_loading_OST="@item.STD_Material_loading_OST" 
+                                              USTD_Change_over_OST="@item.STD_Change_over_OST" 
+                                              USTD_Material_change_over="@item.STD_Material_change_over" 
+                                              USTD_ASSY_OST="@item.STD_ASSY_OST" 
+                                              USTD_Inspection_OST="@item.STD_Inspection_OST" 
+                                              USTD_material_movement="@item.STD_Material_Movement" 
+                                              USystem_regrind_management="@item.System_Regrind_Management" 
+                                              UOST_For_daily_monitoring="@item.OST_For_daily_Monitoring"><i class="fa fa-edit"></i></span>
                                     </td>
-
-
-
-
-
-
                                 </tr>
-
                             }
-
                         </tbody>
-
                     </table>
                 </div>
-
             </div>
-
         </div>
-        </div>
-    
-
+    </div>
 </section>
 
+<div id="updateConfiguration" class="modal fade in"  data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">update ChangeType Configuration  </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="EChangeTypeConfigID">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Machine Id</label>
+                                <input type="text" class="form-control" id="EMachine_Id" placeholder="Machine Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Machine operation</label>
+                                <input type="text" class="form-control" id="EMachine_operation" placeholder="Machine Operation">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Change_Over_Target_Time</label>
+                                <input type="text" class="form-control" id="EChange_Over_Target_Time" placeholder=" Change Over Target Time">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Expected Lumps</label>
+                                <input type="text" class="form-control" id="EExpected_Lumps" placeholder=" Expected Lumps">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD Material loading OST</label>
+                                <input type="text" class="form-control" id="ESTD_Material_loading_OST" placeholder=" STD Material loading OST">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  STD Change over OST</label>
+                                <input type="text" class="form-control" id="ESTD_Change_over_OST" placeholder="  STD Change over OST">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD Material change over</label>
+                                <input type="text" class="form-control" id="ESTD_Material_change_over" placeholder="STD Material change over ">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD ASSY OST</label>
+                                <input type="text" class="form-control" id="ESTD_ASSY_OST" placeholder=" STD ASSY OST">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD Inspection OST</label>
+                                <input type="text" class="form-control" id="ESTD_Inspection_OST" placeholder=" STD Inspection OST">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  STD material movement</label>
+                                <input type="text" class="form-control" id="ESTD_material_movement" placeholder=" STD material movement">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  System regrind management</label>
+                                <input type="text" class="form-control" id="ESystem_regrind_management" placeholder="System regrind management ">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  OST For daily monitoring</label>
+                                <input type="text" class="form-control" id="EOST_For_daily_monitoring" placeholder=" OST For daily monitoring">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
@@ -92,10 +202,43 @@
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 
+<script>
+    function refresh() {
+        $('.EditChangeTypeConfiguration').on('click', function () {
+            var UChangeTypeConfigID = this.getAttribute("UChangeTypeConfigID");
+            var UMachineId = this.getAttribute("UMachineId");
+            var UMachine_operation = this.getAttribute("UMachine_operation");
+            var UChange_Over_Target_Time = this.getAttribute("UChange_Over_Target_Time");
+            var UExpected_Lumps = this.getAttribute("UExpected_Lumps");
+            var USTD_Material_loading_OST = this.getAttribute("USTD_Material_loading_OST");
+            var USTD_Change_over_OST = this.getAttribute("USTD_Change_over_OST");
+            var USTD_Material_change_over = this.getAttribute("USTD_Material_change_over");
+            var USTD_ASSY_OST = this.getAttribute("USTD_ASSY_OST");
+            var USTD_Inspection_OST = this.getAttribute("USTD_Inspection_OST");
+            var USTD_material_movement = this.getAttribute("USTD_material_movement");
+            var USystem_regrind_management = this.getAttribute("USystem_regrind_management");
+            var UOST_For_daily_monitoring = this.getAttribute("UOST_For_daily_monitoring");
+            $("#EChangeTypeConfigID").val(UChangeTypeConfigID),
+                $("#EMachine_Id").val(UMachineId),
+                $("#EMachine_operation").val(UMachine_operation),
+                $("#EChange_Over_Target_Time").val(UChange_Over_Target_Time),
+                $("#EExpected_Lumps").val(UExpected_Lumps),
+                $("#ESTD_Material_loading_OST").val(USTD_Material_loading_OST),
+                $("#ESTD_Change_over_OST").val(USTD_Change_over_OST),
+                $("#ESTD_Material_change_over").val(USTD_Material_change_over),
+                $("#ESTD_ASSY_OST").val(USTD_ASSY_OST),
+                $("#ESTD_Inspection_OST").val(USTD_Inspection_OST),
+                $("#ESTD_material_movement").val(USTD_material_movement),
+                $("#ESystem_regrind_management").val(USystem_regrind_management),
+                $("#EOST_For_daily_monitoring").val(UOST_For_daily_monitoring),
+                $("#updateConfiguration").show();
+        });
 
+    };
+</script>
 <script type="text/javascript">
 
- 
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -106,10 +249,57 @@
     })
 
     $(document).ready(function () {
-       
-    });
-  
+        $('.close').on('click', function () {
+            $("#updateConfiguration").hide();
+        });
 
+        $('#btnSaveChanges').on('click', function () {
+            
+            var UChangeTypeConfigID                =      $("#EChangeTypeConfigID").val();
+            var UMachineId                           =    $("#EMachine_Id").val();
+            var UMachine_operation                   =    $("#EMachine_operation").val();
+            var UChange_Over_Target_Time               =  $("#EChange_Over_Target_Time").val();
+            var UExpected_Lumps                       =   $("#EExpected_Lumps").val();
+            var USTD_Material_loading_OST             =   $("#ESTD_Material_loading_OST").val();
+            var USTD_Change_over_OST                   =  $("#ESTD_Change_over_OST").val();
+            var USTD_Material_change_over              =  $("#ESTD_Material_change_over").val();
+            var USTD_ASSY_OST                         =   $("#ESTD_ASSY_OST").val();
+            var USTD_Inspection_OST                     = $("#ESTD_Inspection_OST").val();
+            var USTD_material_movement                  = $("#ESTD_material_movement").val();
+            var USystem_regrind_management              = $("#ESystem_regrind_management").val();
+            var UOST_For_daily_monitoring               = $("#EOST_For_daily_monitoring").val();
+           
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateChangeTypeConfiguration',
+                data:
+                {
+                    ChangeTypeConfigID: UChangeTypeConfigID ,       
+                    Machine_Id: UMachineId ,                
+                    Machine_operation: UMachine_operation   ,      
+                    Change_Over_Target_Time: UChange_Over_Target_Time   ,
+                    Expected_Lumps: UExpected_Lumps            ,
+                    STD_Material_loading_OST: USTD_Material_loading_OST  ,
+                    STD_Change_over_OST: USTD_Change_over_OST      , 
+                    STD_Material_change_over: USTD_Material_change_over  ,
+                    STD_ASSY_OST: USTD_ASSY_OST      ,        
+                    STD_Inspection_OST: USTD_Inspection_OST   ,     
+                    STD_material_movement: USTD_material_movement  ,   
+                    System_regrind_management: USystem_regrind_management ,
+                    OST_For_daily_monitoring: UOST_For_daily_monitoring  
+                },
+                success: function (data) {
+                    $("#updateConfiguration").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+    });
+       
 
 </script>
 

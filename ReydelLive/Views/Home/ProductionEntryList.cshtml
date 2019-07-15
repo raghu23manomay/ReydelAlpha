@@ -1,6 +1,6 @@
 ﻿
 
-@model  IEnumerable<ReyDel.Models.Production_Entry>
+@model  IEnumerable<ReyDel.Models.ProductionEntryList>
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
@@ -20,15 +20,16 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>  Entry_Id   </th>
-                                <th>   Calendar_id  </th>
+                               
+                                <th>   Calendar id  </th>
                                 <th>  Entry Date   </th>
-                                <th>   Emp_name  </th>
+                                <th>   Emp Id  </th>
                                 <th>    Shift </th>
                                 <th>   Machine  </th>
                                 <th>    REI </th>
+                                <th> Part</th>
                                 <th>  Plan Qty   </th>
-                                <th>  Cumm Accepted_Qty   </th>
+                                <th>  Cumm Accepted Qty   </th>
                                 <th>Accepted Qty</th>
                                 <th>Operator Emp</th>
                                 <th>Shift superviser</th>
@@ -39,13 +40,14 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Entry_Id</td>
+                                  
                                     <td>@item.Calendar_id</td>
-                                    <td>@item.Entry_Date</td>
-                                    <td>@item.Emp_name</td>
+                                    <td>@item.EntryDate</td>
+                                    <td>@item.Emp_id</td>
                                     <td>@item.Shift</td>
                                     <td>@item.Machine</td>
                                     <td>@item.REI</td>
+                                    <td>@item.Part</td>
                                     <td>@item.Plan_Qty</td>
                                     <td>@item.Cumm_Accepted_Qty</td>
                                     <td>@item.Accepted_Qty</td>
@@ -53,7 +55,20 @@
                                     <td>@item.Shift_superviser</td>
 
                                     <td>
-                                        <span class="EditColourMaster"><i class="fa fa-edit"></i></span>
+                                        <span class="EditProductionEntry"
+                                              UEntry_Id="@item.Entry_Id"
+                                              UEntry_Date="@item.EntryDate"
+                                              UCalendar_id="@item.Calendar_id"
+                                              UEmp_Id="@item.Emp_id"
+                                              UShift="@item.Shift"
+                                              UMachine="@item.Machine"
+                                              UREI="@item.REI"
+                                              UPart="@item.Part"
+                                              UPlan_Qty="@item.Plan_Qty"
+                                              UCumm_Accepted_Qty="@item.Cumm_Accepted_Qty"
+                                              UAccepted_Qty="@item.Accepted_Qty"
+                                              UOperator_Emp="@item.Operator_Emp"
+                                              UShift_superviser="@item.Shift_superviser"><i class="fa fa-edit"></i></span>
                                     </td>
 
                                 </tr>
@@ -72,6 +87,147 @@
     </div>
 
 </section>
+<div id="UpdateProduction" class="modal fade in" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Production Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="EEntry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input type="text" class="form-control" id="EEntry_Date" placeholder="Entry Date">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Calendar id</label>
+                                <input type="text" class="form-control" id="ECalendar_id" placeholder="Calendar id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employe Id  </label>
+                                <select name=" Employee Name" class="form-control" id="EEmp_id">
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Shift</label>
+
+                                <select name=" Shift" class="form-control" id="EShift_Id">
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Machine</label>
+                                <select name=" Machine" class="form-control" id="EMachine_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  REI</label>
+                                <select name=" REI " class="form-control" id="EREI_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Part</label>
+                                <select name=" Part " class="form-control" id="EPart_Id">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Plan Quntity</label>
+                                <input type="text" class="form-control" id="EPlan_Qty">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Cumm Accepted Qty</label>
+                                <input type="text" class="form-control" id="ECumm_Accepted_Qty" placeholder="Cumm Accepted Qty">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Accepted Quntity</label>
+                                <input type="text" class="form-control" id="EAccepted_Qty" placeholder="  Accepted Quntity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Operator Emp</label>
+                                <select name=" Operator Name" class="form-control" id="EOperator_Emp">
+                                    <option>2</option>
+                                    <option>2</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  Shift superviser</label>
+                                <select name=" superviser Name" class="form-control" id="EShift_superviser">
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
@@ -82,9 +238,45 @@
 <!-- SlimScroll -->
 <script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
+<script>
+    function refresh() {
+
+        $('.EditProductionEntry').on('click', function () {
+
+            var UEntry_Id = this.getAttribute("UEntry_Id");
+            var UEntry_Date = this.getAttribute("UEntry_Date");
+            var UCalendar_id = this.getAttribute("UCalendar_id");
+            var UEmp_id = this.getAttribute("UEmp_id");
+            var UShift = this.getAttribute("UShift");
+            var UMachine = this.getAttribute("UMachine");
+            var UREI = this.getAttribute("UREI");
+            var UPart = this.getAttribute("UPart");
+            var UPlan_Qty = this.getAttribute("UPlan_Qty");
+            var UAccepted_Qty = this.getAttribute("UAccepted_Qty");
+            var UCumm_Accepted_Qty = this.getAttribute("UCumm_Accepted_Qty");
+            var UOperator_Emp = this.getAttribute("UOperator_Emp");
+            var UShift_superviser = this.getAttribute("UShift_superviser");
+            $("#EEntry_Id").val(UEntry_Id),
+                $("#EEntry_Date").val(UEntry_Date),
+                $("#ECalendar_id").val(UCalendar_id),
+                $("#EEmp_id").val(UEmp_id),
+                $("EShift_Id").val(UShift),
+                $("#EMachine_Id").val(UMachine),
+                $("#EREI_Id").val(UREI),
+                $("#EPart_Id").val(UPart),
+                $("#EPlan_Qty").val(UPlan_Qty),
+                $("#EAccepted_Qty").val(UAccepted_Qty)
+            $("#ECumm_Accepted_Qty").val(UCumm_Accepted_Qty),
+                $("#EOperator_Emp").val(UOperator_Emp),
+                $("#EShift_superviser").val(UShift_superviser),
+                $("#UpdateProduction").show();
+        });
+    };
+
+</script>
 <script type="text/javascript">
 
-
+    refresh();
     $('#example1').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -93,5 +285,59 @@
         'info': true,
         'autoWidth': false
     })
+
+    $(document).ready(function () {
+        $('.close').on('click', function () {
+            $("#UpdateProduction").hide();
+        });
+
+        $('#btnSaveChanges').on('click', function () {
+
+            var UEntry_Id = $("#EEntry_Id").val();
+            var UEntry_Date = $("#EEntry_Date").val();
+            var UCalendar_id = $("#ECalendar_id").val();
+            var UEmp_id = $("#EEmp_id").val();
+            var UShift = $("#EShift_Id");
+            var UMachine = $("#EMachine_Id").val();
+            var UREI = $("#EREI_Id").val();
+            var UPart = $("#EPart_Id").val();
+            var UPlan_Qty = $("#EPlan_Qty").val();
+            var UAccepted_Qty = $("EAccepted_Qty").val();
+            var UCumm_Accepted_Qty = $("#ECumm_Accepted_Qty").val();
+            var UOperator_Emp = $("#EOperator_Emp").val();
+            var UShift_superviser = $("#EShift_superviser").val();
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateProductionEntry',
+                data:
+                {
+                    Entry_Id: UEntry_Id,
+                    Calendar_id: UEntry_Date,
+                    Entry_Date: UCalendar_id,
+                    Emp_id: UEmp_id,
+                    Shift: UShift,
+                    Machine: UMachine,
+                    REI: UREI,
+                    Part: UPart,
+                    Plan_Qty: UPlan_Qty,
+                    Cumm_Accepted_Qty: UCumm_Accepted_Qty,
+                    Accepted_Qty: UAccepted_Qty,
+                    Operator_Emp: UOperator_Emp,
+                    Shift_superviser: UShift_superviser    
+                },
+                success: function (data) {
+                    $("#UpdateProduction").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+    });
+
+
 
 </script>

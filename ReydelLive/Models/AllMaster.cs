@@ -12,12 +12,24 @@ namespace ReyDel.Models
     {
         [Key]
         public int? PRejection_Entry_Id { get; set; }
-        public int Rejection_from { get; set; }
+        public DateTime Rejection_from { get; set; }
         public int Prod_Entry_Id { get; set; }
         public int Rejection_Type_Id { get; set; }
         public int Rejection_Reason_Id { get; set; }
         public int Rejection_Qty { get; set; }
-        public int lumps { get; set; }
+        public int Lumps { get; set; }
+
+    }
+    public class RejectionEntryDetailsList
+    {
+        [Key]
+        public int? PRejection_Entry_Id { get; set; }
+        public String Rejectionfrom { get; set; }
+        public int Prod_Entry_Id { get; set; }
+        public int Rejection_Type_Id { get; set; }
+        public int Rejection_Reason_Id { get; set; }
+        public int Rejection_Qty { get; set; }
+        public int Lumps { get; set; }
 
     }
     public class ChangeOver_Entry
@@ -38,8 +50,8 @@ namespace ReyDel.Models
         public int Actual_RunQty { get; set; }
         public decimal Increase_in_Scrap_Percent { get; set; }
         public decimal Increase_in_scrap_Value { get; set; }
-        public DateTime ChangeOver_Start { get; set; }
-        public DateTime ChangeOver_End { get; set; }
+        public TimeSpan ChangeOver_Start { get; set; }
+        public TimeSpan ChangeOver_End { get; set; }
         public int TotalChangeOver { get; set; }
         public int Std_ChangeOverTime { get; set; }
         public decimal Difference { get; set; }
@@ -49,13 +61,59 @@ namespace ReyDel.Models
         public decimal Difference_Lumps { get; set; }
         public decimal ScrapPercentIncrease { get; set; }
     }
-   public class Production_Entry
+    public class ChangeOverEntryList
+    {
+        [Key]
+        public int? Entry_Id { get; set; }
+        public String EntryDate { get; set; }
+        public int Calendar_id { get; set; }
+        public int Emp_Id { get; set; }
+        public int ChangeOver_Config_Type { get; set; }
+        public int Change_From_REI_ID { get; set; }
+        public int Change_From_Part_Id { get; set; }
+        public int Change_From_Mat_Grade_Id { get; set; }
+        public int Change_To_REI_ID { get; set; }
+        public int Change_To_Part_Id { get; set; }
+        public int Change_To_Mat_Grade_Id { get; set; }
+        public int StandardRunQty { get; set; }
+        public int Actual_RunQty { get; set; }
+        public decimal Increase_in_Scrap_Percent { get; set; }
+        public decimal Increase_in_scrap_Value { get; set; }
+        public TimeSpan ChangeOver_Start { get; set; }
+        public TimeSpan ChangeOver_End { get; set; }
+        public int TotalChangeOver { get; set; }
+        public int Std_ChangeOverTime { get; set; }
+        public decimal Difference { get; set; }
+        public decimal LossInPrecentage { get; set; }
+        public decimal Expected_Lumps { get; set; }
+        public decimal Actual_Lumps { get; set; }
+        public decimal Difference_Lumps { get; set; }
+        public decimal ScrapPercentIncrease { get; set; }
+    }
+    public class Production_Entry
     {
         [Key]
         public int? Entry_Id { get; set; }
         public int Calendar_id { get; set; }
         public DateTime Entry_Date { get; set; }
-        public int Emp_name { get; set; }
+        public int Emp_id { get; set; }
+        public int Shift { get; set; }
+        public int Machine { get; set; }
+        public int REI { get; set; }
+        public int Part { get; set; }
+        public int Plan_Qty { get; set; }
+        public decimal Cumm_Accepted_Qty { get; set; }
+        public decimal Accepted_Qty { get; set; }
+        public int Operator_Emp { get; set; }
+        public int Shift_superviser { get; set; }
+    }
+    public class ProductionEntryList
+    {
+        [Key]
+        public int? Entry_Id { get; set; }
+        public int Calendar_id { get; set; }
+        public String EntryDate { get; set; }
+        public int Emp_id { get; set; }
         public int Shift { get; set; }
         public int Machine { get; set; }
         public int REI { get; set; }
@@ -74,17 +132,34 @@ namespace ReyDel.Models
         public int Calendar_id { get; set; }
         public int Emp_Id { get; set; }
         public Boolean IsPlanned { get; set; }
-        public DateTime Planned_from { get; set; }
-        public DateTime Planned_to { get; set; }
+        public TimeSpan Planned_from { get; set; }
+        public TimeSpan Planned_to { get; set; }
         public int Total_Planned { get; set; }
         public string Downtime_description { get; set; }
         public int Supoort_Function_Id { get; set; }
         public string Downtime_SlipSerialNo { get; set; }
-        public DateTime Downtime_From { get; set; }
-        public DateTime Downtime_to { get; set; }
+        public TimeSpan Downtime_From { get; set; }
+        public TimeSpan Downtime_to { get; set; }
         public int Total_Downtime { get; set; }
     }
-
+    public class DownTimeEntryList
+    {
+        [Key]
+        public int? Entry_Id { get; set; }
+        public String EntryDate { get; set; }
+        public int Calendar_id { get; set; }
+        public int Emp_Id { get; set; }
+        public Boolean IsPlanned { get; set; }
+        public TimeSpan Planned_from { get; set; }
+        public TimeSpan Planned_to { get; set; }
+        public int Total_Planned { get; set; }
+        public string Downtime_description { get; set; }
+        public int Supoort_Function_Id { get; set; }
+        public string Downtime_SlipSerialNo { get; set; }
+        public TimeSpan Downtime_From { get; set; }
+        public TimeSpan Downtime_to { get; set; }
+        public int Total_Downtime { get; set; }
+    }
     public class MaterialGradeMaster
     {
         [Key]
