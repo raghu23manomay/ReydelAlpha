@@ -1,0 +1,500 @@
+﻿
+
+
+
+@model  IEnumerable<ReyDel.Models.ChangeOver_Entry>
+<style>
+    .box-body {
+        overflow: auto !important;
+    }
+</style>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>Change Over Entry List </b></h3>
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#AddChangeOver_Entry">Add New </button>
+
+                    @Html.Partial("../Home/AddChangeOver_Entry")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped" style="overflow:auto">
+                        <thead>
+                            <tr>
+                                <th> Entry Id</th>
+                                <th> Entry Date</th>
+                                <th> Calendar id</th>
+                                <th> Emp Id</th>
+                                <th> ChangeOver Config Type</th>
+                                <th> Change From REI ID</th>
+                                <th> Change From Part Id</th>
+                                <th> Change From Mat Grade Id</th>
+                                <th>Change To REI ID</th>
+                                <th> Change To Part Id</th>
+                                <th> Change To Mat Grade Id</th>
+                                <th> Standard Run Qty</th>
+                                <th> Actual Run Qty</th>
+                                <th> Increase in Scrap Percent</th>
+                                <th> Increase in scrap Value</th>
+                                <th>  ChangeOver Start</th>
+                                <th>  ChangeOver End</th>
+                                <th> Total ChangeOver</th>
+                                <th> Std ChangeOver Time</th>
+                                <th>  Difference</th>
+                                <th> Loss In Precentage</th>
+                                <th> Expected Lumps</th>
+                                <th> Actual Lumps</th>
+                                <th>  Difference Lumps</th>
+                                <th> Scrap Percent Increase</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Entry_Id</td>
+                                    <td>@item.Entry_Date</td>
+                                    <td>@item.Calendar_id</td>
+                                    <td>@item.Emp_Id</td>
+                                    <td>@item.ChangeOver_Config_Type</td>
+                                    <td>@item.Change_From_REI_ID</td>
+                                    <td>@item.Change_From_Part_Id</td>
+                                    <td>@item.Change_From_Mat_Grade_Id</td>
+                                    <td>@item.Change_To_REI_ID</td>
+                                    <td>@item.Change_To_Part_Id</td>
+                                    <td>@item.Change_To_Mat_Grade_Id</td>
+                                    <td>@item.StandardRunQty</td>
+                                    <td>@item.Actual_RunQty</td>
+                                    <td>@item.Increase_in_Scrap_Percent</td>
+                                    <td>@item.Increase_in_scrap_Value</td>
+                                    <td>@item.ChangeOver_Start</td>
+                                    <td>@item.ChangeOver_End</td>
+                                    <td>@item.TotalChangeOver</td>
+                                    <td>@item.Std_ChangeOverTime</td>
+                                    <td>@item.Difference</td>
+                                    <td>@item.LossInPrecentage</td>
+                                    <td>@item.Expected_Lumps</td>
+                                    <td>@item.Actual_Lumps</td>
+                                    <td>@item.Difference_Lumps</td>
+                                    <td>@item.ScrapPercentIncrease</td>
+
+
+                                    <td>
+                                        <span class="EditChangeOver_Entry"
+                                              UEntry_Id="@item.Entry_Id"
+                                              UEntry_Date="@item.Entry_Date"
+                                              UCalendar_id="@item.Calendar_id"
+                                              UEmp_Id="@item.Emp_Id"
+                                              UChangeOver_Config_Type="@item.ChangeOver_Config_Type"
+                                              UChange_From_REI_ID="@item.Change_From_REI_ID"
+                                              UChange_From_Part_Id="@item.Change_To_Part_Id"
+                                              UChange_From_Mat_Grade_Id="@item.Change_From_Mat_Grade_Id"
+                                              UChange_To_REI_ID="@item.Change_To_REI_ID"
+                                              UChange_To_Part_Id="@item.Change_To_Part_Id"
+                                              UChange_To_Mat_Grade_Id="@item.Change_To_Mat_Grade_Id"
+                                              UStandardRunQty="@item.StandardRunQty"
+                                              UActual_RunQty="@item.Actual_RunQty"
+                                              UIncrease_in_Scrap_Percent="@item.Increase_in_Scrap_Percent"
+                                              UIncrease_in_scrap_Value="@item.Increase_in_scrap_Value"
+                                              UChangeOver_Start="@item.ChangeOver_Start"
+                                              UChangeOver_End="@item.ChangeOver_End"
+                                              UTotalChangeOver="@item.TotalChangeOver"
+                                              UStd_ChangeOverTime="@item.Std_ChangeOverTime"
+                                              UDifference="@item.Difference"
+                                              ULossInPrecentage="@item.LossInPrecentage"
+                                              UExpected_Lumps="@item.Expected_Lumps"
+                                              UActual_Lumps="@item.Actual_Lumps"
+                                              UDifference_Lumps="@item.Difference_Lumps"
+                                              UScrapPercentIncrease="@item.ScrapPercentIncrease">
+                                              <i class="fa fa-edit"></i></span>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<div id="UpdateChangeOver_Entry" class="modal fade in" data-backdrop="static" data-keyboard="false" role="dialog" style=" line-height:0.9">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update ChangeOver Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="EEntry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input type="date" class="form-control" id="EEntry_Date" placeholder="Entry Date">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Calendar id</label>
+                                <input type="text" class="form-control" id="ECalendar_id" placeholder="Calendar id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employe ID  </label>
+                                <input type="text" class="form-control" id="EEmp_Id" placeholder="Emp_Id" />
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> ChangeOver Config Type</label>
+                                <input type="text" class="form-control" id="EChangeOver_Config_Type" placeholder="ChangeOver Config Type" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Change From REI ID</label>
+                                <select class="form-control" id="EChange_From_REI_ID">
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  Change From Part Id</label>
+                                <input type="text" class="form-control" id="EChange_To_Part_Id" placeholder=" Change From Part Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Change From_Mat_Grade_Id</label>
+                                <input type="text" class="form-control" id="EChange_From_Mat_Grade_Id" placeholder="Change_From_Mat_Grade_Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Change To REI ID</label>
+                                <input type="text" class="form-control" id=" EChange_To_REI_ID" placeholder=" Change To REI ID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Change To Part Id</label>
+                                <input type="text" class="form-control" id="EChange_To_Part_Id" placeholder="Change To Part Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Change To Mat Grade Id</label>
+                                <input type="text" class="form-control" id="EChange_To_Mat_Grade_Id" placeholder="   Change To Mat Grade Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Standard Run Qty</label>
+                                <input type="text" class="form-control" id="EStandardRunQty" placeholder="   StandardRun Qty">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Actual Run Qty</label>
+                                <input type="text" class="form-control" id="EActual_RunQty" placeholder="   Actual_Run Qty">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Increase in Scrap Percent</label>
+                                <input type="text" class="form-control" id="EIncrease_in_Scrap_Percent" placeholder="   Increase_in_Scrap_Percent">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Increase in scrap Value</label>
+                                <input type="text" class="form-control" id="EIncrease_in_scrap_Value" placeholder="   Increase_in_scrap_Value">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> ChangeOver Start</label>
+                                <input type="time" class="form-control" id="ChangeOver_Start" placeholder="   ChangeOver_Start">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> ChangeOver End</label>
+                                <input type="time" class="form-control" id="EChangeOver_End" placeholder="  ChangeOver_End">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Total ChangeOver(Mins)</label>
+                                <input type="text" class="form-control" id="ETotalChangeOver" placeholder="   TotalChangeOver(Mins)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Std ChangeOver Time</label>
+                                <input type="text" class="form-control" id="EStd_ChangeOverTime" placeholder="   Std ChangeOver Time">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Difference</label>
+                                <input type="text" class="form-control" id="EDifference" placeholder="   Difference">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> LossIn Precentage</label>
+                                <input type="text" class="form-control" id="ELossInPrecentage" placeholder="   LossIn Precentage">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Expected Lumps(Kg)</label>
+                                <input type="text" class="form-control" id="Expected_Lumps" placeholder="   Expected Lumps(Kg)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Actual Lumps(Kg)</label>
+                                <input type="text" class="form-control" id="EActual_Lumps" placeholder="   Actual Lumps(Kg)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Difference Lumps</label>
+                                <input type="text" class="form-control" id="EDifference_Lumps" placeholder="   Difference_Lumps">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Scrap Percent Increase</label>
+                                <input type="text" class="form-control" id="EScrapPercentIncrease" placeholder="   Scrap Percent Increase">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script>
+    function refresh() {
+
+        $('.EditChangeOver_Entry').on('click', function () {
+
+            UEntry_Id = this.getAttribute("UEntry_Id");
+            UEntry_Date = this.getAttribute("UEntry_Date");
+            UCalendar_id = this.getAttribute("UCalendar_id");
+            UEmp_Id = this.getAttribute("UEmp_Id");
+            UChangeOver_Config_Type = this.getAttribute("UChangeOver_Config_Type");
+            UChange_From_REI_ID = this.getAttribute("UChange_From_REI_ID");
+            UChange_From_Part_Id = this.getAttribute("UChange_From_Part_Id");
+            UChange_From_Mat_Grade_Id = this.getAttribute("UChange_From_Mat_Grade_Id");
+            UChange_To_REI_ID = this.getAttribute("UChange_To_REI_ID");
+            UChange_To_Part_Id = this.getAttribute("UChange_To_Part_Id");
+            UChange_To_Mat_Grade_Id = this.getAttribute("UChange_To_Mat_Grade_Id");
+            UStandardRunQty = this.getAttribute("UStandardRunQty");
+            UActual_RunQty = this.getAttribute("UActual_RunQty");
+            UIncrease_in_Scrap_Percent = this.getAttribute("UIncrease_in_Scrap_Percent");
+            UIncrease_in_scrap_Value = this.getAttribute("UIncrease_in_scrap_Value");
+            UChangeOver_Start = this.getAttribute("UChangeOver_Start");
+            UChangeOver_End = this.getAttribute("UChangeOver_End");
+            UTotalChangeOver = this.getAttribute("UTotalChangeOver");
+            UStd_ChangeOverTime = this.getAttribute("UStd_ChangeOverTime");
+            UDifference = this.getAttribute("UDifference");
+            ULossInPrecentage = this.getAttribute("ULossInPrecentage");
+            UExpected_Lumps = this.getAttribute("UExpected_Lumps");
+            UActual_Lumps = this.getAttribute("UActual_Lumps");
+            UDifference_Lumps = this.getAttribute("UDifference_Lumps");
+            UScrapPercentIncrease = this.getAttribute("UScrapPercentIncrease");
+
+                $("EEntry_Id").val(UEntry_Id),                                                               
+                $("EEntry_Date").val(UEntry_Date),
+                $("ECalendar_id").val(UCalendar_id),
+                $("EEmp_Id").val(UEmp_Id),
+                $("EChangeOver_Config_Type").val(UChangeOver_Config_Type),
+                $("EChange_From_REI_ID").val(UChange_From_REI_ID),
+                $("EChange_From_Part_Id").val(UChange_From_Part_Id),
+                $("EChange_From_Mat_Grade_Id").val(UChange_From_Mat_Grade_Id),
+                $("EChange_To_REI_ID").val(UChange_To_REI_ID),
+                $("EChange_To_Part_Id").val(UChange_To_Part_Id),
+                $("EChange_To_Mat_Grade_Id").val(UChange_To_Mat_Grade_Id),
+                $("EStandardRunQty").val(UStandardRunQty),
+                $("EActual_RunQty").val(UActual_RunQty),
+                $("EIncrease_in_Scrap_Percent").val(UIncrease_in_Scrap_Percent),
+                $("EIncrease_in_scrap_Value").val(UIncrease_in_scrap_Value),
+                $("EChangeOver_Start").val(UChangeOver_Start),
+                $("EChangeOver_End").val(UChangeOver_End),
+                $("ETotalChangeOver").val(UTotalChangeOver),
+                $("EStd_ChangeOverTime").val(UStd_ChangeOverTime),
+                $("EDifference").val(UDifference),
+                $("ELossInPrecentage").val(ULossInPrecentage),
+                $("EExpected_Lumps").val(UExpected_Lumps),
+                $("EActual_Lumps").val(UActual_Lumps),
+                $("EDifference_Lumps").val(UDifference_Lumps),
+                $("EScrapPercentIncrease").val(UScrapPercentIncrease),
+                $("#UpdateChangeOver_Entry").show();
+        });
+    };
+
+</script>
+<script type="text/javascript">
+
+    refresh();
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+
+    $('#btnSaveChanges').on('click', function () {
+
+        var UEntry_Id = $("EEntry_Id").val();
+        var UEntry_Date = $("EEntry_Date").val();
+        var UCalendar_id = $("ECalendar_id").val();
+        var UEmp_Id = $("EEmp_Id").val();
+        var UChangeOver_Config_Type = $("EChangeOver_Config_Type").val();
+        var UChange_From_REI_ID = $("EChange_From_REI_ID").val();
+        var UChange_From_Part_Id = $("EChange_From_Part_Id").val();
+        var UChange_From_Mat_Grade_Id = $("EChange_From_Mat_Grade_Id").val();
+        var UChange_To_REI_ID = $("EChange_To_REI_ID").val();
+        var UChange_To_Part_Id = $("EChange_To_Part_Id").val();
+        var UChange_To_Mat_Grade_Id = $("EChange_To_Mat_Grade_Id").val();
+        var UStandardRunQty = $("EStandardRunQty").val();
+        var UActual_RunQty = $("EActual_RunQty").val();
+        var UIncrease_in_Scrap_Percen = $("EIncrease_in_Scrap_Percent").val();
+        var UIncrease_in_scrap_Value = $("EIncrease_in_scrap_Value").val();
+        var UChangeOver_Start = $("EChangeOver_Start").val();
+        var UChangeOver_End = $("EChangeOver_End").val();
+        var UTotalChangeOver = $("ETotalChangeOver").val();
+        var UStd_ChangeOverTime = $("EStd_ChangeOverTime").val();
+        var UDifference = $("EDifference").val();
+        var ULossInPrecentage = $("ELossInPrecentage").val();
+        var UExpected_Lumps = $("EExpected_Lumps").val();
+        var UActual_Lumps = $("EActual_Lumps").val();
+        var UDifference_Lumps = $("EDifference_Lumps").val();
+        var UScrapPercentIncrease = $("EScrapPercentIncrease").val();
+        
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/UpdateChangeOver_Entry',
+            data:
+            {
+                Entry_Id: UEntry_Id,
+                Entry_Date: UEntry_Date,
+                Calendar_id: UCalendar_id,
+                Emp_Id: UEmp_Id,
+                ChangeOver_Config_Type: UChangeOver_Config_Type,
+                Change_From_REI_ID: UChange_From_REI_ID,
+                Change_From_Part_Id: UChange_From_Part_Id,
+                Change_From_Mat_Grade_Id: UChange_From_Mat_Grade_Id,
+                Change_To_REI_ID: UChange_To_REI_ID,
+                    Change_To_Part_Id: UChange_To_Part_Id,
+                Change_To_Mat_Grade_Id: UChange_To_Mat_Grade_Id,
+                    StandardRunQty: UStandardRunQty,
+                Actual_RunQty: UActual_RunQty,
+                Increase_in_Scrap_Percent: UIncrease_in_Scrap_Percen,
+                Increase_in_scrap_Value: UIncrease_in_scrap_Value,
+                ChangeOver_Start: UChangeOver_Start,
+                ChangeOver_End: UChangeOver_End,
+                TotalChangeOver: UTotalChangeOver,
+                Std_ChangeOverTime: UStd_ChangeOverTime,
+                Difference: UDifference,
+                LossInPrecentage: ULossInPrecentage,
+                    Expected_Lumps: UExpected_Lumps ,
+                Actual_Lumps: UActual_Lumps,
+                Difference_Lumps: UDifference_Lumps,
+                ScrapPercentIncrease: UScrapPercentIncrease 
+            },
+            success: function (data) {
+                $("#UpdateChangeOver_Entry").hide();
+                location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    });
+    
+
+
+</script>

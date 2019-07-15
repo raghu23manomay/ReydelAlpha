@@ -1,0 +1,153 @@
+﻿
+
+@{
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="modal fade" id="AddChangeTypeConfiguration" role="dialog" >
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add ChangeType Configuration</h4>
+            </div>
+            <div class="modal-body">
+              
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="ChangeTypeConfigID">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Machine Id</label>
+                                <input type="text" class="form-control" id="Machine_Id" placeholder="Machine Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Machine operation</label>
+                                <input type="text" class="form-control" id="Machine_operation" placeholder="Machine Operation">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Change_Over_Target_Time</label>
+                                <input type="text" class="form-control" id="Change_Over_Target_Time" placeholder=" Change Over Target Time">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Expected Lumps</label>
+                                <input type="text" class="form-control" id="Expected_Lumps" placeholder=" Expected Lumps">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD Material loading OST</label>
+                                <input type="text" class="form-control" id="STD_Material_loading_OST" placeholder=" STD Material loading OST">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  STD Change over OST</label>
+                                <input type="text" class="form-control" id="STD_Change_over_OST" placeholder="  STD Change over OST">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD Material change over</label>
+                                <input type="text" class="form-control" id="STD_Material_change_over" placeholder="STD Material change over ">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD ASSY OST</label>
+                                <input type="text" class="form-control" id="STD_ASSY_OST" placeholder=" STD ASSY OST">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  STD Inspection OST</label>
+                                <input type="text" class="form-control" id="STD_Inspection_OST" placeholder=" STD Inspection OST">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  STD material movement</label>
+                                <input type="text" class="form-control" id="STD_material_movement" placeholder=" STD material movement">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  System regrind management</label>
+                                <input type="text" class="form-control" id="System_regrind_management" placeholder="System regrind management ">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  OST For daily monitoring</label>
+                                <input type="text" class="form-control" id="OST_For_daily_monitoring" placeholder=" OST For daily monitoring">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnAdd">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+     $('#btnAdd').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/AddChangeTypeConfiguration',
+                data:
+                {
+                    Machine_Id: $("#Machine_Id").val(),
+                    Machine_operation: $("#Machine_operation").val(),
+                    Change_Over_Target_Time: $("#Change_Over_Target_Time").val(),
+                    Expected_Lumps: $("#Expected_Lumps").val(),
+                    STD_Material_loading_OST: $("#STD_Material_loading_OST").val(),
+                    STD_Change_over_OST: $("#STD_Change_over_OST").val(),
+                    STD_Material_change_over: $("#STD_Material_change_over").val(),
+                    STD_ASSY_OST: $("#STD_ASSY_OST").val(),
+                    STD_Inspection_OST: $("#STD_Inspection_OST").val(),
+                    STD_Material_Movement: $("#STD_material_movement").val(),
+                    System_Regrind_Management: $("#System_regrind_management").val(),
+                    OST_For_daily_Monitoring: $("#OST_For_daily_monitoring").val(),
+
+                },
+                success: function (data) {
+                    $("#AddChangeTypeConfiguration").hide(),
+                        // alert(data);
+                        location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+</script>

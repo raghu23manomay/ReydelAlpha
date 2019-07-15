@@ -1,0 +1,111 @@
+﻿
+
+@{
+    /**/
+
+    /**/
+
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="modal fade" id="AddRejectionEntryDetails" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Rejection Entry Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="PRejection_Entry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rejection from</label>
+                                <input type="date" class="form-control" id="Rejection_from" placeholder="Rejection from">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Prod Entry Id</label>
+                                <input type="text" class="form-control" id="Prod_Entry_Id" placeholder="Prod_Entry_Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rejection Type Id </label>
+                                <input type="text" class="form-control" id="Rejection_Type_Id" placeholder="Rejection Type Id ">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Rejection Reason Id</label>
+                                <input type="text" class="form-control" id="Rejection_Reason_Id" placeholder="Rejection_Reason_Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rejection Qty</label>
+                                <input type="text" class="form-control" id="Rejection_Qty" placeholder="Rejection Qty">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  lumps</label>
+                                <input type="text" class="form-control" id="Lumps" placeholder="Lumps">
+                            </div>
+                        </div>
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnAdd">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('#btnAdd').on('click', function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/AddRejectionEntryDetails',
+            data:
+            {
+
+                Rejection_from: $("#Rejection_from").val(),
+                Prod_Entry_Id: $("#Prod_Entry_Id").val(),
+                Rejection_Type_Id: $("#Rejection_Type_Id").val(),
+                Rejection_Reason_Id: $("#Rejection_Reason_Id").val(),
+                Rejection_Qty: $("#Rejection_Qty").val(),
+                Lumps: $("#Lumps").val(),
+
+
+            },
+            success: function (data) {
+                $("#AddRejectionEntryDetails").hide(),
+                    // alert(data);
+                    location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    });
+</script>
+
+
+

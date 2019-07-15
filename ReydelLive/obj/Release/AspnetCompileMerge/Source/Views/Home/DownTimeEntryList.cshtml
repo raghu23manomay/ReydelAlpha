@@ -1,0 +1,340 @@
+﻿
+
+
+@model  IEnumerable<ReyDel.Models.DownTime_Entry>
+    <style>
+        .box-body
+        {
+            overflow:auto !important;
+        }
+    </style>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>DownTime Entry List</b></h3>
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#AddDownTime_Entry">Add New </button>
+
+                    @Html.Partial("../Home/AddDownTime_Entry")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped" style="overflow:auto">
+                        <thead>
+                            <tr>
+                                <th>  Entry_Id   </th>
+                                <th>   Entry_Date  </th>
+                                <th>  Calendar_id   </th>
+                                <th>   Emp_Id  </th>
+                                <th>    IsPlanned </th>
+                                <th>   Planned from  </th>
+                                <th>    Planned to </th>
+                                <th>  Total Planned   </th>
+                                <th>   Downtime description   </th>
+                                <th>Supoort Function Id</th>
+                                <th>Downtime Slip Serial No</th>
+                                <th>Downtime to</th>
+                                <th>Downtime From</th>
+                                <th>Total Downtime</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Entry_Id</td>
+                                    <td>@item.Entry_Date</td>
+                                    <td>@item.Calendar_id</td>
+                                    <td>@item.Emp_Id</td>
+                                    <td>@item.IsPlanned</td>
+                                    <td>@item.Planned_from</td>
+                                    <td>@item.Planned_to</td>
+                                    <td>@item.Total_Planned</td>
+                                    <td>@item.Downtime_description</td>
+                                    <td>@item.Supoort_Function_Id</td>
+                                    <td>@item.Downtime_SlipSerialNo</td>
+                                    <td>@item.Downtime_From</td>
+                                    <td>@item.Downtime_to</td>
+                                    <td>@item.Total_Downtime</td>
+                                    <td>
+                                        <span class="EditDownTime_Entry" 
+                                              UEntry_Id="@item.Entry_Id"
+                                              UEntry_Date="@item.Entry_Date"
+                                              UCalendar_id="@item.Calendar_id"
+                                              UEmp_Id="@item.Emp_Id"
+                                              UIsPlanned="@item.IsPlanned.ToString()"
+                                              UPlanned_from="@item.Planned_from"
+                                              UPlanned_to="@item.Planned_to"
+                                              UTotal_Planned="@item.Total_Planned"
+                                              UDowntime_description="@item.Downtime_description"
+                                              USupoort_Function_Id="@item.Supoort_Function_Id"
+                                              UDowntime_SlipSerialNo="@item.Downtime_SlipSerialNo"
+                                              UDowntime_From="@item.Downtime_From"
+                                              UDowntime_to="@item.Downtime_to"
+                                              UTotal_Downtime="@item.Total_Downtime">
+                                              <i class="fa fa-edit"></i></span>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<div id="UpdateDTE" class="modal fade in" data-backdrop="static" data-keyboard="false" role="dialog" style=" line-height:0.9">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Updat DownTime Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="EEntry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input type="text" class="form-control" id="EEntry_Date" placeholder="Entry Date">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Calendar id</label>
+                                <input type="text" class="form-control" id="ECalendar_id" placeholder="Calendar id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employe Id  </label>
+                                <input type="text" class="form-control" id="EEmp_Id" placeholder="Employe Id ">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Is Planned</label>
+                                <input type="text" class="form-control" id="EIsPlanned" placeholder=" Is Planned">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Planned from</label>
+                                <input type="time" class="form-control" id="EPlanned_from" placeholder="Planned from">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Planned to</label>
+                                <input type="time" class="form-control" id="EPlanned_to" placeholder="Planned to">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Total Planned(Mins)</label>
+                                <input type="text" class="form-control" id="ETotal_Planned" placeholder="Total Planned">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Downtime description</label>
+                                <input type="text" class="form-control" id="EDowntime_description" placeholder="Downtime description">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Supoort Function Id</label>
+                                <input type="text" class="form-control" id="ESupoort_Function_Id" placeholder="Supoort Function Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Downtime Slip Serial No</label>
+                                <input type="text" class="form-control" id="EDowntime_SlipSerialNo" placeholder="  Downtime_SlipSerialNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Downtime From</label>
+                                <input type="time" class="form-control" id="EDowntime_From" placeholder="  Downtime From">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Downtime to</label>
+                                <input type="time" class="form-control" id="EDowntime_to" placeholder="Downtime to">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Total Downtime(Mins)</label>
+                                <input type="text" class="form-control" id="ETotal_Downtime" placeholder="Total_Downtime(Mins)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script>
+    function refresh() {
+        
+        $('.EditDownTime_Entry').on('click', function () {
+           
+            var UEntry_Id = this.getAttribute("UEntry_Id");
+            var UEntry_Date = this.getAttribute("UEntry_Date");
+            var UCalendar_id = this.getAttribute("UCalendar_id");
+            var UEmp_Id = this.getAttribute("UEmp_Id");
+            var UIsPlanned = this.getAttribute("UIsPlanned");
+            var UPlanned_from = this.getAttribute("UPlanned_from");
+            var UPlanned_to = this.getAttribute("UPlanned_to");
+            var UTotal_Planned = this.getAttribute("UTotal_Planned");
+            var UDowntime_description = this.getAttribute("UDowntime_description");
+            var USupoort_Function_Id = this.getAttribute("USupoort_Function_Id");
+            var UDowntime_SlipSerialNo = this.getAttribute("UDowntime_SlipSerialNo");
+            var UDowntime_From = this.getAttribute("UDowntime_From");
+            var UDowntime_to = this.getAttribute("UDowntime_to");
+            var UTotal_Downtime = this.getAttribute("UTotal_Downtime");
+                $("#EEntry_Id").val(UEntry_Id),
+                $("#EEntry_Date").val(UEntry_Date),
+                $("#ECalendar_id").val(UCalendar_id),
+                $("#EEmp_Id").val(UEmp_Id),
+                $("#EIsPlanned").val(UIsPlanned),
+                $("#EPlanned_from").val(UPlanned_from),
+                $("#EPlanned_to").val(UPlanned_to),
+                $("#ETotal_Planned").val(UTotal_Planned),
+                $("#EDowntime_description").val(UDowntime_description),
+                $("#ESupoort_Function_Id").val(USupoort_Function_Id),
+                $("#EDowntime_SlipSerialNo").val(UDowntime_SlipSerialNo),
+                $("#EDowntime_From").val(UDowntime_From),
+                $("#EDowntime_to").val(UDowntime_to),
+                $("#ETotal_Downtime").val(UTotal_Downtime),
+                    $("#UpdateDTE").show();
+        });
+    };
+
+</script>
+<script type="text/javascript">
+
+    refresh();
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+
+    $(document).ready(function () {
+        $('.close').on('click', function () {
+            $("#UpdateDTE").hide();
+        });
+
+        $('#btnSaveChanges').on('click', function () {
+
+            var UEntry_Id = $("#EEntry_Id").val();
+            var UEntry_Date = $("#EEntry_Date").val();
+            var UCalendar_id = $("#ECalendar_id").val();
+            var UEmp_Id = $("#EEmp_Id").val();
+            var UIsPlanned = $("#EIsPlanned").val();
+            var UPlanned_from = $("#EPlanned_from").val();
+            var UPlanned_to = $("#EPlanned_to").val();
+            var UTotal_Planned = $("#ETotal_Planned").val();
+            var UDowntime_description = $("#EDowntime_description").val();
+            var USupoort_Function_Id = $("#ESupoort_Function_Id").val();
+            var UDowntime_SlipSerialNo = $("#EDowntime_SlipSerialNo").val();
+            var UDowntime_From = $("#EDowntime_From").val();
+            var UDowntime_to = $("#EDowntime_to").val();
+            var UTotal_Downtime = $("#ETotal_Downtime").val();
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpdateDownTimeEntry',
+                data:
+                    {  
+                    Entry_Id: UEntry_Id ,
+                    Entry_Date: UEntry_Date ,
+                    Calendar_id: UCalendar_id ,
+                    Emp_Id: UEmp_Id ,
+                    IsPlanned: UIsPlanned,
+                    Planned_from: UPlanned_from ,
+                    Planned_to: UPlanned_to ,
+                    Total_Planned: UTotal_Planned ,
+                    Downtime_description: UDowntime_description,
+                    Supoort_Function_Id: USupoort_Function_Id,
+                    Downtime_SlipSerialNo: UDowntime_SlipSerialNo,
+                    Downtime_From: UDowntime_From ,
+                    Downtime_to: UDowntime_to ,
+                    Total_Downtime: UTotal_Downtime 
+                },
+                success: function (data) {
+                    $("#UpdateDTE").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+    });
+
+
+
+</script>

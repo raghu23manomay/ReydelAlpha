@@ -1,0 +1,226 @@
+﻿
+
+
+@model  IEnumerable<ReyDel.Models.RejectionEntryDetails>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+
+                    <h3 class="box-title"><b>Rejection Entry Details List</b></h3>
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#AddRejectionEntryDetails">Add New </button>
+
+                    @Html.Partial("../Home/AddRejectionEntryDetails")
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th> PRejection_Entry_Id</th>
+                                <th> RejectionFrom      </th>
+                                <th> Prod_Entry_Id      </th>
+                                <th> Rejection_Type_Id  </th>
+                                <th> Rejection_Reason_Id</th>
+                                <th> Rejection_Qty      </th>
+                                <th> Lumps              </th>
+                             
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.PRejection_Entry_Id</td>
+                                <td>@item.Rejection_from</td>
+                                <td>@item.Prod_Entry_Id</td>
+                                <td>@item.Rejection_Type_Id</td>
+                                <td>@item.Rejection_Reason_Id</td>
+                                <td>@item.Rejection_Qty</td>
+                                <td>@item.Lumps</td>
+                                <td>
+                                    <span class="EditRejectionEntryDetails"
+                                          UPRejection_Entry_Id="@item.PRejection_Entry_Id"
+                                          URejection_from="@item.Rejection_from"
+                                          UProd_Entry_Id="@item.Prod_Entry_Id"
+                                          URejection_Type_Id="@item.Rejection_Type_Id"
+                                          URejection_Reason_Id ="  @item.Rejection_Reason_Id"
+                                          URejection_Qty            ="@item.Rejection_Qty"
+                                          Ulumps                            =" @item.Lumps">
+                                          <i class="fa fa-edit"></i></span>
+                                </td>
+                                                           
+                                                                 
+                            </tr>                                 
+                                                                 
+                            }                                    
+                                                                  
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<div id="UpdateRejectionEntry" class="modal fade in" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Rejection Entry Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="EPRejection_Entry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rejection from</label>
+                                <input type="text" class="form-control" id="ERejection_from" placeholder="Rejection from">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Prod Entry Id</label>
+                                <input type="text" class="form-control" id="EProd_Entry_Id" placeholder="Prod_Entry_Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rejection Type Id </label>
+                                <input type="text" class="form-control" id="ERejection_Type_Id" placeholder="Rejection Type Id ">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Rejection Reason Id</label>
+                                <input type="text" class="form-control" id="ERejection_Reason_Id" placeholder="Rejection_Reason_Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rejection Qty</label>
+                                <input type="text" class="form-control" id="ERejection_Qty" placeholder="Rejection Qty">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  lumps</label>
+                                <input type="text" class="form-control" id="Elumps" placeholder="lumps">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary " id="btnSaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="~/dist/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="~/dist/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/dist/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="~/dist/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script>
+    function refresh() {
+        $('.EditRejectionEntryDetails').on('click', function () {
+            var UPRejection_Entry_Id = this.getAttribute("UPRejection_Entry_Id");
+            var URejection_from = this.getAttribute("URejection_from");
+            var UProd_Entry_Id = this.getAttribute("UProd_Entry_Id");
+            var URejection_Type_Id = this.getAttribute("URejection_Type_Id");
+            var URejection_Reason_Id = this.getAttribute("URejection_Reason_Id");
+            var URejection_Qty = this.getAttribute("URejection_Qty");
+            var Ulumps = this.getAttribute("Ulumps");
+                $("#EPRejection_Entry_Id").val(UPRejection_Entry_Id),
+                $("#ERejection_from").val(URejection_from),
+                $("#EProd_Entry_Id").val(UProd_Entry_Id),
+                $("#ERejection_Type_Id").val(URejection_Type_Id),
+                $("#ERejection_Reason_Id").val(URejection_Reason_Id),
+                $("#ERejection_Qty").val(URejection_Qty),
+                $("#Elumps").val(Ulumps),
+                    $("#UpdateRejectionEntry").show();
+        });
+
+    };
+</script>
+<script type="text/javascript">
+
+    refresh();
+    $('#example1').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false
+    })
+    </script>
+<script>
+    $(document).ready(function () {
+        $('.close').on('click', function () {
+            $("#UpdateRejectionEntry").hide();
+        });
+
+        $('#btnSaveChanges').on('click', function () {
+            var UPRejection_Entry_Id = $("#EPRejection_Entry_Id").val();
+            var URejection_from = $("#ERejection_from").val();
+            var UProd_Entry_Id = $("#EProd_Entry_Id").val();
+            var URejection_Type_Id = $("#ERejection_Type_Id").val();
+            var URejection_Reason_Id = $("#ERejection_Reason_Id").val();
+            var URejection_Qty = $("#ERejection_Qty").val();
+            var Ulumps = $("#Elumps").val(); 
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UpadteRejectionEntryDetails',
+                data:
+                {
+                    PRejection_Entry_Id: UPRejection_Entry_Id ,
+                    Rejection_from: URejection_from      ,
+                    Prod_Entry_Id: UProd_Entry_Id     ,  
+                    Rejection_Type_Id: URejection_Type_Id   ,
+                    Rejection_Reason_Id: URejection_Reason_Id ,
+                    Rejection_Qty: URejection_Qty       ,
+                    Lumps:Ulumps               
+                },
+                success: function (data) {
+                    $("#UpdateRejectionEntry").hide();
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+    });
+</script>

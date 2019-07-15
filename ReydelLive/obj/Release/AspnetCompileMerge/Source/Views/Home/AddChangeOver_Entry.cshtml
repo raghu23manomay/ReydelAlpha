@@ -1,0 +1,266 @@
+﻿
+
+
+@{
+    /**/
+
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="modal fade" id="AddChangeOver_Entry" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add ChangeOver Entry</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group" hidden>
+                        <input type="text" class="form-control" id="Entry_Id">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input type="date" class="form-control" id="Entry_Date" placeholder="Entry Date">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Calendar id</label>
+                                <input type="text" class="form-control" id="Calendar_id" placeholder="Calendar id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Employe ID  </label>
+                                <input type="text" class="form-control" id="Emp_Id" placeholder="Emp_Id" />
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> ChangeOver Config Type</label>
+                                <input type="text" class="form-control" id="ChangeOver_Config_Type" placeholder="ChangeOver Config Type" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Change From REI ID</label>
+                                <select class="form-control" id="Change_From_REI_ID">
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>  Change From Part Id</label>
+                                <input type="text" class="form-control" id=" Change_To_Part_Id" placeholder=" Change From Part Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Change From_Mat_Grade_Id</label>
+                                <input type="text" class="form-control" id=" Change_From_Mat_Grade_Id" placeholder="Change_From_Mat_Grade_Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Change To REI ID</label>
+                                <input type="text" class="form-control" id=" Change_To_REI_ID" placeholder=" Change To REI ID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Change To Part Id</label>
+                                <input type="text" class="form-control" id="Change_To_Part_Id" placeholder="Change To Part Id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Change To Mat Grade Id</label>
+                                <input type="text" class="form-control" id="Change_To_Mat_Grade_Id" placeholder="   Change To Mat Grade Id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Standard Run Qty</label>
+                                <input type="text" class="form-control" id="StandardRunQty" placeholder="   StandardRun Qty">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Actual Run Qty</label>
+                                <input type="text" class="form-control" id="Actual_RunQty" placeholder="   Actual_Run Qty">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Increase in Scrap Percent</label>
+                                <input type="text" class="form-control" id="Increase_in_Scrap_Percent" placeholder="   Increase_in_Scrap_Percent">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Increase in scrap Value</label>
+                                <input type="text" class="form-control" id="Increase_in_scrap_Value" placeholder="   Increase_in_scrap_Value">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> ChangeOver Start</label>
+                                <input type="time" class="form-control" id="ChangeOver_Start" placeholder="   ChangeOver_Start">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> ChangeOver End</label>
+                                <input type="time" class="form-control" id="ChangeOver_End" placeholder="  ChangeOver_End">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Total ChangeOver(Mins)</label>
+                                <input type="text" class="form-control" id="TotalChangeOver" placeholder="   TotalChangeOver(Mins)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> Std ChangeOver Time</label>
+                                <input type="text" class="form-control" id="Std_ChangeOverTime" placeholder="   Std ChangeOver Time">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Difference</label>
+                                <input type="text" class="form-control" id="Difference" placeholder="   Difference">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label> LossIn Precentage</label>
+                                <input type="text" class="form-control" id="LossInPrecentage" placeholder="   LossIn Precentage">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Expected Lumps(Kg)</label>
+                                <input type="text" class="form-control" id="Expected_Lumps" placeholder="   Expected Lumps(Kg)">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Actual Lumps(Kg)</label>
+                                <input type="text" class="form-control" id="Actual_Lumps" placeholder="   Actual Lumps(Kg)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>  Difference Lumps</label>
+                                <input type="text" class="form-control" id="Difference_Lumps" placeholder="   Difference_Lumps">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Scrap Percent Increase</label>
+                                <input type="text" class="form-control" id="ScrapPercentIncrease" placeholder="   Scrap Percent Increase">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnAdd">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('#btnAdd').on('click', function () {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/AddChangeOver_Entry',
+            data:
+            {
+
+                Entry_Date: $("#Entry_Date").val(),
+                Calendar_id: $("#Calendar_id").val(),
+                Emp_Id: $("#Emp_Id").val(),
+                ChangeOver_Config_Type: $("#ChangeOver_Config_Type").val(),
+                Change_From_REI_ID: $("#Change_From_REI_ID").val(),
+                Change_From_Part_Id: $("#Change_To_Part_Id").val(),
+                Change_From_Mat_Grade_Id: $("#Change_From_Mat_Grade_Id").val(),
+                Change_To_REI_ID: $("#Change_To_REI_ID").val(),
+                Change_To_Part_Id: $("#Change_To_Part_Id").val(),
+                Change_To_Mat_Grade_Id: $("#Change_To_Mat_Grade_Id").val(),
+                StandardRunQty: $("#StandardRunQty").val(),
+                Actual_RunQty: $("#Actual_RunQty").val(),
+                Increase_in_Scrap_Percent: $("#Increase_in_Scrap_Percent").val(),
+                Increase_in_scrap_Value: $("#Increase_in_scrap_Value").val(),
+                ChangeOver_Start: $("#ChangeOver_Start").val(),
+                ChangeOver_End: $("#ChangeOver_End").val(),
+                TotalChangeOver: $("#TotalChangeOver").val(),
+                Std_ChangeOverTime: $("#Std_ChangeOverTime").val(),
+                Difference: $("#Difference").val(),
+                LossInPrecentage: $("#LossInPrecentage").val(),
+                Expected_Lumps: $("#Expected_Lumps").val(),
+                Actual_Lumps: $("#Actual_Lumps").val(),
+                Difference_Lumps: $("#Difference_Lumps").val(),
+                ScrapPercentIncrease: $("#ScrapPercentIncrease").val(),
+
+
+            },
+            success: function (data) {
+                $("#AddChangeOver_Entry").hide(),
+                    // alert(data);
+                    location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    });
+</script>
+

@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>Login</b></a>
+    </div>
+
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <form action="#" method="post">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="UserName" id="txtUserName">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" id="txtPassWord" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <button type="button" id="btnlogin" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+
+            </div>
+            <div id="error" class="form-group has-feedback">
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script src="~/dist/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#btnlogin').on('click', function (e) {
+            if ($("#txtUserName").val() == "") {
+                return false;
+            }
+            if ($("#txtPassWord").val() == "") {
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Home/Login",
+                data: {
+                    UserName: $("#txtUserName").val(),
+                    password: $("#txtPassWord").val()
+                },
+                success: function (da) {
+                     
+                    if (da == "true") {
+                        url = "/Home/Dashboard";
+                        window.location.href = url;
+                    }
+                    else {
+                        $("#error").html("Please enter correct username or password");
+                    }
+                },
+                error: function (errorData) {
+                    $("#error").html("Please enter correct username or password");
+
+                }
+            });
+            return true;
+        });
+    });
+</script>
