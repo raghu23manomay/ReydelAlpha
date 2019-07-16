@@ -40,8 +40,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Employe Id  </label>
-                                <input type="text" class="form-control" id="Emp_Id" placeholder="Employe Id ">
+                                <label>Employe Name  </label>
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 1), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
 
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Supoort Function Id</label>
-                                <input type="text" class="form-control" id="Supoort_Function_Id" placeholder="Supoort Function Id">
+                                @Html.DropDownList("SupportFunction_Id", new SelectList((System.Collections.IEnumerable)ViewData["SupportFunction"], "Value", "Text", 1), "Select ", new { @class = "form-control input-sm", @id = "SupportFunction_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -136,6 +136,8 @@
 </div>
 <script>
     $('#btnAdd').on('click', function () {
+        var Eid = $("#EmployeeID").val();
+        var SupportFunctionId = $("#SupportFunction_Id").val();
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -145,13 +147,13 @@
                 
                 Entry_Date: $("#Entry_Date").val(),
                 Calendar_id: $("#Calendar_id").val(),
-                Emp_Id: $("#Emp_Id").val(),
+                Emp_Id: Eid,
                 IsPlanned: $("#IsPlanned").val(),
                 Planned_from: $("#Planned_from").val(),
                 Planned_to: $("#Planned_to").val(),
                 Total_Planned: $("#Total_Planned").val(),
                 Downtime_description: $("#Downtime_description").val(),
-                Supoort_Function_Id: $("#Supoort_Function_Id").val(),
+                Supoort_Function_Id: SupportFunctionId,
                 Downtime_SlipSerialNo: $("#Downtime_SlipSerialNo").val(),
                 Downtime_From: $("#Downtime_From").val(),
                 Downtime_to: $("#Downtime_to").val(),

@@ -1,10 +1,12 @@
 ﻿
-
 @{
-                /**/
+    /**/
 
-                Layout = null;
+    Layout = null;
 }
+
+
+@*@model  IEnumerable<ReyDel.Models.Production_Entry>*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <div class="modal fade" id="AddProductionEntry" role="dialog">
     <div class="modal-dialog">
@@ -39,18 +41,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Employe Name  </label>
-                                <select name=" Employee Name"  class="form-control" id="Employee_Id" >
-                                    <option>3</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
-                              
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 1), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
+
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Shift</label>
-                                <select name=" Shift "  class="form-control" id="Shift_Id">
+                                <select name=" Shift " class="form-control" id="Shift_Id">
                                     <option>2</option>
                                     <option>2</option>
                                     <option>2</option>
@@ -62,7 +60,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Machine</label>
-                                <select name=" Machine"  class="form-control" id="Machine_Id">
+                                <select name=" Machine" class="form-control" id="Machine_Id">
                                     <option>2</option>
                                     <option>2</option>
                                     <option>2</option>
@@ -73,11 +71,7 @@
 
                             <div class="form-group">
                                 <label>  REI</label>
-                                <select name=" REI "  class="form-control" id="REI_Id">
-                                    <option>2</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 1), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -85,7 +79,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Part</label>
-                                <select name=" Part "  class="form-control" id="Part_Id">
+                                <select name=" Part " class="form-control" id="Part_Id">
                                     <option>2</option>
                                     <option>2</option>
                                     <option>2</option>
@@ -96,7 +90,7 @@
                             <div class="form-group">
                                 <label>  Plan Quntity</label>
                                 <input type="text" class="form-control" id="Plan_Qty" placeholder="Plan Quntity">
-                              
+
                             </div>
                         </div>
                     </div>
@@ -119,7 +113,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>  Operator Emp</label>
-                                <select name=" Operator Name"  class="form-control" id="Operator_Emp">
+                                <select name=" Operator Name" class="form-control" id="Operator_Emp">
                                     <option>2</option>
                                     <option>2</option>
                                     <option>2</option>
@@ -130,7 +124,7 @@
 
                             <div class="form-group">
                                 <label>  Shift superviser</label>
-                                <select name=" superviser Name"  class="form-control" id="Shift_superviser">
+                                <select name=" superviser Name" class="form-control" id="Shift_superviser">
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -149,26 +143,29 @@
 </div>
 <script>
     $('#btnAdd').on('click', function () {
+      
+        var Eid = $("#EmployeeID").val();
+        var Rid = $("#REI_Id").val();
         $.ajax({
             type: 'POST',
             dataType: 'json',
             url: '/Home/AddProductionEntry',
             data:
             {
-               
+
                 Entry_Date: $("#Entry_Date").val(),
                 Calendar_id: $("#Calendar_id").val(),
-                Emp_id: $("#Employee_Id").val(),
+                Emp_id: Eid,
                 Shift: $("#Shift_Id").val(),
                 Machine: $("#Machine_Id").val(),
-                REI: $("#REI_Id").val(),
+                REI: Rid,
                 Part: $("#Part_Id").val(),
                 Plan_Qty: $("#Plan_Qty").val(),
                 Cumm_Accepted_Qty: $("#Cumm_Accepted_Qty").val(),
                 Accepted_Qty: $("#Accepted_Quntity").val(),
                 Operator_Emp: $("#Operator_Emp").val(),
                 Shift_superviser: $("#Shift_superviser").val(),
-           
+
 
             },
             success: function (data) {

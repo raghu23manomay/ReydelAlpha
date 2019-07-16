@@ -20,6 +20,8 @@ namespace ReyDel.Controllers
         }
         public ActionResult ProductionEntryList()
         {
+            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
+            ViewData["REI"] = BindDropDownREI("REI", 0);
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<ProductionEntryList> result = _db.ProductionEntryList.SqlQuery(@"exec USPGetProduction_Entry").ToList<ProductionEntryList>();
 
@@ -28,6 +30,8 @@ namespace ReyDel.Controllers
         }
         public ActionResult DownTimeEntryList()
         {
+            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
+            ViewData["SupportFunction"] = binddropdownSupoortFunction("SupportFunction", 0);
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<DownTimeEntryList> result = _db.DownTimeEntryList.SqlQuery(@"exec USPGetDownTimeEntry").ToList<DownTimeEntryList>();
 
@@ -44,6 +48,10 @@ namespace ReyDel.Controllers
         }
         public ActionResult ChangeOver_EntryList()
         {
+            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
+            ViewData["REI"] = BindDropDownREI("REI", 0);
+            ViewData["MaterialGrade"] = BindDropDownMaterialGrade("MaterialGrade", 0);
+
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<ChangeOverEntryList> result = _db.ChangeOverEntryList.SqlQuery(@"exec USPGetChangeOver_Entry").ToList<ChangeOverEntryList>();
 
@@ -185,6 +193,20 @@ namespace ReyDel.Controllers
 
             return Json("data inserted");
         }
+        public ActionResult AddChangeOver_Entry()
+        {
+            ChangeOver_Entry data = new ChangeOver_Entry();
+            data.Emp_Id=2;
+            data.Change_From_REI_ID = 2;
+            data.Change_To_REI_ID = 2;
+            data.Change_From_Mat_Grade_Id = 2;
+            data.Change_To_Mat_Grade_Id = 2;
+            
+             ViewData["Employee"] = BindDropDownEmp("Employee", 0);
+            ViewData["REI"] = BindDropDownREI("REI", 0);
+            ViewData["MaterialGrade"] = BindDropDownMaterialGrade("MaterialGrade", 0);
+            return View("AddChangeOver_Entry", data);
+        }
         [HttpPost]
         public ActionResult AddProductionEntry(Production_Entry PE)
         {
@@ -206,6 +228,17 @@ namespace ReyDel.Controllers
 
             return Json("data inserted");
         }
+        public ActionResult AddProductionEntry()
+        {
+            Production_Entry data = new Production_Entry();
+            data.Emp_id = 2;
+            data.REI = 2;
+            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
+            ViewData["REI"] = BindDropDownREI("REI", 0);
+
+            return View("AddProductionEntry", data);
+        }
+      
         [HttpPost]
         public ActionResult AddRejectionEntryDetails(RejectionEntryDetails RED)
         {
@@ -244,6 +277,15 @@ namespace ReyDel.Controllers
 
             return Json("data inserted");
         }
+        public ActionResult AddDownTime_Entry()
+        {
+            DownTime_Entry data = new DownTime_Entry();
+            data.Emp_Id = 2;
+            data.Supoort_Function_Id=2;
+            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
+            ViewData["SupportFunction"] = binddropdownSupoortFunction("SupportFunction", 0);
+            return View("AddDownTime_Entry", data);
+        }
         [HttpPost]
         public ActionResult AddREIMaster(String REIName)
         {
@@ -272,6 +314,7 @@ namespace ReyDel.Controllers
                  new SqlParameter("@SupportFunctionCode", SupportFunctionCode));
             return Json("data inserted");
         }
+
         [HttpPost]
         public ActionResult AddChangeTypeMaster(String ChangeTypeName, string ChangeTypeCode)
         {
@@ -297,6 +340,78 @@ namespace ReyDel.Controllers
             ReydeldbContext _db = new ReydeldbContext();
 
             var res = _db.Database.SqlQuery<SelectListItem>("exec USP_BindDropDown @action , @val",
+                   new SqlParameter("@action", action),
+                    new SqlParameter("@val", val))
+                   .ToList()
+                   .AsEnumerable()
+                   .Select(r => new SelectListItem
+                   {
+                       Text = r.Text.ToString(),
+                       Value = r.Value.ToString(),
+                       Selected = r.Value.Equals(Convert.ToString(val))
+                   }).ToList();
+
+            return res;
+        }
+        public List<SelectListItem> binddropdownSupoortFunction(string action, int val = 0)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+
+            var res = _db.Database.SqlQuery<SelectListItem>("exec binddropdownSupoortFunction @action , @val",
+                   new SqlParameter("@action", action),
+                    new SqlParameter("@val", val))
+                   .ToList()
+                   .AsEnumerable()
+                   .Select(r => new SelectListItem
+                   {
+                       Text = r.Text.ToString(),
+                       Value = r.Value.ToString(),
+                       Selected = r.Value.Equals(Convert.ToString(val))
+                   }).ToList();
+
+            return res;
+        }
+        public List<SelectListItem> BindDropDownEmp(string action, int val = 0)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+
+            var res = _db.Database.SqlQuery<SelectListItem>("exec USP_BindDropDownEmp @action , @val",
+                   new SqlParameter("@action", action),
+                    new SqlParameter("@val", val))
+                   .ToList()
+                   .AsEnumerable()
+                   .Select(r => new SelectListItem
+                   {
+                       Text = r.Text.ToString(),
+                       Value = r.Value.ToString(),
+                       Selected = r.Value.Equals(Convert.ToString(val))
+                   }).ToList();
+
+            return res;
+        }
+        public List<SelectListItem> BindDropDownREI(string action, int val = 0)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+
+            var res = _db.Database.SqlQuery<SelectListItem>("exec USP_BindDropDownREI @action , @val",
+                   new SqlParameter("@action", action),
+                    new SqlParameter("@val", val))
+                   .ToList()
+                   .AsEnumerable()
+                   .Select(r => new SelectListItem
+                   {
+                       Text = r.Text.ToString(),
+                       Value = r.Value.ToString(),
+                       Selected = r.Value.Equals(Convert.ToString(val))
+                   }).ToList();
+
+            return res;
+        }
+        public List<SelectListItem> BindDropDownMaterialGrade(string action, int val = 0)
+        {
+            ReydeldbContext _db = new ReydeldbContext();
+
+            var res = _db.Database.SqlQuery<SelectListItem>("exec binddropdownMaterialGrade @action , @val",
                    new SqlParameter("@action", action),
                     new SqlParameter("@val", val))
                    .ToList()

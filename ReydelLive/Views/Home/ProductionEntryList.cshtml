@@ -20,7 +20,7 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                               
+
                                 <th>   Calendar id  </th>
                                 <th>  Entry Date   </th>
                                 <th>   Emp Id  </th>
@@ -40,7 +40,7 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                  
+
                                     <td>@item.Calendar_id</td>
                                     <td>@item.EntryDate</td>
                                     <td>@item.Emp_id</td>
@@ -325,7 +325,7 @@
                     Cumm_Accepted_Qty: UCumm_Accepted_Qty,
                     Accepted_Qty: UAccepted_Qty,
                     Operator_Emp: UOperator_Emp,
-                    Shift_superviser: UShift_superviser    
+                    Shift_superviser: UShift_superviser
                 },
                 success: function (data) {
                     $("#UpdateProduction").hide();

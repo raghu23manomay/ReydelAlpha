@@ -7200,7 +7200,6 @@
     <Content Include="Views\Home\ExportImportTypeList.cshtml" />
     <Content Include="Views\Home\RejectionReasonList.cshtml" />
     <Content Include="Views\Home\RejectionTypeList.cshtml" />
-    <Content Include="Views\Home\UpdateMaterialGrade.cshtml" />
     <Content Include="Views\Home\AddChangeTypeConfiguration.cshtml" />
     <Content Include="Views\Home\ChangeTypeConfigurationList.cshtml" />
     <Content Include="Views\Home\ProductionEntryList.cshtml" />
@@ -7212,6 +7211,7 @@
     <Content Include="Views\Home\AddRejectionEntryDetails.cshtml" />
     <Content Include="Views\Home\RejectionEntryDetailsList.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Home\UserPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

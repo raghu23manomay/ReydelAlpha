@@ -39,8 +39,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Employe ID  </label>
-                                <input type="text" class="form-control" id="Emp_Id" placeholder="Emp_Id" />
+                                <label>Employe Name  </label>
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 1), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
 
                             </div>
                         </div>
@@ -54,18 +54,14 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Change From REI ID</label>
-                                <select class="form-control" id="Change_From_REI_ID">
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <label>Change From REI </label>
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 1), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label>  Change From Part Id</label>
+                                <label>  From Part </label>
                                 <input type="text" class="form-control" id=" Change_To_Part_Id" placeholder=" Change From Part Id">
                             </div>
                         </div>
@@ -73,29 +69,29 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Change From_Mat_Grade_Id</label>
-                                <input type="text" class="form-control" id="Change_From_Mat_Grade_Id" placeholder="Change_From_Mat_Grade_Id">
+                                <label>  From Material Grade</label>
+                                @Html.DropDownList("Material_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGrade"], "Value", "Text", 1), "Select ", new { @class = "form-control input-sm", @id = "Material_Grade_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Change To REI ID</label>
-                                <input type="text" class="form-control" id="Change_To_REI_ID" placeholder=" Change To REI ID">
+                                <label> Change To REI </label>
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 1), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Change To Part Id</label>
+                                <label> To Part </label>
                                 <input type="text" class="form-control" id="Change_To_Part_Id" placeholder="Change To Part Id">
                             </div>
                         </div>
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label> Change To Mat Grade Id</label>
-                                <input type="text" class="form-control" id="Change_To_Mat_Grade_Id" placeholder="   Change To Mat Grade Id">
+                                <label>  To Material Grade </label>
+                                @Html.DropDownList("Material_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGrade"], "Value", "Text", 1), "Select ", new { @class = "form-control input-sm", @id = "Material_Grade_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -218,6 +214,9 @@
 </div>
 <script>
     $('#btnAdd').on('click', function () {
+        var Eid = $("#EmployeeID").val();
+        var Rid = $("#REI_Id").val();
+        var MaterialGradeId = $("#Material_Grade_Id").val();
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -227,14 +226,14 @@
 
                 Entry_Date: $("#Entry_Date").val(),
                 Calendar_id: $("#Calendar_id").val(),
-                Emp_Id: $("#Emp_Id").val(),
+                Emp_Id: Eid,
                 ChangeOver_Config_Type: $("#ChangeOver_Config_Type").val(),
-                Change_From_REI_ID: $("#Change_From_REI_ID").val(),
+                Change_From_REI_ID: Rid,
                 Change_From_Part_Id: $("#Change_To_Part_Id").val(),
-                Change_From_Mat_Grade_Id: $("#Change_From_Mat_Grade_Id").val(),
-                Change_To_REI_ID: $("#Change_To_REI_ID").val(),
+                Change_From_Mat_Grade_Id: MaterialGradeId,
+                Change_To_REI_ID: Rid,
                 Change_To_Part_Id: $("#Change_To_Part_Id").val(),
-                Change_To_Mat_Grade_Id: $("#Change_To_Mat_Grade_Id").val(),
+                Change_To_Mat_Grade_Id: MaterialGradeId,
                 StandardRunQty: $("#StandardRunQty").val(),
                 Actual_RunQty: $("#Actual_RunQty").val(),
                 Increase_in_Scrap_Percent: $("#Increase_in_Scrap_Percent").val(),
