@@ -29,7 +29,7 @@
                             <tr>
                              
                                 <th> Entry Date</th>
-                                <th> Calendar id</th>
+                               
                                 <th> Emp Id</th>
                                 <th> ChangeOver Config Type</th>
                                 <th> Change From REI ID</th>
@@ -61,7 +61,7 @@
                                 <tr>
                                     
                                     <td>@item.EntryDate</td>
-                                    <td>@item.Calendar_id</td>
+                                  
                                     <td>@item.Emp_Id</td>
                                     <td>@item.ChangeOver_Config_Type</td>
                                     <td>@item.Change_From_REI_ID</td>
@@ -151,22 +151,23 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Entry Date</label>
-                                <input type="text" class="form-control" id="EEntry_Date" placeholder="Entry Date">
+                                <input type="date" class="form-control" id="EEntry_Date" placeholder="Entry Date">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Calendar id</label>
-                                <input type="text" class="form-control" id="ECalendar_id" placeholder="Calendar id">
+                                <label>Employe Name  </label>
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 0), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
+
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Employe ID  </label>
-                                <input type="text" class="form-control" id="EEmp_Id" placeholder="Emp_Id" />
 
+                            <div class="form-group">
+                                <label>Scrap Percent Increase</label>
+                                <input type="text" class="form-control" id="EScrapPercentIncrease" placeholder="   Scrap Percent Increase">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -179,33 +180,29 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Change From REI ID</label>
-                                <select class="form-control" id="EChange_From_REI_ID">
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <label> From REI </label>
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 0), "Select REI", new { @class = "form-control input-sm", @id = "FromREI_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label>  Change From Part Id</label>
-                                <input type="text" class="form-control" id="EChange_To_Part_Id" placeholder=" Change From Part Id">
+                                <label>   From Part </label>
+                                <input type="text" class="form-control" id="EChange_From_Part_Id" placeholder=" Change From Part Id">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Change From_Mat_Grade_Id</label>
-                                <input type="text" class="form-control" id="EChange_From_Mat_Grade_Id" placeholder="Change_From_Mat_Grade_Id">
+                                <label>  From Material Grade</label>
+                                @Html.DropDownList("Change_From_Mat_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGradeId"], "Value", "Text", 0), "Select ", new { @class = "form-control input-sm", @id = "Change_From_Mat_Grade_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Change To REI ID</label>
-                                <input type="text" class="form-control" id=" EChange_To_REI_ID" placeholder=" Change To REI ID">
+                                <label>  To REI </label>
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 0), "Select REI", new { @class = "form-control input-sm", @id = "ToREI_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -219,8 +216,8 @@
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label> Change To Mat Grade Id</label>
-                                <input type="text" class="form-control" id="EChange_To_Mat_Grade_Id" placeholder="   Change To Mat Grade Id">
+                                <label>  To Material Grade </label>
+                                @Html.DropDownList("Change_To_Mat_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGradeId"], "Value", "Text", 0), "Select ", new { @class = "form-control input-sm", @id = "Change_To_Mat_Grade_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -259,7 +256,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> ChangeOver Start</label>
-                                <input type="time" class="form-control" id="ChangeOver_Start" placeholder="   ChangeOver_Start">
+                                <input type="time" class="form-control" id="EChangeOver_Start" placeholder="   ChangeOver_Start">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -305,7 +302,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>  Expected Lumps(Kg)</label>
-                                <input type="text" class="form-control" id="Expected_Lumps" placeholder="   Expected Lumps(Kg)">
+                                <input type="text" class="form-control" id="EExpected_Lumps" placeholder="   Expected Lumps(Kg)">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -324,13 +321,7 @@
                                 <input type="text" class="form-control" id="EDifference_Lumps" placeholder="   Difference_Lumps">
                             </div>
                         </div>
-                        <div class="col-sm-6">
-
-                            <div class="form-group">
-                                <label>Scrap Percent Increase</label>
-                                <input type="text" class="form-control" id="EScrapPercentIncrease" placeholder="   Scrap Percent Increase">
-                            </div>
-                        </div>
+                       
                     </div>
                 </form>
             </div>
@@ -355,7 +346,6 @@
     function refresh() {
 
         $('.EditChangeOver_Entry').on('click', function () {
-
             UEntry_Id = this.getAttribute("UEntry_Id");
             UEntry_Date = this.getAttribute("UEntry_Date");
             UCalendar_id = this.getAttribute("UCalendar_id");
@@ -381,31 +371,37 @@
             UActual_Lumps = this.getAttribute("UActual_Lumps");
             UDifference_Lumps = this.getAttribute("UDifference_Lumps");
             UScrapPercentIncrease = this.getAttribute("UScrapPercentIncrease");
-                $("EEntry_Id").val(UEntry_Id),                                                               
-                    $("EEntry_Date").val(UEntry_Date),
-                $("ECalendar_id").val(UCalendar_id),
-                $("EEmp_Id").val(UEmp_Id),
-                    $("EChangeOver_Config_Type").val(UChangeOver_Config_Type),
-                $("EChange_From_REI_ID").val(UChange_From_REI_ID),
-                $("EChange_From_Part_Id").val(UChange_From_Part_Id),
-                $("EChange_From_Mat_Grade_Id").val(UChange_From_Mat_Grade_Id),
-                $("EChange_To_REI_ID").val(UChange_To_REI_ID),
-                $("EChange_To_Part_Id").val(UChange_To_Part_Id),
-                $("EChange_To_Mat_Grade_Id").val(UChange_To_Mat_Grade_Id),
-                $("EStandardRunQty").val(UStandardRunQty),
-                $("EActual_RunQty").val(UActual_RunQty),
-                $("EIncrease_in_Scrap_Percent").val(UIncrease_in_Scrap_Percent),
-                $("EIncrease_in_scrap_Value").val(UIncrease_in_scrap_Value),
-                $("EChangeOver_Start").val(UChangeOver_Start),
-                $("EChangeOver_End").val(UChangeOver_End),
-                $("ETotalChangeOver").val(UTotalChangeOver),
-                $("EStd_ChangeOverTime").val(UStd_ChangeOverTime),
-                $("EDifference").val(UDifference),
-                $("ELossInPrecentage").val(ULossInPrecentage),
-                $("EExpected_Lumps").val(UExpected_Lumps),
-                $("EActual_Lumps").val(UActual_Lumps),
-                    $("EDifference_Lumps").val(UDifference_Lumps),
-                    $("EScrapPercentIncrease").val(UScrapPercentIncrease),
+                $("#EEntry_Id").val(UEntry_Id);                                                               
+            //$("#EEntry_Date").val(UEntry_Date);
+            $('#EEntry_Date option[value="' + UEntry_Date + '"]').attr("selected", "selected"); 
+                $("#ECalendar_id").val(UCalendar_id);
+            $('#EmployeeID option[value="' + UEmp_Id + '"]').attr("selected", "selected"); 
+
+            $("#EChangeOver_Config_Type").val(UChangeOver_Config_Type);
+            $('#FromREI_Id option[value="' + UChange_From_REI_ID + '"]').attr("selected", "selected"); 
+
+            $("#EChange_From_Part_Id").val(UChange_From_Part_Id);
+            $('#Change_From_Mat_Grade_Id option[value="' + UChange_From_Mat_Grade_Id + '"]').attr("selected", "selected"); 
+
+            $('#ToREI_Id option[value="' + UChange_To_REI_ID + '"]').attr("selected", "selected"); 
+
+                $("#EChange_To_Part_Id").val(UChange_To_Part_Id);
+            $('#Change_To_Mat_Grade_Id option[value="' + UChange_To_Mat_Grade_Id + '"]').attr("selected", "selected"); 
+
+                $("#EStandardRunQty").val(UStandardRunQty);
+                $("#EActual_RunQty").val(UActual_RunQty);
+                $("#EIncrease_in_Scrap_Percent").val(UIncrease_in_Scrap_Percent);
+                $("#EIncrease_in_scrap_Value").val(UIncrease_in_scrap_Value);
+                $("#EChangeOver_Start").val(UChangeOver_Start);
+                $("#EChangeOver_End").val(UChangeOver_End);
+                $("#ETotalChangeOver").val(UTotalChangeOver);
+                $("#EStd_ChangeOverTime").val(UStd_ChangeOverTime);
+                $("#EDifference").val(UDifference);
+                $("#ELossInPrecentage").val(ULossInPrecentage);
+                $("#EExpected_Lumps").val(UExpected_Lumps);
+                $("#EActual_Lumps").val(UActual_Lumps);
+                $("#EDifference_Lumps").val(UDifference_Lumps);
+                $("#EScrapPercentIncrease").val(UScrapPercentIncrease);
                     $("#UpdateChangeOverEntry").show();
         });
     };
@@ -428,31 +424,31 @@
         });
     $('#btnSaveChanges').on('click', function () {
 
-        var UEntry_Id = $("EEntry_Id").val();
-        var UEntry_Date = $("EEntry_Date").val();
-        var UCalendar_id = $("ECalendar_id").val();
-        var UEmp_Id = $("EEmp_Id").val();
-        var UChangeOver_Config_Type = $("EChangeOver_Config_Type").val();
-        var UChange_From_REI_ID = $("EChange_From_REI_ID").val();
-        var UChange_From_Part_Id = $("EChange_From_Part_Id").val();
-        var UChange_From_Mat_Grade_Id = $("EChange_From_Mat_Grade_Id").val();
-        var UChange_To_REI_ID = $("EChange_To_REI_ID").val();
-        var UChange_To_Part_Id = $("EChange_To_Part_Id").val();
-        var UChange_To_Mat_Grade_Id = $("EChange_To_Mat_Grade_Id").val();
-        var UStandardRunQty = $("EStandardRunQty").val();
-        var UActual_RunQty = $("EActual_RunQty").val();
-        var UIncrease_in_Scrap_Percen = $("EIncrease_in_Scrap_Percent").val();
-        var UIncrease_in_scrap_Value = $("EIncrease_in_scrap_Value").val();
-        var UChangeOver_Start = $("EChangeOver_Start").val();
-        var UChangeOver_End = $("EChangeOver_End").val();
-        var UTotalChangeOver = $("ETotalChangeOver").val();
-        var UStd_ChangeOverTime = $("EStd_ChangeOverTime").val();
-        var UDifference = $("EDifference").val();
-        var ULossInPrecentage = $("ELossInPrecentage").val();
-        var UExpected_Lumps = $("EExpected_Lumps").val();
-        var UActual_Lumps = $("EActual_Lumps").val();
-        var UDifference_Lumps = $("EDifference_Lumps").val();
-        var UScrapPercentIncrease = $("EScrapPercentIncrease").val();
+        var UEntry_Id = $("#EEntry_Id").val();
+        var UEntry_Date = $("#EEntry_Date").val();
+        var UCalendar_id = $("#ECalendar_id").val();
+        var UEmp_Id = $("#EmployeeID").val();
+        var UChangeOver_Config_Type = $("#EChangeOver_Config_Type").val();
+        var UChange_From_REI_ID = $("#FromREI_Id").val();
+        var UChange_From_Part_Id = $("#EChange_From_Part_Id").val();
+        var UChange_From_Mat_Grade_Id = $("#Change_From_Mat_Grade_Id").val();
+        var UChange_To_REI_ID = $("#ToREI_Id").val();
+        var UChange_To_Part_Id = $("#EChange_To_Part_Id").val();
+        var UChange_To_Mat_Grade_Id = $("#Change_To_Mat_Grade_Id").val();
+        var UStandardRunQty = $("#EStandardRunQty").val();
+        var UActual_RunQty = $("#EActual_RunQty").val();
+        var UIncrease_in_Scrap_Percen = $("#EIncrease_in_Scrap_Percent").val();
+        var UIncrease_in_scrap_Value = $("#EIncrease_in_scrap_Value").val();
+        var UChangeOver_Start = $("#EChangeOver_Start").val();
+        var UChangeOver_End = $("#EChangeOver_End").val();
+        var UTotalChangeOver = $("#ETotalChangeOver").val();
+        var UStd_ChangeOverTime = $("#EStd_ChangeOverTime").val();
+        var UDifference = $("#EDifference").val();
+        var ULossInPrecentage = $("#ELossInPrecentage").val();
+        var UExpected_Lumps = $("#EExpected_Lumps").val();
+        var UActual_Lumps = $("#EActual_Lumps").val();
+        var UDifference_Lumps = $("#EDifference_Lumps").val();
+        var UScrapPercentIncrease = $("#EScrapPercentIncrease").val();
         
 
         $.ajax({

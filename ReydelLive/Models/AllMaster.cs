@@ -11,7 +11,7 @@ namespace ReyDel.Models
     public class RejectionEntryDetails
     {
         [Key]
-        public int? PRejection_Entry_Id { get; set; }
+        public int? Rejection_Entry_Id { get; set; }
         public DateTime Rejection_from { get; set; }
         public int Prod_Entry_Id { get; set; }
         public int Rejection_Type_Id { get; set; }
@@ -23,9 +23,11 @@ namespace ReyDel.Models
     public class RejectionEntryDetailsList
     {
         [Key]
-        public int? PRejection_Entry_Id { get; set; }
+        public int? Rejection_Entry_Id { get; set; }
         public String Rejectionfrom { get; set; }
         public int Prod_Entry_Id { get; set; }
+        public String RejectionReasonName { get; set; }
+        public String RejectionTypeName { get; set; }
         public int Rejection_Type_Id { get; set; }
         public int Rejection_Reason_Id { get; set; }
         public int Rejection_Qty { get; set; }
@@ -111,7 +113,7 @@ namespace ReyDel.Models
     {
         [Key]
         public int? Entry_Id { get; set; }
-        public int Calendar_id { get; set; }
+        public int? Calendar_id { get; set; }
         public String EntryDate { get; set; }
         public int Emp_id { get; set; }
         public int Shift { get; set; }

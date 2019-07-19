@@ -21,9 +21,9 @@
                         <thead>
                             <tr>
 
-                                <th>   Calendar id  </th>
+                               
                                 <th>  Entry Date   </th>
-                                <th>   Emp Id  </th>
+                                <th>   Employee Nmae  </th>
                                 <th>    Shift </th>
                                 <th>   Machine  </th>
                                 <th>    REI </th>
@@ -41,7 +41,7 @@
                             {
                                 <tr>
 
-                                    <td>@item.Calendar_id</td>
+                                   
                                     <td>@item.EntryDate</td>
                                     <td>@item.Emp_id</td>
                                     <td>@item.Shift</td>
@@ -66,7 +66,7 @@
                                               UPart="@item.Part"
                                               UPlan_Qty="@item.Plan_Qty"
                                               UCumm_Accepted_Qty="@item.Cumm_Accepted_Qty"
-                                              UAccepted_Qty="@item.Accepted_Qty"
+                                              UAcceptedQty="@item.Accepted_Qty"
                                               UOperator_Emp="@item.Operator_Emp"
                                               UShift_superviser="@item.Shift_superviser"><i class="fa fa-edit"></i></span>
                                     </td>
@@ -87,6 +87,7 @@
     </div>
 
 </section>
+
 <div id="UpdateProduction" class="modal fade in" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -106,37 +107,29 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Entry Date</label>
-                                <input type="text" class="form-control" id="EEntry_Date" placeholder="Entry Date">
+                                <input type="date" class="form-control" id="EEntry_Date" placeholder="Entry Date">
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Calendar id</label>
-                                <input type="text" class="form-control" id="ECalendar_id" placeholder="Calendar id">
+                                <label>Employe Name  </label>
+                                @Html.DropDownList( "EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text",0), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Employe Id  </label>
-                                <select name=" Employee Name" class="form-control" id="EEmp_id">
-                                    <option>3</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
 
+                            <div class="form-group">
+                                <label>  Shift superviser</label>
+                                @Html.DropDownList("ShiftSuperviserId", new SelectList((System.Collections.IEnumerable)ViewData["ShiftSuperviser"], "Value", "Text", 0), "Select Shift superviser", new { @class = "form-control input-sm", @id = "ShiftSuperviserId", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Shift</label>
-
-                                <select name=" Shift" class="form-control" id="EShift_Id">
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>2</option>
-                                </select>
+                                @Html.DropDownList("Shift_id", new SelectList((System.Collections.IEnumerable)ViewData["Shift"], "Value", "Text", 0), "Select Shift ", new { @class = "form-control input-sm", @id = "Shift_id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -155,11 +148,7 @@
 
                             <div class="form-group">
                                 <label>  REI</label>
-                                <select name=" REI " class="form-control" id="EREI_Id">
-                                    <option>2</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text",0), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -189,10 +178,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-
                             <div class="form-group">
                                 <label> Accepted Quntity</label>
-                                <input type="text" class="form-control" id="EAccepted_Qty" placeholder="  Accepted Quntity">
+                                <input type="text" class="form-control" id="EAcceptedQuntity" placeholder="  Accepted Quntity">
                             </div>
                         </div>
                     </div>
@@ -200,24 +188,10 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>  Operator Emp</label>
-                                <select name=" Operator Name" class="form-control" id="EOperator_Emp">
-                                    <option>2</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
+                                @Html.DropDownList("OperatorEmp_id", new SelectList((System.Collections.IEnumerable)ViewData["OperatorEmp"], "Value", "Text", 0), "Select OperatorEmp ", new { @class = "form-control input-sm", @id = "OperatorEmp_id", Title = "Source" })
                             </div>
                         </div>
-                        <div class="col-sm-6">
 
-                            <div class="form-group">
-                                <label>  Shift superviser</label>
-                                <select name=" superviser Name" class="form-control" id="EShift_superviser">
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -242,7 +216,6 @@
     function refresh() {
 
         $('.EditProductionEntry').on('click', function () {
-
             var UEntry_Id = this.getAttribute("UEntry_Id");
             var UEntry_Date = this.getAttribute("UEntry_Date");
             var UCalendar_id = this.getAttribute("UCalendar_id");
@@ -252,23 +225,23 @@
             var UREI = this.getAttribute("UREI");
             var UPart = this.getAttribute("UPart");
             var UPlan_Qty = this.getAttribute("UPlan_Qty");
-            var UAccepted_Qty = this.getAttribute("UAccepted_Qty");
+            var UAcceptedQty = this.getAttribute("UAcceptedQty");
             var UCumm_Accepted_Qty = this.getAttribute("UCumm_Accepted_Qty");
             var UOperator_Emp = this.getAttribute("UOperator_Emp");
             var UShift_superviser = this.getAttribute("UShift_superviser");
-            $("#EEntry_Id").val(UEntry_Id),
-                $("#EEntry_Date").val(UEntry_Date),
-                $("#ECalendar_id").val(UCalendar_id),
-                $("#EEmp_id").val(UEmp_id),
-                $("EShift_Id").val(UShift),
-                $("#EMachine_Id").val(UMachine),
-                $("#EREI_Id").val(UREI),
-                $("#EPart_Id").val(UPart),
-                $("#EPlan_Qty").val(UPlan_Qty),
-                $("#EAccepted_Qty").val(UAccepted_Qty)
-            $("#ECumm_Accepted_Qty").val(UCumm_Accepted_Qty),
-                $("#EOperator_Emp").val(UOperator_Emp),
-                $("#EShift_superviser").val(UShift_superviser),
+            $("#EEntry_Id").val(UEntry_Id);
+            $("#EEntry_Date").val(UEntry_Date);
+            $("#ECalendar_id").val(UCalendar_id);
+            $('#EmployeeID option[value="'+UEmp_id+'"]').attr("selected", "selected"); 
+            $('#Shift_id option[value="' + UShift + '"]').attr("selected", "selected"); 
+            $("#EMachine_Id").val(UMachine);
+            $('#REI_Id option[value="' + UREI + '"]').attr("selected", "selected"); 
+            $("#EPart_Id").val(UPart);
+            $("#EPlan_Qty").val(UPlan_Qty);
+            $("#EAcceptedQuntity").val(UAcceptedQty);
+            $("#ECumm_Accepted_Qty").val(UCumm_Accepted_Qty);
+            $('#OperatorEmp_id option[value="' + UOperator_Emp + '"]').attr("selected", "selected"); 
+            $('#ShiftSuperviserId option[value="' + UShift_superviser + '"]').attr("selected", "selected"); 
                 $("#UpdateProduction").show();
         });
     };
@@ -290,22 +263,22 @@
         $('.close').on('click', function () {
             $("#UpdateProduction").hide();
         });
-
         $('#btnSaveChanges').on('click', function () {
-
+            var Eid = $("#EmployeeID").val();
+            var Rid = $("#REI_Id").val();
+            var shiftsup = $("#ShiftSuperviserId").val();
+            var shift = $("#Shift_id").val();
+            var AcceptedQty = $("#EAcceptedQuntity").val();
             var UEntry_Id = $("#EEntry_Id").val();
             var UEntry_Date = $("#EEntry_Date").val();
             var UCalendar_id = $("#ECalendar_id").val();
-            var UEmp_id = $("#EEmp_id").val();
-            var UShift = $("#EShift_Id");
             var UMachine = $("#EMachine_Id").val();
-            var UREI = $("#EREI_Id").val();
             var UPart = $("#EPart_Id").val();
             var UPlan_Qty = $("#EPlan_Qty").val();
-            var UAccepted_Qty = $("EAccepted_Qty").val();
+            //var UAcceptedQty = $("EAcceptedQuntity").val();
             var UCumm_Accepted_Qty = $("#ECumm_Accepted_Qty").val();
-            var UOperator_Emp = $("#EOperator_Emp").val();
-            var UShift_superviser = $("#EShift_superviser").val();
+            var UOperator_Emp = $("#OperatorEmp_id").val();
+          
 
             $.ajax({
                 type: 'POST',
@@ -314,18 +287,18 @@
                 data:
                 {
                     Entry_Id: UEntry_Id,
-                    Calendar_id: UEntry_Date,
-                    Entry_Date: UCalendar_id,
-                    Emp_id: UEmp_id,
-                    Shift: UShift,
+                    Calendar_id: UCalendar_id,
+                    Entry_Date: UEntry_Date,
+                    Emp_id: Eid,
+                    Shift: shift,
                     Machine: UMachine,
-                    REI: UREI,
+                    REI: Rid,
                     Part: UPart,
                     Plan_Qty: UPlan_Qty,
                     Cumm_Accepted_Qty: UCumm_Accepted_Qty,
-                    Accepted_Qty: UAccepted_Qty,
+                    Accepted_Qty: AcceptedQty,
                     Operator_Emp: UOperator_Emp,
-                    Shift_superviser: UShift_superviser
+                    Shift_superviser: shiftsup
                 },
                 success: function (data) {
                     $("#UpdateProduction").hide();

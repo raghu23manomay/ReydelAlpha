@@ -29,7 +29,7 @@
                             <tr>
                                
                                 <th>   Entry Date  </th>
-                                <th>  Calendar id   </th>
+                               
                                 <th>   Emp Id  </th>
                                 <th>    IsPlanned </th>
                                 <th>   Planned from  </th>
@@ -50,7 +50,6 @@
                                 <tr>
                                   
                                     <td>@item.EntryDate</td>
-                                    <td>@item.Calendar_id</td>
                                     <td>@item.Emp_Id</td>
                                     <td>@item.IsPlanned</td>
                                     <td>@item.Planned_from</td>
@@ -116,13 +115,13 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Entry Date</label>
-                                <input type="text" class="form-control" id="EEntry_Date" placeholder="Entry Date">
+                                <input type="date" class="form-control" id="EEntry_Date" placeholder="Entry Date">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Calendar id</label>
-                                <input type="text" class="form-control" id="ECalendar_id" placeholder="Calendar id">
+                                <label>  Total Downtime(Mins)</label>
+                                <input type="text" class="form-control" id="ETotal_Downtime" placeholder="Total_Downtime(Mins)">
                             </div>
                         </div>
                     </div>
@@ -130,7 +129,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Employe Id  </label>
-                                <input type="text" class="form-control" id="EEmp_Id" placeholder="Employe Id ">
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 1), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -172,7 +171,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Supoort Function Id</label>
-                                <input type="text" class="form-control" id="ESupoort_Function_Id" placeholder="Supoort Function Id">
+                                @Html.DropDownList("SupportFunction_Id", new SelectList((System.Collections.IEnumerable)ViewData["SupportFunction"], "Value", "Text", 1), "Select ", new { @class = "form-control input-sm", @id = "SupportFunction_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -197,19 +196,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>  Total Downtime(Mins)</label>
-                                <input type="text" class="form-control" id="ETotal_Downtime" placeholder="Total_Downtime(Mins)">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-
-                            </div>
-                        </div>
-                    </div>
+                    
+                       
+                      
 
                 </form>
             </div>
@@ -253,13 +242,15 @@
                 $("#EEntry_Id").val(UEntry_Id),
                 $("#EEntry_Date").val(UEntry_Date),
                 $("#ECalendar_id").val(UCalendar_id),
-                $("#EEmp_Id").val(UEmp_Id),
+                    //$("#EEmp_Id").val(UEmp_Id),
+                $('#EmployeeID option[value="' + UEmp_Id + '"]').attr("selected", "selected"); 
                 $("#EIsPlanned").val(UIsPlanned),
                 $("#EPlanned_from").val(UPlanned_from),
                 $("#EPlanned_to").val(UPlanned_to),
                 $("#ETotal_Planned").val(UTotal_Planned),
                 $("#EDowntime_description").val(UDowntime_description),
-                $("#ESupoort_Function_Id").val(USupoort_Function_Id),
+                    //$("#ESupoort_Function_Id").val(USupoort_Function_Id),
+                    $('#SupportFunction_Id option[value="' + USupoort_Function_Id + '"]').attr("selected", "selected"); 
                 $("#EDowntime_SlipSerialNo").val(UDowntime_SlipSerialNo),
                 $("#EDowntime_From").val(UDowntime_From),
                 $("#EDowntime_to").val(UDowntime_to),

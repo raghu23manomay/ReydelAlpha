@@ -20,7 +20,7 @@
 
                 <form role="form">
                     <div class="form-group" hidden>
-                        <input type="text" class="form-control" id="PRejection_Entry_Id">
+                        <input type="text" class="form-control" id="Rejection_Entry_Id">
                     </div>
 
                     <div class="row">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Prod Entry Id</label>
+                                <label>Product Entry </label>
                                 <input type="text" class="form-control" id="Prod_Entry_Id" placeholder="Prod_Entry_Id">
                             </div>
                         </div>
@@ -40,15 +40,15 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Rejection Type Id </label>
-                                <input type="text" class="form-control" id="Rejection_Type_Id" placeholder="Rejection Type Id ">
+                                <label>Rejection Type  </label>
+                                @Html.DropDownList("Rejection_Type_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionType"], "Value", "Text", 1), "Select Source", new { @class = "form-control input-sm", @id = "Rejection_Reason_Id", Title = "Source" })
 
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Rejection Reason Id</label>
-                                <input type="text" class="form-control" id="Rejection_Reason_Id" placeholder="Rejection_Reason_Id">
+                                <label> Rejection Reason </label>
+                                @Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionReason"], "Value", "Text", 1), "Select Source", new { @class = "form-control input-sm", @id = "Rejection_Reason_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -79,6 +79,8 @@
 </div>
 <script>
     $('#btnAdd').on('click', function () {
+        var RR_id = $("#Rejection_Reason_Id").val();
+        var RT_id = $("#Rejection_Type_Id").val();
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -88,8 +90,8 @@
 
                 Rejection_from: $("#Rejection_from").val(),
                 Prod_Entry_Id: $("#Prod_Entry_Id").val(),
-                Rejection_Type_Id: $("#Rejection_Type_Id").val(),
-                Rejection_Reason_Id: $("#Rejection_Reason_Id").val(),
+                Rejection_Type_Id: RT_id,
+                Rejection_Reason_Id: RR_id,
                 Rejection_Qty: $("#Rejection_Qty").val(),
                 Lumps: $("#Lumps").val(),
 

@@ -39,17 +39,17 @@
                                
                                 <td>@item.Rejectionfrom</td>
                                 <td>@item.Prod_Entry_Id</td>
-                                <td>@item.Rejection_Type_Id</td>
-                                <td>@item.Rejection_Reason_Id</td>
+                                <td>@item.RejectionTypeName</td>
+                                <td>@item.RejectionReasonName</td>
                                 <td>@item.Rejection_Qty</td>
                                 <td>@item.Lumps</td>
                                 <td>
                                     <span class="EditRejectionEntryDetails"
-                                          UPRejection_Entry_Id="@item.PRejection_Entry_Id"
+                                          URejection_Entry_Id="@item.Rejection_Entry_Id"
                                           URejection_from="@item.Rejectionfrom"
                                           UProd_Entry_Id="@item.Prod_Entry_Id"
                                           URejection_Type_Id="@item.Rejection_Type_Id"
-                                          URejection_Reason_Id ="  @item.Rejection_Reason_Id"
+                                          URejection_Reason_Id ="@item.Rejection_Reason_Id"
                                           URejection_Qty            ="@item.Rejection_Qty"
                                           Ulumps                            =" @item.Lumps">
                                           <i class="fa fa-edit"></i></span>
@@ -78,25 +78,25 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Rejection Entry Details</h4>
+                <h4 class="modal-title">Upda Rejection Entry Details</h4>
             </div>
             <div class="modal-body">
 
                 <form role="form">
                     <div class="form-group" hidden>
-                        <input type="text" class="form-control" id="EPRejection_Entry_Id">
+                        <input type="text" class="form-control" id="ERejection_Entry_Id">
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Rejection from</label>
-                                <input type="text" class="form-control" id="ERejection_from" placeholder="Rejection from">
+                                <input type="date" class="form-control" id="ERejection_from" placeholder="Rejection from">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Prod Entry Id</label>
+                                <label>Product Entry </label>
                                 <input type="text" class="form-control" id="EProd_Entry_Id" placeholder="Prod_Entry_Id">
                             </div>
                         </div>
@@ -104,29 +104,29 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Rejection Type Id </label>
-                                <input type="text" class="form-control" id="ERejection_Type_Id" placeholder="Rejection Type Id ">
+                                <label>Rejection Type  </label>
+                                @Html.DropDownList("Rejection_Type_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionType"], "Value", "Text", 0), "Select Source", new { @class = "form-control input-sm", @id = "Rejection_Type_Id", Title = "Source" })
 
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Rejection Reason Id</label>
-                                <input type="text" class="form-control" id="ERejection_Reason_Id" placeholder="Rejection_Reason_Id">
+                                <label> Rejection Reason </label>
+                                @Html.DropDownList("Rejection_Reason_Id", new SelectList((System.Collections.IEnumerable)ViewData["RejectionReason"], "Value", "Text", 0), "Select Source", new { @class = "form-control input-sm", @id = "Rejection_ReasonId", Title = "Source" })
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Rejection Qty</label>
+                                <label>Rejection Quntity</label>
                                 <input type="text" class="form-control" id="ERejection_Qty" placeholder="Rejection Qty">
                             </div>
                         </div>
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label>  lumps</label>
+                                <label>  Lumps</label>
                                 <input type="text" class="form-control" id="Elumps" placeholder="lumps">
                             </div>
                         </div>
@@ -154,20 +154,21 @@
 <script>
     function refresh() {
         $('.EditRejectionEntryDetails').on('click', function () {
-            var UPRejection_Entry_Id = this.getAttribute("UPRejection_Entry_Id");
+            debugger;
+            var URejection_Entry_Id = this.getAttribute("URejection_Entry_Id");
             var URejection_from = this.getAttribute("URejection_from");
             var UProd_Entry_Id = this.getAttribute("UProd_Entry_Id");
             var URejection_Type_Id = this.getAttribute("URejection_Type_Id");
             var URejection_Reason_Id = this.getAttribute("URejection_Reason_Id");
             var URejection_Qty = this.getAttribute("URejection_Qty");
             var Ulumps = this.getAttribute("Ulumps");
-                $("#EPRejection_Entry_Id").val(UPRejection_Entry_Id),
-                $("#ERejection_from").val(URejection_from),
-                $("#EProd_Entry_Id").val(UProd_Entry_Id),
-                $("#ERejection_Type_Id").val(URejection_Type_Id),
-                $("#ERejection_Reason_Id").val(URejection_Reason_Id),
-                $("#ERejection_Qty").val(URejection_Qty),
-                $("#Elumps").val(Ulumps),
+            $("#ERejection_Entry_Id").val(URejection_Entry_Id);
+            $("#ERejection_from").val(URejection_from);
+            $("#EProd_Entry_Id").val(UProd_Entry_Id);
+            $('#Rejection_Type_Id option[value="' + URejection_Type_Id + '"]').attr("selected", "selected"); 
+            $('#Rejection_ReasonId option[value="' + URejection_Reason_Id + '"]').attr("selected", "selected"); 
+            $("#ERejection_Qty").val(URejection_Qty);
+            $("#Elumps").val(Ulumps);
                     $("#UpdateRejectionEntry").show();
         });
 
@@ -192,11 +193,11 @@
         });
 
         $('#btnSaveChanges').on('click', function () {
-            var UPRejection_Entry_Id = $("#EPRejection_Entry_Id").val();
+            var URejection_Entry_Id = $("#ERejection_Entry_Id").val();
             var URejection_from = $("#ERejection_from").val();
             var UProd_Entry_Id = $("#EProd_Entry_Id").val();
-            var URejection_Type_Id = $("#ERejection_Type_Id").val();
-            var URejection_Reason_Id = $("#ERejection_Reason_Id").val();
+            var URejection_Type_Id = $("#Rejection_Type_Id").val();
+            var URejection_Reason_Id = $("#Rejection_ReasonId").val();
             var URejection_Qty = $("#ERejection_Qty").val();
             var Ulumps = $("#Elumps").val(); 
 
@@ -206,7 +207,7 @@
                 url: '/Home/UpadteRejectionEntryDetails',
                 data:
                 {
-                    PRejection_Entry_Id: UPRejection_Entry_Id ,
+                    Rejection_Entry_Id: URejection_Entry_Id ,
                     Rejection_from: URejection_from      ,
                     Prod_Entry_Id: UProd_Entry_Id     ,  
                     Rejection_Type_Id: URejection_Type_Id   ,

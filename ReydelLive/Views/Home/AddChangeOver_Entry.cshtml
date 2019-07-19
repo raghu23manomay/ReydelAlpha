@@ -31,23 +31,25 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Calendar id</label>
-                                <input type="text" class="form-control" id="Calendar_id" placeholder="Calendar id">
+                                <label>Employe Name  </label>
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 0), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
+
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Employe Name  </label>
-                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 1), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
 
-                            </div>
-                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> ChangeOver Config Type</label>
                                 <input type="text" class="form-control" id="ChangeOver_Config_Type" placeholder="ChangeOver Config Type" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label>Scrap Percent Increase</label>
+                                <input type="text" class="form-control" id="ScrapPercentIncrease" placeholder="   Scrap Percent Increase">
                             </div>
                         </div>
                     </div>
@@ -55,7 +57,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Change From REI </label>
-                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 1), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 0), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -70,13 +72,13 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>  From Material Grade</label>
-                                @Html.DropDownList("Material_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGrade"], "Value", "Text", 1), "Select ", new { @class = "form-control input-sm", @id = "Material_Grade_Id", Title = "Source" })
+                                @Html.DropDownList("Change_From_Mat_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGradeId"], "Value", "Text", 0), "Select ", new { @class = "form-control input-sm", @id = "Change_From_Mat_Grade_Id", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Change To REI </label>
-                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 1), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 0), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -91,7 +93,7 @@
 
                             <div class="form-group">
                                 <label>  To Material Grade </label>
-                                @Html.DropDownList("Material_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGrade"], "Value", "Text", 1), "Select ", new { @class = "form-control input-sm", @id = "Material_Grade_Id", Title = "Source" })
+                                @Html.DropDownList("Change_To_Mat_Grade_Id", new SelectList((System.Collections.IEnumerable)ViewData["MaterialGradeId"], "Value", "Text", 0), "Select ", new { @class = "form-control input-sm", @id = "Change_To_Mat_Grade_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -195,13 +197,7 @@
                                 <input type="text" class="form-control" id="Difference_Lumps" placeholder="   Difference_Lumps">
                             </div>
                         </div>
-                        <div class="col-sm-6">
-
-                            <div class="form-group">
-                                <label>Scrap Percent Increase</label>
-                                <input type="text" class="form-control" id="ScrapPercentIncrease" placeholder="   Scrap Percent Increase">
-                            </div>
-                        </div>
+                      
                     </div>
                 </form>
             </div>
@@ -216,7 +212,8 @@
     $('#btnAdd').on('click', function () {
         var Eid = $("#EmployeeID").val();
         var Rid = $("#REI_Id").val();
-        var MaterialGradeId = $("#Material_Grade_Id").val();
+        var Change_From_Mat_Grade_Id = $("#Change_From_Mat_Grade_Id").val();
+    var Change_To_Mat_Grade_Id = $("#Change_To_Mat_Grade_Id").val();
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -230,10 +227,10 @@
                 ChangeOver_Config_Type: $("#ChangeOver_Config_Type").val(),
                 Change_From_REI_ID: Rid,
                 Change_From_Part_Id: $("#Change_To_Part_Id").val(),
-                Change_From_Mat_Grade_Id: MaterialGradeId,
+                Change_From_Mat_Grade_Id: Change_From_Mat_Grade_Id,
                 Change_To_REI_ID: Rid,
                 Change_To_Part_Id: $("#Change_To_Part_Id").val(),
-                Change_To_Mat_Grade_Id: MaterialGradeId,
+                Change_To_Mat_Grade_Id: Change_To_Mat_Grade_Id,
                 StandardRunQty: $("#StandardRunQty").val(),
                 Actual_RunQty: $("#Actual_RunQty").val(),
                 Increase_in_Scrap_Percent: $("#Increase_in_Scrap_Percent").val(),

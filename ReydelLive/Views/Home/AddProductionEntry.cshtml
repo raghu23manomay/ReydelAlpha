@@ -32,27 +32,24 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Calendar id</label>
-                                <input type="text" class="form-control" id="Calendar_id" placeholder="Calendar id">
+                                <label>Employe Name  </label>
+                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 0), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
+
                             </div>
                         </div>
+                       
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Employe Name  </label>
-                                @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", 1), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Source" })
-
+                                <label>  Shift superviser</label>
+                                @Html.DropDownList("ShiftSuperviserId", new SelectList((System.Collections.IEnumerable)ViewData["ShiftSuperviser"], "Value", "Text", 0), "Select Shift superviser", new { @class = "form-control input-sm", @id = "ShiftSuperviserId", Title = "Source" })
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label> Shift</label>
-                                <select name=" Shift " class="form-control" id="Shift_Id">
-                                    <option>2</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
+                                @Html.DropDownList("Shift_id", new SelectList((System.Collections.IEnumerable)ViewData["Shift"], "Value", "Text", 0), "Select Shift ", new { @class = "form-control input-sm", @id = "Shift_id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -71,7 +68,7 @@
 
                             <div class="form-group">
                                 <label>  REI</label>
-                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 1), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
+                                @Html.DropDownList("REI_Id", new SelectList((System.Collections.IEnumerable)ViewData["REI"], "Value", "Text", 0), "Select REI", new { @class = "form-control input-sm", @id = "REI_Id", Title = "Source" })
                             </div>
                         </div>
                     </div>
@@ -113,24 +110,10 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>  Operator Emp</label>
-                                <select name=" Operator Name" class="form-control" id="Operator_Emp">
-                                    <option>2</option>
-                                    <option>2</option>
-                                    <option>2</option>
-                                </select>
+                                @Html.DropDownList("OperatorEmp_id", new SelectList((System.Collections.IEnumerable)ViewData["OperatorEmp"], "Value", "Text", 0), "Select Shift ", new { @class = "form-control input-sm", @id = "OperatorEmp_id", Title = "Source" })
                             </div>
                         </div>
-                        <div class="col-sm-6">
-
-                            <div class="form-group">
-                                <label>  Shift superviser</label>
-                                <select name=" superviser Name" class="form-control" id="Shift_superviser">
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-                        </div>
+                       
                     </div>
                 </form>
             </div>
@@ -146,6 +129,9 @@
       
         var Eid = $("#EmployeeID").val();
         var Rid = $("#REI_Id").val();
+        var shiftsup = $("#ShiftSuperviserId").val();
+        var shift = $("#Shift_id").val();
+        var OperatorEmp = $("#OperatorEmp_id").val();
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -156,15 +142,15 @@
                 Entry_Date: $("#Entry_Date").val(),
                 Calendar_id: $("#Calendar_id").val(),
                 Emp_id: Eid,
-                Shift: $("#Shift_Id").val(),
+                Shift: shift,
                 Machine: $("#Machine_Id").val(),
                 REI: Rid,
                 Part: $("#Part_Id").val(),
                 Plan_Qty: $("#Plan_Qty").val(),
                 Cumm_Accepted_Qty: $("#Cumm_Accepted_Qty").val(),
                 Accepted_Qty: $("#Accepted_Quntity").val(),
-                Operator_Emp: $("#Operator_Emp").val(),
-                Shift_superviser: $("#Shift_superviser").val(),
+                Operator_Emp: OperatorEmp,
+                Shift_superviser: shiftsup,
 
 
             },

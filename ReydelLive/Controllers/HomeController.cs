@@ -20,8 +20,11 @@ namespace ReyDel.Controllers
         }
         public ActionResult ProductionEntryList()
         {
-            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
-            ViewData["REI"] = BindDropDownREI("REI", 0);
+            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["REI"] = binddropdown("REI", 0);
+            ViewData["ShiftSuperviser"] = binddropdown("ShiftSuperviser", 0);
+            ViewData["Shift"] = binddropdown("Shift", 0);
+            ViewData["OperatorEmp"] = binddropdown("OperatorEmp", 0);
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<ProductionEntryList> result = _db.ProductionEntryList.SqlQuery(@"exec USPGetProduction_Entry").ToList<ProductionEntryList>();
 
@@ -30,8 +33,8 @@ namespace ReyDel.Controllers
         }
         public ActionResult DownTimeEntryList()
         {
-            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
-            ViewData["SupportFunction"] = binddropdownSupoortFunction("SupportFunction", 0);
+            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["SupportFunction"] = binddropdown("SupportFunction", 0);
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<DownTimeEntryList> result = _db.DownTimeEntryList.SqlQuery(@"exec USPGetDownTimeEntry").ToList<DownTimeEntryList>();
 
@@ -40,6 +43,8 @@ namespace ReyDel.Controllers
         }
         public ActionResult RejectionEntryDetailsList()
         {
+            ViewData["RejectionReason"] = binddropdown("RejectionReason", 0);
+            ViewData["RejectionType"] = binddropdown("RejectionType", 0);
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<RejectionEntryDetailsList> result = _db.RejectionEntryDetailsList.SqlQuery(@"exec USPGetRejectionEntryDetails").ToList<RejectionEntryDetailsList>();
 
@@ -48,9 +53,9 @@ namespace ReyDel.Controllers
         }
         public ActionResult ChangeOver_EntryList()
         {
-            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
-            ViewData["REI"] = BindDropDownREI("REI", 0);
-            ViewData["MaterialGrade"] = BindDropDownMaterialGrade("MaterialGrade", 0);
+            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["REI"] = binddropdown("REI", 0);
+            ViewData["MaterialGradeId"] = binddropdown("MaterialGradeId", 0);
 
             ReydeldbContext _db = new ReydeldbContext();
             IEnumerable<ChangeOverEntryList> result = _db.ChangeOverEntryList.SqlQuery(@"exec USPGetChangeOver_Entry").ToList<ChangeOverEntryList>();
@@ -202,9 +207,9 @@ namespace ReyDel.Controllers
             data.Change_From_Mat_Grade_Id = 2;
             data.Change_To_Mat_Grade_Id = 2;
             
-             ViewData["Employee"] = BindDropDownEmp("Employee", 0);
-            ViewData["REI"] = BindDropDownREI("REI", 0);
-            ViewData["MaterialGrade"] = BindDropDownMaterialGrade("MaterialGrade", 0);
+             ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["REI"] = binddropdown("REI", 0);
+            ViewData["MaterialGradeId"] = binddropdown("MaterialGradeId", 0);
             return View("AddChangeOver_Entry", data);
         }
         [HttpPost]
@@ -212,9 +217,9 @@ namespace ReyDel.Controllers
         {
 
             ReydeldbContext dbc = new ReydeldbContext();
-            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertProductionEntry  @Entry_Date,@Calender_Id,@Emp_Id,@Shift_Id,@Machine_Id,@REI_Id,@Part_Id,@Plan_Qty,@Cumm_Accepted_Qty,@Accepted_Qty,@Operator_Emp_Id,@Shift_superviser",
+            var res = dbc.Database.ExecuteSqlCommand(@"exec USPInsertProductionEntry  @Entry_Date,@Calender_Id,@Emp_Id,@Shift_Id,@Machine_Id,@REI_Id,@Part_Id,@Plan_Qty,@Cumm_Accepted_Qty,@Accepted_Qty,@Operator_Emp,@Shift_superviser",
                  new SqlParameter("@Entry_Date", PE.Entry_Date),
-                 new SqlParameter("@Calender_Id", PE.Calendar_id),
+                  new SqlParameter("@Calender_Id", PE.Calendar_id),
                  new SqlParameter("@Emp_Id", PE.Emp_id),
                  new SqlParameter("@Shift_Id", PE.Shift),
                  new SqlParameter("@Machine_Id", PE.Machine),
@@ -223,8 +228,9 @@ namespace ReyDel.Controllers
                  new SqlParameter("@Plan_Qty", PE.Plan_Qty),
                  new SqlParameter("@Cumm_Accepted_Qty", PE.Cumm_Accepted_Qty),
                  new SqlParameter("@Accepted_Qty", PE.Accepted_Qty),
-                 new SqlParameter("@Operator_Emp_Id", PE.Operator_Emp),
+                 new SqlParameter("@Operator_Emp", PE.Operator_Emp),
                  new SqlParameter("@Shift_superviser", PE.Shift_superviser));
+
 
             return Json("data inserted");
         }
@@ -233,9 +239,14 @@ namespace ReyDel.Controllers
             Production_Entry data = new Production_Entry();
             data.Emp_id = 2;
             data.REI = 2;
-            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
-            ViewData["REI"] = BindDropDownREI("REI", 0);
-
+            data.Shift_superviser = 2;
+            data.Shift = 2;
+            data.Operator_Emp = 2;
+            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["REI"] = binddropdown("REI", 0); 
+                ViewData["ShiftSuperviser"] = binddropdown("ShiftSuperviser", 0); 
+                 ViewData["Shift"] = binddropdown("Shift", 0);
+            ViewData["OperatorEmp"] = binddropdown("OperatorEmp", 0);
             return View("AddProductionEntry", data);
         }
       
@@ -254,6 +265,17 @@ namespace ReyDel.Controllers
                
 
             return Json("data inserted");
+        }
+        public ActionResult AddRejectionEntryDetails()
+        {
+            RejectionEntryDetails data = new RejectionEntryDetails();
+            data.Rejection_Reason_Id = 2;
+            data.Rejection_Type_Id = 2;
+            data.Prod_Entry_Id = 2;
+            ViewData["RejectionReason"] = binddropdown("RejectionReason", 0); 
+                ViewData["RejectionType"] = binddropdown("RejectionType", 0);
+            ViewData[""] = binddropdown("", 0);
+            return View("AddProductionEntry", data);
         }
         [HttpPost]
         public ActionResult AddDownTime_Entry(DownTime_Entry DE)
@@ -282,8 +304,8 @@ namespace ReyDel.Controllers
             DownTime_Entry data = new DownTime_Entry();
             data.Emp_Id = 2;
             data.Supoort_Function_Id=2;
-            ViewData["Employee"] = BindDropDownEmp("Employee", 0);
-            ViewData["SupportFunction"] = binddropdownSupoortFunction("SupportFunction", 0);
+            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["SupportFunction"] = binddropdown("SupportFunction", 0);
             return View("AddDownTime_Entry", data);
         }
         [HttpPost]
@@ -353,78 +375,8 @@ namespace ReyDel.Controllers
 
             return res;
         }
-        public List<SelectListItem> binddropdownSupoortFunction(string action, int val = 0)
-        {
-            ReydeldbContext _db = new ReydeldbContext();
+      
 
-            var res = _db.Database.SqlQuery<SelectListItem>("exec binddropdownSupoortFunction @action , @val",
-                   new SqlParameter("@action", action),
-                    new SqlParameter("@val", val))
-                   .ToList()
-                   .AsEnumerable()
-                   .Select(r => new SelectListItem
-                   {
-                       Text = r.Text.ToString(),
-                       Value = r.Value.ToString(),
-                       Selected = r.Value.Equals(Convert.ToString(val))
-                   }).ToList();
-
-            return res;
-        }
-        public List<SelectListItem> BindDropDownEmp(string action, int val = 0)
-        {
-            ReydeldbContext _db = new ReydeldbContext();
-
-            var res = _db.Database.SqlQuery<SelectListItem>("exec USP_BindDropDownEmp @action , @val",
-                   new SqlParameter("@action", action),
-                    new SqlParameter("@val", val))
-                   .ToList()
-                   .AsEnumerable()
-                   .Select(r => new SelectListItem
-                   {
-                       Text = r.Text.ToString(),
-                       Value = r.Value.ToString(),
-                       Selected = r.Value.Equals(Convert.ToString(val))
-                   }).ToList();
-
-            return res;
-        }
-        public List<SelectListItem> BindDropDownREI(string action, int val = 0)
-        {
-            ReydeldbContext _db = new ReydeldbContext();
-
-            var res = _db.Database.SqlQuery<SelectListItem>("exec USP_BindDropDownREI @action , @val",
-                   new SqlParameter("@action", action),
-                    new SqlParameter("@val", val))
-                   .ToList()
-                   .AsEnumerable()
-                   .Select(r => new SelectListItem
-                   {
-                       Text = r.Text.ToString(),
-                       Value = r.Value.ToString(),
-                       Selected = r.Value.Equals(Convert.ToString(val))
-                   }).ToList();
-
-            return res;
-        }
-        public List<SelectListItem> BindDropDownMaterialGrade(string action, int val = 0)
-        {
-            ReydeldbContext _db = new ReydeldbContext();
-
-            var res = _db.Database.SqlQuery<SelectListItem>("exec binddropdownMaterialGrade @action , @val",
-                   new SqlParameter("@action", action),
-                    new SqlParameter("@val", val))
-                   .ToList()
-                   .AsEnumerable()
-                   .Select(r => new SelectListItem
-                   {
-                       Text = r.Text.ToString(),
-                       Value = r.Value.ToString(),
-                       Selected = r.Value.Equals(Convert.ToString(val))
-                   }).ToList();
-
-            return res;
-        }
         //public ActionResult AddEmployee()
         //{
         //    Employee data = new Employee();
@@ -635,15 +587,16 @@ namespace ReyDel.Controllers
             var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateUpdateProductionEntry @Entry_Id,@Entry_Date,@Calender_Id,@Emp_Id,@Shift_Id,@Machine_Id,@REI_Id,@Part_Id,@Plan_Qty,@Cumm_Accepted_Qty,@Accepted_Qty,@Operator_Emp_Id,@Shift_superviser",
                  new SqlParameter("@Entry_Id", PE.Entry_Id),
                 new SqlParameter("@Entry_Date", PE.Entry_Date),
-                 new SqlParameter("@Calendar_id", PE.Calendar_id),
+                 new SqlParameter("@Calender_Id", PE.Calendar_id),
                  new SqlParameter("@Emp_Id", PE.Emp_id),
-                 new SqlParameter("@Shift", PE.Shift),
-                 new SqlParameter("@REI", PE.REI),
-                 new SqlParameter("@Part", PE.Part),
+                 new SqlParameter("@Shift_Id", PE.Shift),
+                   new SqlParameter("@Machine_Id", PE.Machine),
+                 new SqlParameter("@REI_Id", PE.REI),
+                 new SqlParameter("@Part_Id", PE.Part),
                  new SqlParameter("@Plan_Qty", PE.Plan_Qty),
                  new SqlParameter("@Cumm_Accepted_Qty", PE.Cumm_Accepted_Qty),
                  new SqlParameter("@Accepted_Qty", PE.Accepted_Qty),
-                 new SqlParameter("@Operator_Emp", PE.Operator_Emp),
+                 new SqlParameter("@Operator_Emp_Id", PE.Operator_Emp),
                  new SqlParameter("@Shift_superviser", PE.Shift_superviser));
             return Json("data Updated");
         }
@@ -651,8 +604,8 @@ namespace ReyDel.Controllers
         public ActionResult UpadteRejectionEntryDetails(RejectionEntryDetails RED  )
         {
             ReydeldbContext _db = new ReydeldbContext();
-            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateUpadteRejectionEntryDetails @PRejection_Entry_Id,@Rejection_From,  @Prod_Entry_Id,  @Rejection_Type_Id,  @Rejection_Reason_Id,  @Rejection_Qty,  @lumps",
-                 new SqlParameter("@PRejection_Entry_Id", RED.PRejection_Entry_Id),
+            var res = _db.Database.ExecuteSqlCommand(@"exec USPUpdateUpadteRejectionEntryDetails @Rejection_Entry_Id,@Rejection_From,  @Prod_Entry_Id,  @Rejection_Type_Id,  @Rejection_Reason_Id,  @Rejection_Qty,  @lumps",
+                 new SqlParameter("@Rejection_Entry_Id", RED.Rejection_Entry_Id),
                 new SqlParameter("@Rejection_From", RED.Rejection_from),
                  new SqlParameter("@Prod_Entry_Id", RED.Prod_Entry_Id),
                  new SqlParameter("@Rejection_Type_Id", RED.Rejection_Type_Id),
